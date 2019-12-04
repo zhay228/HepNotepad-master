@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window size="900,630" sizebox="4,4,6,6" roundcorner="5,5" caption="0,0,0,90" mininfo="800,570">
+  <VerticalLayout bkcolor="#FFD1E8F5" bkcolor2="#FFC6E0F1" bordercolor="#FF768D9B" bordersize="1" borderround="5,5" inset="1,0,1,0">
+    <Control height="25" bkcolor="#FFB8DFF2"/>
+    <HorizontalLayout>
+      <Control width="5"/>
+      <HorizontalLayout bkcolor="#FFFFFFFF" bordercolor="#FF768D9B" bordersize="1">
+        <TabLayout name="tabCalendarContainer">
+         
+          <VerticalLayout   bordercolor="#FFC6CFD8" bordersize="1" >
+            <HorizontalLayout height="48" inset="0,12,0,8">
+              <HorizontalLayout  width="400">
+                <Button textcolor="#FF494949" name="btnCalendarAdd" text="新增"  font="0" padding="10,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                <Button textcolor="#FF494949" name="btnCalendarUpdate" text="修改" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                <Button textcolor="#FF494949" name="btnCalendarDel" text="删除" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                <Button textcolor="#FF494949" visible="false" name="btnInput" text="导入" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                <Button textcolor="#FF494949" visible="false" name="btnOutput" text="导出" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+              </HorizontalLayout>
+              <Control />
+              <HorizontalLayout  width="395">
+                <Combo name="cbxCalendarType"  font="5" itemfont="5" itemtextpadding="6,0,3,0" width="100" style="combo_style" cursor="hand" bordersize="1" bordercolor="FFDDDDDD"  showshadow="true" textcolor="#FF333333" >
+                  <ListLabelElement text="一次提醒" height="23"  />
+                  <ListLabelElement text="每周提醒" height="23"  />
+                  <ListLabelElement text="每天" height="23"  />
+                  <ListLabelElement text="" height="23" selected="true"/>
+                </Combo>
+                <Edit name="txtCalendarKey"  width="180" height="23" text="" padding="6,0,0,0"   bordercolor="#C6CFD8" bkimage="file='search_bg.png' source='0,0,258,23' corner='1,1,1,1'"/>
+                <Button textcolor="#FF494949" name="btnCalendarSearch" text="查询" font="0"  padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+              </HorizontalLayout>
+            </HorizontalLayout>
+            <HorizontalLayout inset="3,0,3,3">
+              <List name="listCalendar" bkcolor="#FFFFFFFF" pageIndex="0" pageCount="0" bordercolor="#FFD6DDDB" bordersize="1" inset="1,0,1,0" itemshowhtml="true" vscrollbar="true"  hscrollbar="true" headerbkimage="file='list_header_bg.png'" itemalign="center" itemshowrowline="true" itembkcolor="#FFFFFFFF" itemaltbk="false" itemlinecolor="#FFDDDDDD"  menu="true">
+                <ListHeader height="24" menu="true">
+                  <ListHeaderItem textcolor="#FF333333"  text="序号" font="1" width="45" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="类型" font="1" width="80"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="提醒日期" font="1" width="80" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="提醒时间" font="1" width="80" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="状态" font="1" width="80"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="内容" font="1"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                </ListHeader>
+              </List>
+            </HorizontalLayout>
+          </VerticalLayout>
+          <VerticalLayout   bordercolor="#FFC6CFD8" bordersize="1" >
+            <HorizontalLayout height="48" inset="0,12,0,8">
+              <HorizontalLayout  width="400">
+                <Button textcolor="#FF494949" name="btnCalendarHistoryDel" text="删除" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                <Button textcolor="#FF494949" name="btnCalendarHistoryClear" text="清理" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                <Button textcolor="#FF494949" visible="false" name="btnOutput" text="导出" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+              </HorizontalLayout>
+              <Control />
+              <HorizontalLayout  width="395">
+                <Combo name="cbxHistoryType" font="5" itemfont="5" width="100" itemtextpadding="6,0,3,0" style="combo_style" cursor="hand" bordersize="1" bordercolor="FFDDDDDD"  showshadow="true" textcolor="#FF333333"  >
+                  <ListLabelElement text="一次提醒" height="23"  />
+                  <ListLabelElement text="每周提醒" height="23" />
+                  <ListLabelElement text="每天" height="23" />
+                  <ListLabelElement text="" height="23" selected="true"/>
+                </Combo>
+                <Edit name="txtHistoryKey" width="180" height="23" text="" padding="6,0,0,0"   bordercolor="#C6CFD8" bkimage="file='search_bg.png' source='0,0,258,23' corner='1,1,1,1'"/>
+                <Button textcolor="#FF494949" name="btnHistorySearch" text="查询" font="0"  padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+              </HorizontalLayout>
+            </HorizontalLayout>
+            <HorizontalLayout inset="3,0,3,3">
+              <List name="listCalendarHistory" bkcolor="#FFFFFFFF" pageIndex="0" pageCount="0" bordercolor="#FFD6DDDB" bordersize="1" inset="1,0,1,0" itemshowhtml="true" vscrollbar="true" hscrollbar="true" headerbkimage="file='list_header_bg.png'" itemalign="center" itemshowrowline="true" itembkcolor="#FFFFFFFF" itemaltbk="false" itemlinecolor="#FFDDDDDD" menu="true">
+                <ListHeader height="24" menu="true">
+                  <ListHeaderItem textcolor="#FF333333"  text="序号" font="1" width="45" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="类型" font="1" width="100"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="提醒时间" font="1" width="120" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>                  
+                  <ListHeaderItem textcolor="#FF333333"  text="内容" font="1"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                </ListHeader>
+              </List>
+            </HorizontalLayout>
+          </VerticalLayout>
+          <VerticalLayout>
+            <HorizontalLayout height="48" inset="0,12,0,8">
+              <HorizontalLayout  width="400">
+                <Button textcolor="#FF494949" name="btnWeeklyAdd" text="今日记事"  font="0" padding="10,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                <Button textcolor="#FF494949" name="btnWeeklyDel" text="删除" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                <Button textcolor="#FF494949" visible="false" name="btnInput" text="导入" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                <Button textcolor="#FF494949" visible="false" name="btnOutput" text="导出" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+              </HorizontalLayout>
+              <Control />
+            </HorizontalLayout>
+            <HorizontalLayout inset="3,0,3,3">
+             <List name="listWeeklyData" bkcolor="#FFFFFFFF"  pageIndex="0" pageCount="0" bordercolor="#FFD6DDDB" bordersize="1" inset="1,0,1,0" itemshowhtml="true" vscrollbar="true" hscrollbar="true" headerbkimage="file='list_header_bg.png'" itemalign="center" itemshowrowline="true" itembkcolor="#FFFFFFFF" itemaltbk="false" itemlinecolor="#FFDDDDDD" menu="true">
+                <ListHeader height="24" menu="true">
+                  <ListHeaderItem textcolor="#FF333333"  text="序号" font="1" width="45" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="第几周" font="1"  width="80" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/> 
+                  <ListHeaderItem textcolor="#FF333333"  text="开始时间" font="1" width="90"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="结束时间" font="1"  width="90" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/> 
+                  <ListHeaderItem textcolor="#FF333333"  text="内容" font="1" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                </ListHeader>
+              </List>
+              <List name="listWeeklyData1" visible="false" bkcolor="#FFFFFFFF"  pageIndex="0" pageCount="0" bordercolor="#FFD6DDDB" bordersize="1" inset="1,0,1,0" itemshowhtml="true" vscrollbar="true" hscrollbar="true" headerbkimage="file='list_header_bg.png'" itemalign="center" itemshowrowline="true" itembkcolor="#FFFFFFFF" itemaltbk="false" itemlinecolor="#FFDDDDDD" menu="true">
+                <ListHeader height="24" menu="true">
+                  <ListHeaderItem textcolor="#FF333333"  text="序号" font="1" width="45" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="开始时间" font="1" width="80"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="周一" font="1" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="周二" font="1" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="周三" font="1" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="周四" font="1" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="周五" font="1" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="周六" font="1" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="周日" font="1" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  <ListHeaderItem textcolor="#FF333333"  text="总结" font="1" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                </ListHeader>
+              </List>
+            </HorizontalLayout>
+          </VerticalLayout>
+           <VerticalLayout>
+            <List name="listCalendarView" header="hidden" scrollselect="true"  colorhsl="true" vscrollbar="true" autovscroll="true" padding="6,6,6,0" ></List>
+          </VerticalLayout>
+          <VerticalLayout>
+            <Text text="备用1" pos="335, 180, 600, 300" relativepos="50,50,0,0"  float="true" font="4" />
+          </VerticalLayout>
+        </TabLayout>
+      </HorizontalLayout>
+      <Control width="5"/>
+    </HorizontalLayout>
+    <HorizontalLayout   float="true" pos="1,0,799,26" name="navCalendar">
+      <Option navType="navCalendarBtn" text="待提醒"  name="optCalendar"  pos="6, 0, 84, 26" float="true"  textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navCalendarBtn" selected="true"/>
+      <Option navType="navCalendarBtn" text="历史提醒" name="optHistory"  pos="86, 0, 164, 26" float="true"   textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navCalendarBtn"/>
+      <Option navType="navCalendarBtn" text="周记事" name="optWeekly"  pos="166, 0, 244, 26" float="true"   textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navCalendarBtn"/>
+      <Option navType="navCalendarBtn" text="视图" visible="false" pos="246, 0, 324, 26" float="true"   textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navCalendarBtn"/>
+      <Option navType="navCalendarBtn" text="备用1" visible="false" pos="326, 0, 404, 26" float="true"  textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navCalendarBtn"/>
+
+    </HorizontalLayout>
+  </VerticalLayout>
+</Window>

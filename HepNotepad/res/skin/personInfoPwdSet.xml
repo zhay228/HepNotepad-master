@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window size="300,240" sizebox="4,4,6,6" roundcorner="5,5" caption="0,0,0,90" mininfo="300,240" maxinfo="300,240">
+  <Font id="0" name="宋体" size="13" bold="true" />
+  <Font id="1" name="宋体" size="12" bold="true" />
+  <Font id="2" name="宋体" size="12" /> 
+  <Font id="3" name="宋体" size="14" /> 
+  <Font id="4" name="宋体" size="15" bold="true"  /> 
+  <Default name="VScrollBar" shared="true" value="width=&quot;14&quot; maxwidth=&quot;14&quot; button1normalimage=&quot;file='scrollbar/scrollbar_arrowup_normal.png' &quot; button1hotimage=&quot;file='scrollbar/scrollbar_arrowup_highlight.png'&quot; button1pushedimage=&quot;file='scrollbar/scrollbar_arrowup_down.png'&quot; button2normalimage=&quot;file='scrollbar/scrollbar_down_normal.png'&quot; button2hotimage=&quot;file='scrollbar/scrollbar_down_highlight.png'&quot; button2pushedimage=&quot;file='scrollbar/scrollbar_down_down.png'&quot; thumbnormalimage=&quot;file='scrollbar/scrollbar_bar_normal.png' corner='0,1,0,1'&quot; thumbhotimage=&quot;file='scrollbar/scrollbar_bar_highlight.png' corner='0,1,0,1'&quot; thumbpushedimage=&quot;file='scrollbar/scrollbar_bar_down.png' corner='0,1,0,1'&quot; bknormalimage=&quot;file='scrollbar/scrollbar_bkg.png'&quot;" />
+  <Default shared="true" name="Slider" value="thumbsize=&quot;10,10&quot; bkimage=&quot;file='progress/bg.bmp' corner='6,0,6,0' mask='#FFFF00FF'&quot; foreimage=&quot;file='progress/fg.bmp' corner='6,0,6,0' mask='#FFFF00FF'&quot; thumbimage=&quot;file='progress/thumb.bmp' source='30,0,40,10' mask='#FFDAEBF9'&quot; thumbhotimage=&quot;file='progress/thumb.bmp' source='10,0,20,10' mask='#FFDAEBF9'&quot; " />
+  <Style name="chk_style" shared="true" value="align=&quot;left&quot; valign=&quot;vcenter&quot; height=&quot;16&quot; textcolor=&quot;#FF333333&quot; hottextcolor=&quot;#FF333333&quot; textpadding=&quot;20,0,6,0&quot; normalimage=&quot;res='common/cb_normal.png' dest='0,0,16.16'&quot; hotimage=&quot;res='common/cb_hot.png' dest='0,0,16.16'&quot; pushedimage=&quot;res='common/cb_pushed.png' dest='0,0,16.16'&quot; selectedimage=&quot;res='common/cb_selected.png' dest='0,0,16,16'&quot;" />
+	
+  <Style name="combo_style" value="height=&quot;23&quot; textcolor=&quot;#FFFFFFFF&quot; itemvalign=&quot;vcenter&quot; textpadding=&quot;4,1,28,1&quot; normalimage=&quot;res='common/combo.png' source='93,3,243,26' corner='2,2,28,2'&quot; pushedimage=&quot;res='common/combo.png' source='0,59,243,80' corner='2,2,28,2'&quot;" />
+  <VerticalLayout bkcolor="#FFD1E8F5" bkcolor2="#FFC6E0F1" bordercolor="#FF768D9B" bordersize="1" borderround="5,5" inset="1,0,1,0">
+    <HorizontalLayout height="27" >
+      <HorizontalLayout>
+        <Container width="20" height="20" bkimage="file='ico/logo20.png'" padding="3,5,3,0" />
+        <Text name="txtTitle" text="密码设置"  textcolor="#FF447AA1" font="0" padding="0,8,3,0"/>
+      </HorizontalLayout>
+      <HorizontalLayout width="136" inset="0,1,0,0">
+      	<Control width="60" maxheight="17" />
+        <Button textcolor="#FF494949" visible="false" text="" showhtml="true"/>
+        <Button textcolor="#FF494949" visible="false" text="{u}{a}{/a}{/u}" showhtml="true"/>
+        <Button textcolor="#FF494949" visible="false" name="menubtn" maxwidth="26" maxheight="17" normalimage="file='sys_dlg_menu.png' source='52,0,78,17'" hotimage="file='sys_dlg_menu.png' source='26,0,52,17'" pushedimage="file='sys_dlg_menu.png' source='0,0,26,17'"/>
+        <Button textcolor="#FF494949" name="minbtn" maxwidth="26" maxheight="17" normalimage="file='sys_dlg_min.png' source='52,0,78,17'" hotimage="file='sys_dlg_min.png' source='26,0,52,17'" pushedimage="file='sys_dlg_min.png' source='0,0,26,17'"/>
+        <Button textcolor="#FF494949" name="maxbtn" visible="false" maxwidth="26" maxheight="17" normalimage="file='sys_dlg_max.png' source='52,0,78,17'" hotimage="file='sys_dlg_max.png' source='26,0,52,18'" pushedimage="file='sys_dlg_max.png' source='0,0,26,17'"/>
+        <Button textcolor="#FF494949" name="restorebtn" visible="false" maxwidth="26" maxheight="17" normalimage="file='sys_dlg_restore.png' source='52,0,78,17'" hotimage="file='sys_dlg_restore.png' source='26,0,52,17'" pushedimage="file='sys_dlg_restore.png' source='0,0,26,17'" />
+        <Button textcolor="#FF494949" name="closebtn" maxwidth="45" maxheight="17" normalimage="file='sys_dlg_close.png' source='90,0,135,17'" hotimage="file='sys_dlg_close.png' source='45,0,90,17'" pushedimage="file='sys_dlg_close.png' source='0,0,45,17'"/>
+      </HorizontalLayout>
+    </HorizontalLayout>    
+    <VerticalLayout bkcolor="FFFFFFFF" >
+      <HorizontalLayout height="30" padding="0,20,0,0"  >
+        <Label text="旧 密 码：" width="70" font="3" textcolor="#FF333333" align="right" padding="20,10,0,0" />
+        <Edit name="txtOldPwd" password="true" font="3" width="150" height="25"  bordersize="1" bordercolor="FFDDDDDD" padding="6,3,0,0" tipvalue="请输入旧密码"
+          textcolor="#FF515151" />
+      </HorizontalLayout >
+    	<HorizontalLayout height="30" padding="0,5,0,0"  >
+    			<Label text="新 密 码：" width="70" font="3" textcolor="#FF333333" align="right" padding="20,10,0,0" />
+					<Edit name="txtNewPwd" password="true" font="3" width="150" height="25"  bordersize="1" bordercolor="FFDDDDDD" padding="6,3,0,0" tipvalue="请输入新密码"
+						textcolor="#FF515151" />			
+    	</HorizontalLayout >
+      <HorizontalLayout height="30"  padding="0,5,0,0" >
+        <Label text="确认密码：" width="70" font="3" textcolor="#FF333333" align="right" padding="20,10,0,0" />
+        <Edit name="txtPwd2" font="3" password="true" width="150" height="25"  bordersize="1" bordercolor="FFDDDDDD" padding="6,3,0,0" tipvalue="请再次输入新密码"
+          textcolor="#FF515151" />
+      </HorizontalLayout >
+    	<HorizontalLayout height="30" padding="0,20,0,0" >
+    			<Button name="btnPersonInfoAdd" text="确认" font="0" padding="60,0,0,0" width="63" height="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+    			<Button name="btnPersonInfoCancel" text="关闭" font="0" padding="60,0,0,0" width="63" height="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+    	</HorizontalLayout>
+    	
+    </VerticalLayout>
+    <HorizontalLayout height="24">
+      <Text text="{c #386382}{/c}" pos="0, 5, 200, 24" float="true" showhtml="true"/>
+      <Text text="{c #386382}{/c}" pos="155, 5, 400, 24" float="true" showhtml="true"/>
+      <Button text="" textcolor="#FF337833" pos="305,5,360,18" float="true"/>
+      <Control bkimage="" pos="550,4,566,20" float="true"/>
+      <Text text="" pos="570, 5, 800, 24" float="true" showhtml="true"/>
+    </HorizontalLayout>       
+  </VerticalLayout>
+</Window>

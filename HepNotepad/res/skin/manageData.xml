@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window size="900,630" sizebox="4,4,6,6" roundcorner="5,5" caption="0,0,0,90" mininfo="800,570">
+  <VerticalLayout bkcolor="#FFD1E8F5" bkcolor2="#FFC6E0F1" bordercolor="#FF768D9B" bordersize="1"  borderround="5,5" inset="1,0,1,0">
+
+    <Control height="25" bkcolor="#FFB8DFF2"/>
+    <HorizontalLayout>
+      <Control width="5"/>
+      <HorizontalLayout bkcolor="#FFFFFFFF" bordercolor="#FF768D9B" bordersize="1">
+        <TabLayout name="tabDataContainer">
+            <VerticalLayout name="layoutTip"  bordercolor="#FFC6CFD8" bordersize="1" >
+              <HorizontalLayout height="48" inset="0,12,0,8">
+                <HorizontalLayout  width="400">
+                  <Button textcolor="#FF494949" name="btnTipAdd"  text="新增" font="0" padding="10,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                  <Button textcolor="#FF494949" name="btnTipDel"  text="删除" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                  <Button textcolor="#FF494949" visible="false" name="btnTipClear" text="清理" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                </HorizontalLayout>
+                <Control />
+                <HorizontalLayout  width="285">
+                  <Edit name="txtTipKey" width="180" height="23" text="" padding="6,0,0,0"   bordercolor="#C6CFD8"  bkimage="file='search_bg.png' source='0,0,258,23' corner='1,1,1,1'"/>
+                  <Button textcolor="#FF494949" name="btnTipSearch" text="查询" font="0"  padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                </HorizontalLayout>
+              </HorizontalLayout>
+              <HorizontalLayout inset="3,0,3,3">
+                <List name="listTip" bordercolor="#FFD6DDDB" pageIndex="0" pageCount="0" itemtextcolor="#FF333333" bordersize="1" inset="1,0,1,0" vscrollbar="true" hscrollbar="true" headerbkimage="file='list_header_bg.png'" itemalign="center" itemshowrowline="true" itembkcolor="#FFFFFFFF" itemaltbk="false" itemlinecolor="#FFDDDDDD" menu="true">
+                  <ListHeader height="24" menu="true"  >
+                    <ListHeaderItem textcolor="#FF333333"  text="序号" font="1"  width="45" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                    <ListHeaderItem textcolor="#FF333333"  text="内容" font="1"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                    <ListHeaderItem textcolor="#FF333333"  text="时间" font="1" width="130"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  </ListHeader>
+                </List>
+              </HorizontalLayout>
+            </VerticalLayout>
+            
+            <VerticalLayout  name="layoutInfo"  bordercolor="#FFC6CFD8" bordersize="1" >
+              <HorizontalLayout height="48" inset="0,12,0,8">
+                <HorizontalLayout  width="400">
+                  <Button textcolor="#FF494949" name="btnInfoAdd"  text="新增" font="0" padding="10,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                  <Button textcolor="#FF494949" name="btnInfoUpdate" text="修改" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                  <Button textcolor="#FF494949" name="btnInfoDel" text="删除" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                  <Button textcolor="#FF494949" visible="false" name="btnInput" text="导入" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                  <Button textcolor="#FF494949" visible="false" name="btnOutput" text="导出" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                </HorizontalLayout>
+                <Control />
+                <HorizontalLayout  width="435">
+                  <Combo  name="comInfoType" bordercolor="#FFC6CFD8" textpadding="6,0,3,0" bordersize="1" font="2" width="150" height="23" style="combo_style" itemfont="2" cursor="hand" showshadow="true" textcolor="#FF333333"    padding="0,0,0,0">
+                  </Combo>
+                  <Edit name="txtInfoKey" width="180" height="23" text="" padding="6,0,0,0"   bordercolor="#C6CFD8" bkimage="file='search_bg.png' source='0,0,258,23' corner='1,1,1,1'"/>
+                  <Button textcolor="#FF494949" name="btnInfoSearch" text="查询" font="0"  padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                </HorizontalLayout>
+              </HorizontalLayout>
+              <HorizontalLayout inset="3,0,3,3">
+                <List name="listData" bordercolor="#FFD6DDDB" pageIndex="0" pageCount="0" itemtextcolor="#FF333333"  bordersize="1" inset="1,0,1,0" vscrollbar="true" hscrollbar="true" headerbkimage="file='list_header_bg.png'" itemalign="center" itemshowrowline="true" itembkcolor="#FFFFFFFF" itemaltbk="false" itemlinecolor="#FFDDDDDD" menu="true">
+                  <ListHeader height="24" menu="true">
+                    <ListHeaderItem textcolor="#FF333333"  text="序号" font="1" width="45" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                    <ListHeaderItem textcolor="#FF333333"  text="类型" font="1" width="120"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                    <ListHeaderItem textcolor="#FF333333"  text="标题" font="1" width="260" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                    <ListHeaderItem textcolor="#FF333333"  text="内容" font="1"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                    <ListHeaderItem textcolor="#FF333333"  text="时间" font="1" width="130"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  </ListHeader>
+                </List>
+              </HorizontalLayout>
+            </VerticalLayout> 
+            <VerticalLayout   bordercolor="#FFC6CFD8" bordersize="1" name="layoutPerson" >
+              <HorizontalLayout height="48" inset="0,12,0,8">
+                <HorizontalLayout  width="400">
+                  <Button textcolor="#FF494949" name="btnPersonInfoAdd" text="新增" font="0" padding="10,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                  <Button textcolor="#FF494949" name="btnPersonInfoUpdate" text="修改" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                  <Button textcolor="#FF494949" name="btnPersonInfoDel" text="删除" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                  <Button textcolor="#FF494949" name="btnPwdSet" text="设置密码" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                  <Button textcolor="#FF494949" name="btnLockScreen" text="锁屏" font="0" padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                </HorizontalLayout>
+                <Control />
+                <HorizontalLayout  width="435">
+                  <Combo name="comPersonInfoType" bordercolor="#FFC6CFD8" textpadding="6,0,3,0" bordersize="1" font="2" width="150" height="23" style="combo_style" itemfont="2" cursor="hand" showshadow="true" textcolor="#FF333333"    padding="0,0,0,0">
+                  </Combo>
+                  <Edit name="txtPersonInfoKey" width="180" height="23" text="" padding="6,0,0,0"   bordercolor="#C6CFD8" bkimage="file='search_bg.png' source='0,0,258,23' corner='1,1,1,1'"/>
+                  <Button textcolor="#FF494949" name="btnPersonInfoSearch" text="查询" font="0"  padding="12,0,0,0" maxwidth="63" maxheight="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+                </HorizontalLayout>
+              </HorizontalLayout>
+              <HorizontalLayout inset="3,0,3,3">
+                <List name="listPersonInfo"  bordercolor="#FFD6DDDB" pageIndex="0" pageCount="0" itemtextcolor="#FF333333"  bordersize="1" inset="1,0,1,0" vscrollbar="true" hscrollbar="true" headerbkimage="file='list_header_bg.png'" itemalign="center" itemshowrowline="true" itembkcolor="#FFFFFFFF" itemaltbk="false" itemlinecolor="#FFDDDDDD" menu="true">
+                  <ListHeader height="24" menu="true">
+                    <ListHeaderItem textcolor="#FF333333"  text="序号" font="1" width="45" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                    <ListHeaderItem textcolor="#FF333333"  text="类型" font="1" width="120"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                    <ListHeaderItem textcolor="#FF333333"  text="标题" font="1" width="260" pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                    <ListHeaderItem textcolor="#FF333333"  text="内容" font="1"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                    <ListHeaderItem textcolor="#FF333333"  text="时间" font="1" width="130"  pushedimage="file='list_header_pushed.png'" sepimage="file='list_header_sep.png'" sepwidth="1"/>
+                  </ListHeader>
+                </List>
+              </HorizontalLayout> 
+            </VerticalLayout>
+            <VerticalLayout name="layoutEncryt" float="true" bkcolor="DDDDDDDD">
+              <Control height="240"/>
+              <HorizontalLayout height="30" >
+                <Label text="密   码："  width="80" font="3" textcolor="#FF333333" align="right" padding="240,5,0,0" />
+                <Edit name="txtPwd" font="3" textpadding="6,0,3,0" password="true" width="240" height="25"  bordersize="1" bordercolor="FFDDDDDD" padding="6,3,0,0" tipvalue="请输入密码"
+                  textcolor="#FF515151" />
+              </HorizontalLayout >
+              <HorizontalLayout height="30" padding="0,20,0,0" >
+                <Button textcolor="#FF494949" name="btnPwdOK" text="确定" font="0" padding="400,0,0,0" width="63" height="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
+              </HorizontalLayout>
+              <Control />
+            </VerticalLayout>
+          
+          <VerticalLayout>
+            <Text text="开发工具" pos="335, 180, 600, 300" relativepos="50,50,0,0"  float="true" font="4" />
+          </VerticalLayout>
+          <VerticalLayout>
+            <Text text="备用1" pos="335, 180, 600, 300" relativepos="50,50,0,0"  float="true" font="4" />
+          </VerticalLayout>
+        </TabLayout>
+      </HorizontalLayout>
+      <Control width="5"/>
+    </HorizontalLayout>
+    <HorizontalLayout  float="true" pos="1,0,799,26" name="navData">
+      <Option navType="navDataBtn"  text="便签" name="optTip" pos="6, 0, 84, 26" float="true"  textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navDataBtn" selected="true"/>
+      <Option navType="navDataBtn" text="知识点"  name="optInfo" pos="86, 0, 164, 26" float="true" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navDataBtn"/>
+      <Option navType="navDataBtn" text="个人记事" visible="false" name="optPerson" pos="166, 0, 244, 26" float="true" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navDataBtn"/>
+      <Option navType="navDataBtn" text="个人记事" visible="false" pos="246, 0, 324, 26" float="true" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navDataBtn"/>
+      <Option navType="navDataBtn" text="备用1"  visible="false" pos="326, 0, 404, 26" float="true"textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navDataBtn"/>
+    </HorizontalLayout>
+  </VerticalLayout>
+</Window>

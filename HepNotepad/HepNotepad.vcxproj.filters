@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Library">
+      <UniqueIdentifier>{b599a70b-ce26-4270-85e2-83a4a23095ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{c03ddf65-9d03-41f6-983b-fe2bc57b0830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DAL">
+      <UniqueIdentifier>{6244ff6a-7666-47ae-8478-c89710994d92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Form">
+      <UniqueIdentifier>{c4fbfdbc-3519-4815-b635-113af4e6fafa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HepNotepad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWindowWnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\cJSON.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Base64.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Base64Image.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FileHelper.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Helper.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Log.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Path.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\ShellUtils.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\SQLite.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\SqliteServer.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DAL\DataType.h">
+      <Filter>DAL</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DataTypeTool.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\sqlite3.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\sqlite3ext.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="DAL\DataInfo.h">
+      <Filter>DAL</Filter>
+    </ClInclude>
+    <ClInclude Include="Form\DemoFrame.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="Form\FrmTipInfo.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="DAL\TipInfo.h">
+      <Filter>DAL</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowMessageBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Form\FrmInfoAdd.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="DAL\PersonInfo.h">
+      <Filter>DAL</Filter>
+    </ClInclude>
+    <ClInclude Include="Form\FrmPersonInfoAdd.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\des.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DAL\SystemInfo.h">
+      <Filter>DAL</Filter>
+    </ClInclude>
+    <ClInclude Include="Form\FrmPersonInfoPwdSet.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="Form\FrmInfoQuery.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="Form\FloatWinBase.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="Form\FrmCreateDir.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="FileDialogEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DAL\Calendar.h">
+      <Filter>DAL</Filter>
+    </ClInclude>
+    <ClInclude Include="DAL\Weekly.h">
+      <Filter>DAL</Filter>
+    </ClInclude>
+    <ClInclude Include="Form\FrmCalendarAdd.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="DAL\Common.h">
+      <Filter>DAL</Filter>
+    </ClInclude>
+    <ClInclude Include="Form\FrmTextEditor.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\SciLexer.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Scintilla.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\ILexer.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\ILoader.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Platform.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Sci_Position.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\ScintillaWidget.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Form\FrmLogo.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HepNotepad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWindowWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\cJSON.c">
+      <Filter>Library</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Base64.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Base64Image.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\FileHelper.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Helper.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Log.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Path.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\ShellUtils.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\SQLite.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\SqliteServer.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="DAL\DataType.cpp">
+      <Filter>DAL</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DataTypeTool.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="DAL\DataInfo.cpp">
+      <Filter>DAL</Filter>
+    </ClCompile>
+    <ClCompile Include="Form\DemoFrame.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="Form\FrmTipInfo.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="DAL\TipInfo.cpp">
+      <Filter>DAL</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowMessageBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Form\FrmInfoAdd.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="DAL\PersonInfo.cpp">
+      <Filter>DAL</Filter>
+    </ClCompile>
+    <ClCompile Include="Form\FrmPersonInfoAdd.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\des.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="DAL\SystemInfo.cpp">
+      <Filter>DAL</Filter>
+    </ClCompile>
+    <ClCompile Include="Form\FrmPersonInfoPwdSet.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="Form\FrmInfoQuery.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="Form\FloatWinBase.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="Form\FrmCreateDir.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="FileDialogEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DAL\Calendar.cpp">
+      <Filter>DAL</Filter>
+    </ClCompile>
+    <ClCompile Include="DAL\Weekly.cpp">
+      <Filter>DAL</Filter>
+    </ClCompile>
+    <ClCompile Include="Form\FrmCalendarAdd.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="DAL\Common.cpp">
+      <Filter>DAL</Filter>
+    </ClCompile>
+    <ClCompile Include="Form\FrmTextEditor.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="Form\FrmLogo.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="HepNotepad.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="HepNotepad.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\skin.zip">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Library\Scintilla.iface">
+      <Filter>Library</Filter>
+    </None>
+    <None Include="minus.xpm">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="plus.xpm">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

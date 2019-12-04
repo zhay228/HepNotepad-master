@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E00D8E0E-B252-4932-9782-5811490416F2}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>HepNotepad</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>
+      </SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\DuiLib</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB;APSTUDIO_INVOKED;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\DuiLib</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common\Base64.h" />
+    <ClInclude Include="Common\Base64Image.h" />
+    <ClInclude Include="Common\DataTypeTool.h" />
+    <ClInclude Include="Common\des.h" />
+    <ClInclude Include="Common\FileHelper.h" />
+    <ClInclude Include="Common\Helper.h" />
+    <ClInclude Include="Common\Log.h" />
+    <ClInclude Include="Common\Path.h" />
+    <ClInclude Include="Common\ShellUtils.h" />
+    <ClInclude Include="Common\SQLite.h" />
+    <ClInclude Include="Common\SqliteServer.h" />
+    <ClInclude Include="DAL\Calendar.h" />
+    <ClInclude Include="DAL\Common.h" />
+    <ClInclude Include="DAL\DataInfo.h" />
+    <ClInclude Include="DAL\DataType.h" />
+    <ClInclude Include="DAL\PersonInfo.h" />
+    <ClInclude Include="DAL\SystemInfo.h" />
+    <ClInclude Include="DAL\TipInfo.h" />
+    <ClInclude Include="DAL\Weekly.h" />
+    <ClInclude Include="FileDialogEx.h" />
+    <ClInclude Include="Form\DemoFrame.h" />
+    <ClInclude Include="Form\FloatWinBase.h" />
+    <ClInclude Include="Form\FrmCalendarAdd.h" />
+    <ClInclude Include="Form\FrmCreateDir.h" />
+    <ClInclude Include="Form\FrmInfoAdd.h" />
+    <ClInclude Include="Form\FrmInfoQuery.h" />
+    <ClInclude Include="Form\FrmLogo.h" />
+    <ClInclude Include="Form\FrmPersonInfoAdd.h" />
+    <ClInclude Include="Form\FrmPersonInfoPwdSet.h" />
+    <ClInclude Include="Form\FrmTextEditor.h" />
+    <ClInclude Include="Form\FrmTipInfo.h" />
+    <ClInclude Include="FrameWindowWnd.h" />
+    <ClInclude Include="HepNotepad.h" />
+    <ClInclude Include="Library\cJSON.h" />
+    <ClInclude Include="Library\ILexer.h" />
+    <ClInclude Include="Library\ILoader.h" />
+    <ClInclude Include="Library\Platform.h" />
+    <ClInclude Include="Library\SciLexer.h" />
+    <ClInclude Include="Library\Scintilla.h" />
+    <ClInclude Include="Library\ScintillaWidget.h" />
+    <ClInclude Include="Library\Sci_Position.h" />
+    <ClInclude Include="Library\sqlite3.h" />
+    <ClInclude Include="Library\sqlite3ext.h" />
+    <ClInclude Include="MainFrame.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ShowMessageBox.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Common\Base64.cpp" />
+    <ClCompile Include="Common\Base64Image.cpp" />
+    <ClCompile Include="Common\DataTypeTool.cpp" />
+    <ClCompile Include="Common\des.cpp" />
+    <ClCompile Include="Common\FileHelper.cpp" />
+    <ClCompile Include="Common\Helper.cpp" />
+    <ClCompile Include="Common\Log.cpp" />
+    <ClCompile Include="Common\Path.cpp" />
+    <ClCompile Include="Common\ShellUtils.cpp" />
+    <ClCompile Include="Common\SQLite.cpp" />
+    <ClCompile Include="Common\SqliteServer.cpp" />
+    <ClCompile Include="DAL\Calendar.cpp" />
+    <ClCompile Include="DAL\Common.cpp" />
+    <ClCompile Include="DAL\DataInfo.cpp" />
+    <ClCompile Include="DAL\DataType.cpp" />
+    <ClCompile Include="DAL\PersonInfo.cpp" />
+    <ClCompile Include="DAL\SystemInfo.cpp" />
+    <ClCompile Include="DAL\TipInfo.cpp" />
+    <ClCompile Include="DAL\Weekly.cpp" />
+    <ClCompile Include="FileDialogEx.cpp" />
+    <ClCompile Include="Form\DemoFrame.cpp" />
+    <ClCompile Include="Form\FloatWinBase.cpp" />
+    <ClCompile Include="Form\FrmCalendarAdd.cpp" />
+    <ClCompile Include="Form\FrmCreateDir.cpp" />
+    <ClCompile Include="Form\FrmInfoAdd.cpp" />
+    <ClCompile Include="Form\FrmInfoQuery.cpp" />
+    <ClCompile Include="Form\FrmLogo.cpp" />
+    <ClCompile Include="Form\FrmPersonInfoAdd.cpp" />
+    <ClCompile Include="Form\FrmPersonInfoPwdSet.cpp" />
+    <ClCompile Include="Form\FrmTextEditor.cpp" />
+    <ClCompile Include="Form\FrmTipInfo.cpp" />
+    <ClCompile Include="FrameWindowWnd.cpp" />
+    <ClCompile Include="HepNotepad.cpp" />
+    <ClCompile Include="Library\cJSON.c" />
+    <ClCompile Include="MainFrame.cpp" />
+    <ClCompile Include="ShowMessageBox.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="HepNotepad.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="HepNotepad.ico" />
+    <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Library\Scintilla.iface" />
+    <None Include="minus.xpm" />
+    <None Include="plus.xpm" />
+    <None Include="res\skin.zip" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

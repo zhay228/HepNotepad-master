@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Window  sizebox="4,4,4,4"  >
+  <Font id="1" name="宋体" size="13"  />
+  <ListContainerElement height="25" bordercolor="#FFEDEDED" bottombordersize="1" padding="0,0,0,0">
+    <HorizontalLayout >
+      <Control name="icoFile" bkimage="ico\queryInfo.png"   height="25" width="25"/>
+      <Text name="txtInfo" text="" font="1" textcolor="#FF333333" textpadding="3,6,0,0"  height="20" width="240"  />
+    </HorizontalLayout>
+  </ListContainerElement>
+</Window>

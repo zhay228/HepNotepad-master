@@ -1,0 +1,9 @@
+<?xml version="1.0"  standalone="yes"  encoding="utf-8"?>
+<Window size="24,24" sizebox="4,4,6,6" roundcorner="5,5" caption="0,0,0,24" mininfo="24,24" bktrans="true">
+  <Font id="0" name="微软雅黑" size="13" bold="true" /> 
+  <Font id="1" name="微软雅黑" size="15" bold="false" /> 
+  
+<VerticalLayout bkimage="file='ico\logo32.png' dest='0,0,24,24'" >
+     
+</VerticalLayout>
+</Window>

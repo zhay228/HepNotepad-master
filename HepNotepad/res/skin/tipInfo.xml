@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window size="420,330" sizebox="4,4,6,6" roundcorner="5,5" caption="0,0,0,90" mininfo="360,240">
+  <Font id="0" name="微软雅黑" size="13" bold="true" />
+  <Font id="1" name="微软雅黑" size="15" bold="false" />
+  <Default name="VScrollBar" shared="true" value="width=&quot;14&quot; maxwidth=&quot;14&quot; button1normalimage=&quot;file='scrollbar/scrollbar_arrowup_normal.png' &quot; button1hotimage=&quot;file='scrollbar/scrollbar_arrowup_highlight.png'&quot; button1pushedimage=&quot;file='scrollbar/scrollbar_arrowup_down.png'&quot; button2normalimage=&quot;file='scrollbar/scrollbar_down_normal.png'&quot; button2hotimage=&quot;file='scrollbar/scrollbar_down_highlight.png'&quot; button2pushedimage=&quot;file='scrollbar/scrollbar_down_down.png'&quot; thumbnormalimage=&quot;file='scrollbar/scrollbar_bar_normal.png' corner='0,1,0,1'&quot; thumbhotimage=&quot;file='scrollbar/scrollbar_bar_highlight.png' corner='0,1,0,1'&quot; thumbpushedimage=&quot;file='scrollbar/scrollbar_bar_down.png' corner='0,1,0,1'&quot; bknormalimage=&quot;file='scrollbar/scrollbar_bkg.png'&quot;" />
+  <Default shared="true" name="Slider" value="thumbsize=&quot;10,10&quot; bkimage=&quot;file='progress/bg.bmp' corner='6,0,6,0' mask='#FFFF00FF'&quot; foreimage=&quot;file='progress/fg.bmp' corner='6,0,6,0' mask='#FFFF00FF'&quot; thumbimage=&quot;file='progress/thumb.bmp' source='30,0,40,10' mask='#FFDAEBF9'&quot; thumbhotimage=&quot;file='progress/thumb.bmp' source='10,0,20,10' mask='#FFDAEBF9'&quot; " />
+  <Style name="combo_style" value="height=&quot;23&quot; textcolor=&quot;#FFFFFFFF&quot; itemvalign=&quot;vcenter&quot; textpadding=&quot;4,1,28,1&quot; normalimage=&quot;res='common/combo.png' source='93,3,243,26' corner='2,2,28,2'&quot; pushedimage=&quot;res='common/combo.png' source='0,59,243,80' corner='2,2,28,2'&quot;" />
+  <VerticalLayout bkcolor="#FFD1E8F5" bkcolor2="#FFC6E0F1" bordercolor="#FF768D9B" bordersize="1" borderround="5,5" inset="1,0,1,0">
+    <HorizontalLayout height="27" >
+      <HorizontalLayout>
+        <Container width="20" height="20" bkimage="file='ico/logo20.png'" padding="3,5,3,0" />
+        <Text name="txtTitle" text="记事管理"  textcolor="#FF447AA1" font="0" padding="0,5,3,0"/>
+      </HorizontalLayout>
+      <HorizontalLayout width="162" inset="0,1,0,0">
+        <Control width="60" maxheight="17" />
+        <Button visible="false" text="" showhtml="true"/>
+        <Button visible="false" text="{u}{a}{/a}{/u}" showhtml="true"/>
+        <Button visible="false" name="menubtn" maxwidth="26" maxheight="17" normalimage="file='sys_dlg_menu.png' source='52,0,78,17'" hotimage="file='sys_dlg_menu.png' source='26,0,52,17'" pushedimage="file='sys_dlg_menu.png' source='0,0,26,17'"/>
+        <Button name="minbtn" maxwidth="26" maxheight="17" normalimage="file='sys_dlg_min.png' source='52,0,78,17'" hotimage="file='sys_dlg_min.png' source='26,0,52,17'" pushedimage="file='sys_dlg_min.png' source='0,0,26,17'"/>
+        <Button name="maxbtn" maxwidth="26" maxheight="17" normalimage="file='sys_dlg_max.png' source='52,0,78,17'" hotimage="file='sys_dlg_max.png' source='26,0,52,18'" pushedimage="file='sys_dlg_max.png' source='0,0,26,17'"/>
+        <Button name="restorebtn" visible="false" maxwidth="26" maxheight="17" normalimage="file='sys_dlg_restore.png' source='52,0,78,17'" hotimage="file='sys_dlg_restore.png' source='26,0,52,17'" pushedimage="file='sys_dlg_restore.png' source='0,0,26,17'" />
+        <Button name="closebtn" maxwidth="45" maxheight="17" normalimage="file='sys_dlg_close.png' source='90,0,135,17'" hotimage="file='sys_dlg_close.png' source='45,0,90,17'" pushedimage="file='sys_dlg_close.png' source='0,0,45,17'"/>
+      </HorizontalLayout>
+    </HorizontalLayout>
+    <HorizontalLayout bordersize="1" bordercolor="FFDDDDDD">
+      <TabLayout name="tabContainer">
+        <HorizontalLayout>
+          <RichEdit bkcolor="#FFD0E7F4" bkcolor1="#FFDDEEF7" bkcolor2="#FFE1F5E9"  name="txtContent" multiline="true" textpadding="6,3,6,3"  vscrollbar="true" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
+        </HorizontalLayout>
+        <HorizontalLayout>
+          <HorizontalLayout sepwidth="2" inset="0,0,2,0"  >
+            <RichEdit bkcolor="#FFFFFFFF"  name="txtContentTwo" multiline="true" textpadding="6,3,6,3"  vscrollbar="true" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
+          </HorizontalLayout>
+          <HorizontalLayout sepimm="true" >
+            <RichEdit bkcolor="#FFFFFFFF"  multiline="true" textpadding="6,3,6,3"  vscrollbar="true"   autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
+          </HorizontalLayout>
+        </HorizontalLayout>
+        <VerticalLayout>
+          <VerticalLayout sepimm="true" sepheight="3" inset="0,0,0,3"  bottombordersize="2" bordercolor="FFEEEEEE" minheight="66">
+            <RichEdit bkcolor="#FFD0E7F4" name="txtContentThree" multiline="true" textpadding="6,3,6,3"  vscrollbar="true" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
+          </VerticalLayout>
+          <VerticalLayout sepimm="true"  >
+            <RichEdit bkcolor="#FFD0E7F4" multiline="true" vscrollbar="true" textpadding="6,3,6,3" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
+          </VerticalLayout>
+        </VerticalLayout>
+        <HorizontalLayout>
+          <RichEdit bkcolor="#FFC7EDCC" name="txtContentFour" multiline="true" textpadding="6,3,6,3"  vscrollbar="true" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
+        </HorizontalLayout>
+      </TabLayout>
+    </HorizontalLayout>
+    <HorizontalLayout height="27">
+      <Text text="{c #386382}{/c}" pos="0, 5, 200, 24" float="true" showhtml="true"/>
+      <Text text="{c #386382}{/c}" pos="155, 5, 400, 24" float="true" showhtml="true"/>
+      <Button text="" textcolor="#FF337833" pos="305,5,360,18" float="true"/>
+      <Control bkimage="" pos="550,4,566,20" float="true"/>
+      <Text text="" pos="570, 5, 800, 24" float="true" showhtml="true"/>
+      <Control/>
+      <HorizontalLayout width="128" name="pageLayout" visible="false" inset="1,1,1,1">
+        <Button name="btnPageOne" padding="6,3,0,0" width="20" height="20" normalimage="ico/page1.png" tooltip="面板1" />
+        <Button name="btnPageTwo"   padding="9,3,0,0" width="20" height="20"  normalimage="ico/page2_1.png"  tooltip="面板2" />
+        <Button name="btnPageThree"   padding="9,3,0,0" width="20" height="20"  normalimage="ico/page3_1.png"  tooltip="面板3" />
+        <Button name="btnPageFour"   padding="9,3,0,0" width="20" height="20"  normalimage="ico/page4_1.png"  tooltip="面板4" />
+      </HorizontalLayout>
+    </HorizontalLayout>
+  </VerticalLayout>
+</Window>

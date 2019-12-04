@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+	<Font shared="true" id="1" name="微软雅黑" size="14" bold="false" />
+	<ListContainerElement name="openItem" width="120" height="100" >
+		<VerticalLayout >
+			<VerticalLayout width="60" padding="30,10,30,0">
+				<Control bordercolor="#FFEFEFEF" bordersize="0"  name="fileImage" bkimage="ico/tooladd.png" autopencolor="true"  height="60" width="60"/>
+			</VerticalLayout>
+			<VerticalLayout height="25" > 
+				<Text name="name" text="添加" align="center" font="0" textcolor="#FF333333" padding="0,3,0,2" /> 
+			</VerticalLayout>
+		</VerticalLayout>
+	</ListContainerElement>
+</Window>

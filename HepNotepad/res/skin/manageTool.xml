@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window size="900,630" sizebox="4,4,6,6" roundcorner="5,5" caption="0,0,0,90" mininfo="800,570">
+ <VerticalLayout bkcolor="#FFD1E8F5" bkcolor2="#FFC6E0F1" bordercolor="#FF768D9B" bordersize="1" borderround="5,5" inset="1,0,1,0">   
+ 
+    <Control height="25" bkcolor="#FFB8DFF2"/>
+    <HorizontalLayout>
+      <Control width="5"/>
+      <HorizontalLayout bkcolor="#FFFFFFFF" bordercolor="#FF768D9B" bordersize="1">
+        <TabLayout name="tabToolContainer">
+          <VerticalLayout inset="0,0,0,0">
+            <List name="recentList" header="hidden"  itemtextcolor="#FF333333"  scrollselect="true"  colorhsl="true" vscrollbar="true" autovscroll="true" padding="6,6,6,0" ></List>
+          </VerticalLayout>
+          <VerticalLayout>
+            <List name="developList" header="hidden"  itemtextcolor="#FF333333"  scrollselect="true"  colorhsl="true" vscrollbar="true" autovscroll="true" padding="6,9,6,0" >
+              <ListContainerElement name="sysTooltem"  tool="createDir" width="120" height="100" >
+                <VerticalLayout >
+                  <VerticalLayout width="60" padding="30,10,30,0">
+                    <Control bordercolor="#FFFFAFEF" bordersize="0"  name="workImage" bkimage="ico/createDir.png" autopencolor="true"  height="60" width="60"/>
+                  </VerticalLayout>
+                  <VerticalLayout height="25">
+                    <Text name="name" text="创建路径" font="0" textcolor="#FF333333" padding="30,3,0,2" />
+                  </VerticalLayout>
+                </VerticalLayout>
+              </ListContainerElement>
+              <ListContainerElement name="sysTooltem"  tool="copyFile"  width="120" height="100" >
+                <VerticalLayout >
+                  <VerticalLayout width="60" padding="30,10,30,0">
+                    <Control bordercolor="#FFFFAFEF" bordersize="0"  name="workImage" bkimage="ico/copyFile.png" autopencolor="true"  height="60" width="60"/>
+                  </VerticalLayout>
+                  <VerticalLayout height="25">
+                    <Text name="name" text="复制文件" font="0" textcolor="#FF333333" padding="30,3,0,2" />
+                  </VerticalLayout>
+                </VerticalLayout>
+              </ListContainerElement>
+              <ListContainerElement name="sysTooltem" tool="dealText" width="120" height="100" >
+                <VerticalLayout >
+                  <VerticalLayout width="60" padding="30,10,30,0">
+                    <Control bordercolor="#FFFFAFEF" bordersize="0"  name="workImage" bkimage="ico/txtDeal.png"  autopencolor="true"  height="60" width="60"/>
+                  </VerticalLayout>
+                  <VerticalLayout height="25">
+                    <Text name="name" text="文本处理" font="0" textcolor="#FF333333" padding="30,3,0,2" />
+                  </VerticalLayout>
+                </VerticalLayout>
+              </ListContainerElement>
+            </List>
+          </VerticalLayout>  
+           <VerticalLayout>
+            <Text text="知识" pos="335, 180, 600, 300" relativepos="50,50,0,0"  float="true" font="4" />
+          </VerticalLayout>  
+           <VerticalLayout>
+            <Text text="开发工具" pos="335, 180, 600, 300" relativepos="50,50,0,0"  float="true" font="4" />
+          </VerticalLayout> 
+          <VerticalLayout>
+            <Text text="备用1" pos="335, 180, 600, 300" relativepos="50,50,0,0"  float="true" font="4" />
+          </VerticalLayout> 
+        </TabLayout>
+      </HorizontalLayout>
+      <Control width="5"/>
+    </HorizontalLayout>
+     <HorizontalLayout   float="true" pos="1,0,799,26" name="navTool">
+      <Option navType="navToolBtn" pos="6, 0, 84, 26" float="true" text="快捷方式" name="examine" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navToolBtn" selected="true"/>
+      <Option navType="navToolBtn" pos="86, 0, 164, 26" float="true" text="小工具" name="trojan" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navToolBtn"/>
+      <Option navType="navToolBtn" visible="false" pos="166, 0, 244, 26" float="true" text="个人记事" name="plugins" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navToolBtn"/>
+      <Option navType="navToolBtn" visible="false" pos="246, 0, 324, 26" float="true" text="个人记事" name="vulnerability" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navToolBtn"/>
+      <Option navType="navToolBtn" visible="false" pos="326, 0, 404, 26" float="true" text="备用1" name="rubbish" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navToolBtn"/>
+     </HorizontalLayout> 
+  </VerticalLayout>
+</Window>

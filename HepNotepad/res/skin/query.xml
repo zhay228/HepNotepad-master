@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window size="300,330" sizebox="4,4,6,6" roundcorner="5,5" caption="0,0,0,36" mininfo="300,330" maxinfo="300,330">
+  <Font id="0" name="宋体" size="13" bold="true" />
+  <Font id="1" name="宋体" size="13"  />
+   <Default name="VScrollBar" shared="true" value="width=&quot;14&quot; maxwidth=&quot;14&quot; button1normalimage=&quot;file='scrollbar/scrollbar_arrowup_normal.png' &quot; button1hotimage=&quot;file='scrollbar/scrollbar_arrowup_highlight.png'&quot; button1pushedimage=&quot;file='scrollbar/scrollbar_arrowup_down.png'&quot; button2normalimage=&quot;file='scrollbar/scrollbar_down_normal.png'&quot; button2hotimage=&quot;file='scrollbar/scrollbar_down_highlight.png'&quot; button2pushedimage=&quot;file='scrollbar/scrollbar_down_down.png'&quot; thumbnormalimage=&quot;file='scrollbar/scrollbar_bar_normal.png' corner='0,1,0,1'&quot; thumbhotimage=&quot;file='scrollbar/scrollbar_bar_highlight.png' corner='0,1,0,1'&quot; thumbpushedimage=&quot;file='scrollbar/scrollbar_bar_down.png' corner='0,1,0,1'&quot; bknormalimage=&quot;file='scrollbar/scrollbar_bkg.png'&quot;" />
+  <VerticalLayout bkcolor="#FFD1E8F5" bkcolor2="#FFC6E0F1" bordercolor="#FF768D9B" bordersize="1" borderround="5,5" inset="1,0,1,0">
+    <HorizontalLayout height="27" >
+      <HorizontalLayout>
+        <Container width="20" height="20" bkimage="file='ico/logo20.png'" padding="3,5,3,0" />
+        <Text name="txtTitle" text="记事管理"  textcolor="#FF447AA1" font="0" padding="0,8,3,0"/>
+      </HorizontalLayout>
+      <HorizontalLayout width="46" inset="0,1,0,0" >
+        <Button name="closebtn" maxwidth="45" maxheight="17" normalimage="file='sys_dlg_close.png' source='90,0,135,17'" hotimage="file='sys_dlg_close.png' source='45,0,90,17'" pushedimage="file='sys_dlg_close.png' source='0,0,45,17'"/>
+      </HorizontalLayout>
+    </HorizontalLayout>    
+    <HorizontalLayout height="27" padding="0,0,0,0"  >
+      <Label text="查询：" width="42" font="1" textcolor="#FF333333" align="right" padding="6,5,0,0" />
+      <Edit name="txtQuery" font="1" width="230" height="25" bordersize="1" bordercolor="FFDDDDDD" padding="6,0,0,0" tipvalue="请输入查询内容"
+        textcolor="#FF515151" />
+    </HorizontalLayout >
+    <VerticalLayout  bkcolor="#FFD1E8F5" bkcolor2="#FFC6E0F1" bordercolor="#FFDDDDDD" bordersize="1" >
+      <List name="InfoList" header="hidden" padding="0,3,0,3" vscrollbar="true" autovscroll="true" inset="0,0,0,0" >
+      </List>
+    </VerticalLayout>
+  </VerticalLayout>
+</Window>

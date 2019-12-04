@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+  <Font shared="true" id="1" name="微软雅黑" size="14" bold="false" />
+  <ListContainerElement name="openItem" width="120" height="100" >
+    <VerticalLayout width="120" height="100" >
+      <HorizontalLayout  >
+          <Control padding="30,10,0,0" bordercolor="#FFEFEFEF" bordersize="0"  name="fileImage" bkimage="ico/tooladd.png" autopencolor="true"  height="60" width="60"/>
+          <Button name="btnRecentRemove"   width="30" maxheight="30" tooltip="删除" normalimage="file='button/btnClose_x_normal.png'" hotimage="file='button/btnClose_x_hot.png'" pushedimage="file='button/btnClose_x_hot.png'"/>
+        </HorizontalLayout>
+        <HorizontalLayout height="25" >
+          <Text name="name" text="添加" align="center" font="0" textcolor="#FF333333" padding="0,3,0,2" />
+        </HorizontalLayout>
+      </VerticalLayout> 
+  </ListContainerElement>
+</Window>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+	<Font shared="true" id="1" name="微软雅黑" size="14" bold="false" />
+	<ListTextElementUI name="ItemInfo" > 
+	</ListTextElementUI>
+</Window>

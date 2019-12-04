@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window size="900,630" sizebox="4,4,6,6" roundcorner="5,5" caption="0,0,0,90" mininfo="800,570" >
+  <Font id="0" name="宋体" size="13" bold="true" />
+  <Font id="1" name="宋体" size="12" bold="true" />
+  <Font id="2" name="宋体" size="12" />
+  <Font id="3" name="宋体" size="14" bold="true" />
+  <Font id="4" name="宋体" size="22" bold="true" italic="true"/>
+  <Font id="5" name="宋体" size="14" />
+  <Font id="6" name="宋体" size="13" />
+  <Default name="VScrollBar" shared="true" value="width=&quot;14&quot; maxwidth=&quot;14&quot; button1normalimage=&quot;file='scrollbar/scrollbar_arrowup_normal.png' &quot; button1hotimage=&quot;file='scrollbar/scrollbar_arrowup_highlight.png'&quot; button1pushedimage=&quot;file='scrollbar/scrollbar_arrowup_down.png'&quot; button2normalimage=&quot;file='scrollbar/scrollbar_down_normal.png'&quot; button2hotimage=&quot;file='scrollbar/scrollbar_down_highlight.png'&quot; button2pushedimage=&quot;file='scrollbar/scrollbar_down_down.png'&quot; thumbnormalimage=&quot;file='scrollbar/scrollbar_bar_normal.png' corner='0,1,0,1'&quot; thumbhotimage=&quot;file='scrollbar/scrollbar_bar_highlight.png' corner='0,1,0,1'&quot; thumbpushedimage=&quot;file='scrollbar/scrollbar_bar_down.png' corner='0,1,0,1'&quot; bknormalimage=&quot;file='scrollbar/scrollbar_bkg.png'&quot;" />
+  <Default shared="true" name="Slider" value="thumbsize=&quot;10,10&quot; bkimage=&quot;file='progress/bg.bmp' corner='6,0,6,0' mask='#FFFF00FF'&quot; foreimage=&quot;file='progress/fg.bmp' corner='6,0,6,0' mask='#FFFF00FF'&quot; thumbimage=&quot;file='progress/thumb.bmp' source='30,0,40,10' mask='#FFDAEBF9'&quot; thumbhotimage=&quot;file='progress/thumb.bmp' source='10,0,20,10' mask='#FFDAEBF9'&quot; " />
+  <Style name="combo_style" value="height=&quot;23&quot; textcolor=&quot;#FFFFFFFF&quot; itemvalign=&quot;vcenter&quot; textpadding=&quot;4,1,28,1&quot; normalimage=&quot;res='common/combo.png' source='93,3,243,26' corner='2,2,28,2'&quot; pushedimage=&quot;res='common/combo.png' source='0,59,243,80' corner='2,2,28,2'&quot;" />
+  <Style name="chk_style" shared="true" value="align=&quot;left&quot; valign=&quot;vcenter&quot; height=&quot;16&quot; textcolor=&quot;#FF333333&quot; hottextcolor=&quot;#FF333333&quot; textpadding=&quot;20,0,6,0&quot; normalimage=&quot;res='common/cb_normal.png' dest='0,0,16.16'&quot; hotimage=&quot;res='common/cb_hot.png' dest='0,0,16.16'&quot; pushedimage=&quot;res='common/cb_pushed.png' dest='0,0,16.16'&quot; selectedimage=&quot;res='common/cb_selected.png' dest='0,0,16,16'&quot;" />
+	
+  <VerticalLayout bkcolor="#FFD1E8F5" bkcolor2="#FFC6E0F1" bordercolor="#FF768D9B" bordersize="1" borderround="5,5" inset="1,0,1,0">
+    <HorizontalLayout height="27" >
+      <HorizontalLayout>
+        <Container width="20" height="20" bkimage="file='ico/logo20.png'" padding="3,5,3,0" />
+        <Text name="txtTitle" text="随手记"  textcolor="#FF447AA1" font="0" padding="0,8,3,0"/>
+      </HorizontalLayout>
+      <HorizontalLayout width="188" inset="0,1,0,0">
+      	<Control width="60" maxheight="17" />
+        <Button visible="false" text="" showhtml="true"/>
+        <Button visible="false" text="{u}{a}{/a}{/u}" showhtml="true"/>
+        <Button name="menubtn" maxwidth="26" maxheight="17" normalimage="file='sys_dlg_menu.png' source='52,0,78,17'" hotimage="file='sys_dlg_menu.png' source='26,0,52,17'" pushedimage="file='sys_dlg_menu.png' source='0,0,26,17'"/>
+        <Button name="minbtn" maxwidth="26" maxheight="17" normalimage="file='sys_dlg_min.png' source='52,0,78,17'" hotimage="file='sys_dlg_min.png' source='26,0,52,17'" pushedimage="file='sys_dlg_min.png' source='0,0,26,17'"/>
+        <Button name="maxbtn" maxwidth="26" maxheight="17" normalimage="file='sys_dlg_max.png' source='52,0,78,17'" hotimage="file='sys_dlg_max.png' source='26,0,52,18'" pushedimage="file='sys_dlg_max.png' source='0,0,26,17'"/>
+        <Button name="restorebtn" visible="false" maxwidth="26" maxheight="17" normalimage="file='sys_dlg_restore.png' source='52,0,78,17'" hotimage="file='sys_dlg_restore.png' source='26,0,52,17'" pushedimage="file='sys_dlg_restore.png' source='0,0,26,17'" />
+        <Button name="closebtn" maxwidth="45" maxheight="17" normalimage="file='sys_dlg_close.png' source='90,0,135,17'" hotimage="file='sys_dlg_close.png' source='45,0,90,17'" pushedimage="file='sys_dlg_close.png' source='0,0,45,17'"/>
+      </HorizontalLayout>
+    </HorizontalLayout>
+    <HorizontalLayout height="67">
+      <HorizontalLayout inset="8,5,0,0" name="navMain" >
+        <Option navType="navMainBtn" pos="10, 0, 75, 62" float="true" align="bottom"  name="navOptInfo" text="信息" bindtabindex="0" textcolor="#FF386382" font="1" textpadding="0,40,0,2" foreimage="file='ico/info.png' dest='16,4,52,40'" normalimage="toolbar_normal.png" hotimage="toolbar_hover.png" pushedimage="toolbar_pushed.png" selectedimage="toolbar_pushed.png" group="navMainBtn" selected="true"/>
+        <Option navType="navMainBtn" pos="85, 0, 150, 62" float="true" align="bottom" name="navOptTool" text="工具" bindtabindex="2" textcolor="#FF386382" font="1" textpadding="0,40,0,2" foreimage="file='ico/tool.png' dest='15,4,51,40'" normalimage="toolbar_normal.png" hotimage="toolbar_hover.png" pushedimage="toolbar_pushed.png" selectedimage="toolbar_pushed.png" group="navMainBtn"/>
+        <Option navType="navMainBtn" pos="160, 0, 225, 62" float="true" align="bottom" name="navOptCalendar" text="提醒" bindtabindex="4"  textcolor="#FF386382" font="1" textpadding="0,40,0,2" foreimage="file='ico/calendar.png' dest='15,4,51,40'" normalimage="toolbar_normal.png" hotimage="toolbar_hover.png" pushedimage="toolbar_pushed.png" selectedimage="toolbar_pushed.png" group="navMainBtn"/>
+        <Option navType="navMainBtn"  pos="235, 0, 300, 62" float="true" align="bottom" name="navOptSet" text="设置"  bindtabindex="6" textcolor="#FF386382" font="1" textpadding="0,40,0,2" foreimage="file='ico/system.png' dest='15,4,51,40'" normalimage="toolbar_normal.png" hotimage="toolbar_hover.png" pushedimage="toolbar_pushed.png" selectedimage="toolbar_pushed.png" group="navMainBtn"/>
+        <Option navType="navMainBtn" visible="false" pos="310, 0, 375, 62" float="true" align="bottom" text="备份/导入" textcolor="#FF386382" font="1" textpadding="0,40,0,2" foreimage="file='preventnumber.png' dest='10,5,50,45'" normalimage="toolbar_normal.png" hotimage="toolbar_hover.png" pushedimage="toolbar_pushed.png" selectedimage="toolbar_pushed.png" group="navMainBtn"/>
+        <Option navType="navMainBtn" visible="false" pos="385, 0, 450, 62" float="true" align="bottom" text="备用1" textcolor="#FF386382" font="1" textpadding="0,40,0,2" foreimage="file='softwaremanager.png' dest='10,5,50,45'" normalimage="toolbar_normal.png" hotimage="toolbar_hover.png" pushedimage="toolbar_pushed.png" selectedimage="toolbar_pushed.png" group="navMainBtn"/>
+      </HorizontalLayout>
+      <HorizontalLayout width="64" height="64" inset="0,0,0,0" padding="0,0,21,0">
+        <Button bkimage="file='logo.png'"/>
+      </HorizontalLayout>
+    </HorizontalLayout>
+    <HorizontalLayout height="5">
+      <Control width="1"/>
+      <HorizontalLayout bkcolor="#FF97C0DA" bkcolor2="#FFB8DFF2"></HorizontalLayout>
+      <Control width="1"/>
+    </HorizontalLayout>
+  <HorizontalLayout  bordercolor="#FF768D9B" bordersize="1">
+      <TabLayout name="tabMainContainer">
+        <Include source="manageData.xml" /> 
+        <Include source="manageTool.xml" /> 
+        <Include source="manageCalendar.xml" /> 
+        <Include source="manageSystem.xml" /> 
+     </TabLayout>
+  </HorizontalLayout>
+    <HorizontalLayout height="24">
+      <Text name="txtVersion" text="{c #386382}版本：1.0.0.1 2019 by hep{/c}" pos="0, 5, 200, 24" float="true" showhtml="true"/>
+      <Text text="{c #386382}{/c}" pos="155, 5, 400, 24" float="true" showhtml="true"/>
+      <Button text="" textcolor="#FF337833" pos="305,5,360,18" float="true"/>
+      <Control bkimage="" pos="550,4,566,20" float="true"/>
+      <Text text="" pos="570, 5, 800, 24" float="true" showhtml="true"/>
+      <Control/>
+       <HorizontalLayout width="260" name="pageLayout">
+        <Text name="txtPageInfo" textcolor="#FF386382" text="当前页：1/10页" width="100" padding="0,6,0,0" /> 
+        <Button name="btnPageFirst" padding="6,2,0,0" width="20" height="20" normalimage="button/pageFirst.png" tooltip="首页" />
+        <Button name="btnPagePrev"  padding="9,2,0,0" width="20" height="20"  normalimage="button/pagePrev.png"  tooltip="上一页" />
+        <Button name="btnPageNext"  padding="9,2,0,0" width="20" height="20"  normalimage="button/pageNext.png"  tooltip="下一页" />
+        <Button name="btnPageEnd"   padding="9,2,0,0" width="20" height="20"  normalimage="button/pageEnd.png"  tooltip="末页" />     
+        <Edit name="txtGotoPage" font="6" width="30" numberonly="true" bkcolor="#FFFDFDFD" height="20" textcolor="#FF386382"   bordersize="1" bordercolor="FFFFFFFF" padding="9,1,0,0" textpadding="1,0,1,0" textcolor="#FFCCCCCC" />	   
+      </HorizontalLayout>  
+    </HorizontalLayout>       
+  </VerticalLayout>
+</Window>
