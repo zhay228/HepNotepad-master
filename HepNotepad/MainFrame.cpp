@@ -376,18 +376,18 @@ void CMainFrame::CustomInital() {
 
 		m_pTempTip = new CFrmTipInfo(DataType::tempTip, "", "", "临时便签");
 		m_pTempTip->Create(NULL, _T("临时便签"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE, 0, 0);
-		SetWindowLong(m_pTempTip->GetHWND(), GWL_EXSTYLE, WS_EX_TOOLWINDOW); //不在任务栏显示
 		::ShowWindow(m_pTempTip->GetHWND(), SW_HIDE);
+		SetWindowLong(m_pTempTip->GetHWND(), GWL_EXSTYLE, WS_EX_TOOLWINDOW); //不在任务栏显示
 
 		m_pLogo = new CFrmLogo();
 		m_pLogo->Create(NULL, _T("随手记"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE, 0, 0);
-		SetWindowLong(m_pLogo->GetHWND(), GWL_EXSTYLE, WS_EX_TOOLWINDOW); //不在任务栏显示
 		::ShowWindow(m_pLogo->GetHWND(), SW_HIDE);
+		SetWindowLong(m_pLogo->GetHWND(), GWL_EXSTYLE, WS_EX_TOOLWINDOW); //不在任务栏显示
 
 		wndCopy = new CFrmTipInfo(DataType::copy, "获取复制内容");
 		wndCopy->Create(NULL, "复制内容", UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE, 0, 0);
-		SetWindowLong(wndCopy->GetHWND(), GWL_EXSTYLE, WS_EX_TOOLWINDOW); //不在任务栏显示
 		::ShowWindow(wndCopy->GetHWND(), SW_HIDE);
+		SetWindowLong(wndCopy->GetHWND(), GWL_EXSTYLE, WS_EX_TOOLWINDOW); //不在任务栏显示
 
 		SetTimer(0, 0, 300000, &TimerProc);
 		init = true;
