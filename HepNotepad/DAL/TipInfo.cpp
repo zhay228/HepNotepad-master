@@ -33,6 +33,13 @@ bool CTipInfo::Add(DataInfo * dataInfo) {
 	if (dataInfo == nullptr)	return false;
 	if (IsExist(dataInfo->content))return false;
 
+	CDuiString str = dataInfo->content.c_str();
+	vector<CDuiString>  listStr = StrSplit(str, "\r");
+	if (listStr.size() > 0)
+		dataInfo->title = listStr[0].GetData();
+	else
+		dataInfo->title = str.GetData();
+
 	string sql = _T("insert into Dat_Tip(id,guid,Key,Title,Content,UserId,CreateTime,UserName,UpdateTime,Grade) values (");
 	int id = getMaxId();
 	sql += CDataTypeTool::intTostring(id); 
@@ -56,6 +63,14 @@ bool CTipInfo::Add(DataInfo * dataInfo) {
 
 
 bool CTipInfo::Update(DataInfo * dataInfo) {
+
+	CDuiString str = dataInfo->content.c_str();
+	vector<CDuiString>  listStr = StrSplit(str, "\r");
+	if (listStr.size() > 0)
+		dataInfo->title = listStr[0].GetData();
+	else
+		dataInfo->title = str.GetData();
+
 	string sql = "update Dat_Tip set "; 
 	sql += "Content =  '" + CDataTypeTool::GBKToUTF8(replace(dataInfo->content, "'", "''")) + "' ";
 	if (dataInfo->title != "")
@@ -102,7 +117,7 @@ vector<DataInfo*> CTipInfo::GetList(PageInfo * pageInfo, string key) {
 	string sql = "select id,key,title,content,UpdateTime,Grade from Dat_Tip ";
 	string whereSql = " where 1 = 1 ";
 	if (key != "")
-		whereSql += " and content like '%" + CDataTypeTool::GBKToUTF8(replace(key, "'", "''")) + "%'";
+		whereSql += " and Title like '%" + CDataTypeTool::GBKToUTF8(replace(key, "'", "''")) + "%'";
 	sql += whereSql;
 	if (pageInfo != nullptr) {
 		pageInfo->whereSql = whereSql;
@@ -140,7 +155,7 @@ vector<DataInfo*> CTipInfo::GetListRecent(string key, int orderType) {
 	string sql = "select id,key,title,content,UpdateTime,Grade from Dat_Tip ";
 	string whereSql = " where 1 = 1 ";
 	if (key != "")
-		whereSql += " and content like '%" + CDataTypeTool::GBKToUTF8(replace(key, "'", "''")) + "%'";
+		whereSql += " and Title like '%" + CDataTypeTool::GBKToUTF8(replace(key, "'", "''")) + "%'";
 	sql += whereSql;
 	
 	if (orderType == 0) {

@@ -54,7 +54,9 @@ void CFrmTipInfo::InitWindow()
 		m_pTitle = static_cast<CTextUI*>(m_pm.FindControl(_T("txtTitle")));
 		m_pContent = static_cast<CRichEditUI*>(m_pm.FindControl(_T("txtContent")));
 		m_pContentTwo = static_cast<CRichEditUI*>(m_pm.FindControl(_T("txtContentTwo")));
+		m_pContentTwoDown = static_cast<CRichEditUI*>(m_pm.FindControl(_T("txtContentTwoDown")));
 		m_pContentThree = static_cast<CRichEditUI*>(m_pm.FindControl(_T("txtContentThree")));
+		m_pContentThreeDown = static_cast<CRichEditUI*>(m_pm.FindControl(_T("txtContentThreeDown")));
 		m_pContentFour = static_cast<CRichEditUI*>(m_pm.FindControl(_T("txtContentFour")));
 		m_pBtnPageOne = static_cast<CButtonUI*>(m_pm.FindControl(_T("btnPageOne")));
 		m_pBtnPageTwo = static_cast<CButtonUI*>(m_pm.FindControl(_T("btnPageTwo")));
@@ -69,8 +71,8 @@ void CFrmTipInfo::InitWindow()
 		if (dataType == DataType::calendar) {
 			m_pContent->SetReadOnly(true);
 		}
-		if (dataType == DataType::tempTip) {
-			m_pLayoutPage->SetVisible(true);
+		else if (dataType == DataType::tempTip) {
+			m_pLayoutPage->SetVisible(true);	
 		}
 		else {
 			m_pContent->SetFocus();
@@ -87,6 +89,41 @@ void CFrmTipInfo::InitWindow()
 		sprintf(buffer, "Exception: %s on line %d code:%d\r\n", __FILE__, __LINE__, GetExceptionCode());
 		CLog::WriteToLog(buffer);
 	}
+}
+
+void CFrmTipInfo::InitData() {
+	if (dataType == DataType::tempTip) {
+		if (OpenClipboard(GetHWND())) {//如果打开时，临时标签
+			if (IsClipboardFormatAvailable(CF_TEXT))//判断格式是否是我们所需要  
+			{
+				HANDLE hClip;
+				char* pBuf;
+				//读取数据  
+				hClip = GetClipboardData(CF_TEXT);
+				pBuf = (char*)GlobalLock(hClip);
+				GlobalUnlock(hClip);
+				string info = pBuf;
+				if (info.length() > 2) {
+					int tabIndex = 1;
+					if (m_pContent->GetTextLength() < 2) {
+						tabIndex = 1;
+					}
+					else if (m_pContentTwo->GetTextLength() < 2) {
+						tabIndex = 2;
+					}
+					else if (m_pContentThree->GetTextLength() < 2) {
+						tabIndex = 3;
+					}
+					else if (m_pContentFour->GetTextLength() < 2) {
+						tabIndex = 4;
+					}
+					AppendContent(info, tabIndex);
+
+				}
+			}
+			CloseClipboard();
+		}
+	}	
 }
 
 bool CFrmTipInfo::SetContent(string content) {
@@ -106,9 +143,25 @@ bool CFrmTipInfo::SetContent(string content) {
 	return show;
 }
 
-bool CFrmTipInfo::AppendContent(string content) {
-	m_pContent->AppendText(content.c_str());
-	return true;
+void CFrmTipInfo::AppendContent(string content, int tabIndex) {
+	if (dataType == DataType::copy) {
+		m_pContent->AppendText(content.c_str());
+	}
+	else {
+		if (tabIndex == 1) {
+			m_pContent->AppendText(content.c_str());
+		}
+		else if (tabIndex == 2) {
+			m_pContentTwo->AppendText(content.c_str());
+		}
+		else if (tabIndex == 3) {
+			m_pContentThree->AppendText(content.c_str());
+		}
+		else if (tabIndex == 4) {
+			m_pContentFour->AppendText(content.c_str());
+		}
+		TabRichEdit(tabIndex);
+	} 
 } 
 
 LRESULT CFrmTipInfo::OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
@@ -126,24 +179,19 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg)
 	{
 	case WM_CHAR: {//快捷键捕获
-		switch (wParam)
+		if (wParam == VK_ESCAPE) //快捷键捕获 
 		{
-		case 0x1B: { //Esc 
 			CloseWnd();
 		}
-		break;
-		}
 	}
-	break;
 	case WM_PAINT: {
-
-		if (refeshCount < 3) {
+		/*if (refeshCount < 3) {
 			SetForegroundWindow(GetHWND());
 			if (m_pContent != NULL)
 				m_pContent->SetFocus();
 			refeshCount++;
 
-		}
+		}*/
 	}
 	break;
 	case WM_KEYDOWN: {
@@ -181,6 +229,11 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	return __super::HandleMessage(uMsg, wParam, lParam);
 }
 
+//LRESULT CFrmTipInfo::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
+//{	
+//	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
+//}
+
 void CFrmTipInfo::OnClick(TNotifyUI &msg)
 {
 	CDuiString itemName = msg.pSender->GetName();
@@ -190,7 +243,14 @@ void CFrmTipInfo::OnClick(TNotifyUI &msg)
 			CloseWnd();
 		}
 		else if (_tcsicmp(itemName, _T("minbtn")) == 0) {
-			SendMessage(WM_SYSCOMMAND, SC_MINIMIZE, 0); return;
+
+			if (dataType == DataType::tempTip || dataType == DataType::copy) {
+				CloseWnd();
+			}
+			else { 
+				SendMessage(WM_SYSCOMMAND, SC_MINIMIZE, 0); return;
+			}
+
 		}
 		else if (_tcsicmp(itemName, _T("maxbtn")) == 0) {
 			SendMessage(WM_SYSCOMMAND, SC_MAXIMIZE, 0); return;

@@ -220,7 +220,7 @@ vector<DataInfo*> CCalendar::GetList() {
 	string prevtime = tmp;
 
 	string sql = "select Id,guid,[Key],Title,Content,UserId,UserName,RemindType,RemindDate,RemindTime from Dat_Calendar where ";
-	sql += " (( RemindType = 0 and remindTime > '" + prevtime + "' and remindDate <= '" + date + "' and isRemind = 0 ) or";
+	sql += " (( RemindType = 0 and remindTime <'" + prevtime + "' and remindDate <= '" + date + "' and isRemind = 0 ) or";
 	sql += "  ( RemindType = 1 and remindTime > '" + prevtime + "' and remindTime <= '" + time + "' and remindDate = '" + week + "') or";
 	sql += "  ( RemindType = 2 and remindTime > '" + prevtime + "' and remindTime <= '" + time + "'))  ";
 	sql += " and status = 1 order by updateTime desc  ";

@@ -174,11 +174,11 @@ void CFrmTextEditor::InitEditor() {
 LRESULT CFrmTextEditor::OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
 	// 有时会在收到WM_NCDESTROY后收到wParam为SC_CLOSE的WM_SYSCOMMAND
-	if (wParam == SC_CLOSE) {
+	/*if (wParam == SC_CLOSE) {
 		Close();
-		bHandled = TRUE;
+		bHandled = FALSE;
 		return 0;
-	}
+	}*/
 	return __super::OnSysCommand(uMsg, wParam, lParam, bHandled);
 }
 
@@ -303,6 +303,16 @@ BOOL InitDialog(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	对话框中的第一个控制设置焦点。
 	*/
 	return TRUE;
+}
+
+
+LRESULT CFrmTextEditor::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
+{
+	//if (wParam == VK_ESCAPE) //快捷键捕获 
+	//{
+	//	Close(0);
+	//}
+	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
 }
 
 BOOL CALLBACK FindDlg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {

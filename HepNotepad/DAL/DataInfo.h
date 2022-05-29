@@ -9,6 +9,7 @@ public:
 	int IsExist(string name);
 	bool Add(DataInfo * dataInfo);
 	bool Delete(string id);
+	bool DataClear();
 	bool Update(DataInfo * dataInfo);
 	vector<DataInfo*> GetList(PageInfo * pageInfo, string type = "", string key = "");
 	vector<DataInfo*> GetListRecent(string key = "", int orderType = 0);

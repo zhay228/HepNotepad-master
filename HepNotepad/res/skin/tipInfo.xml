@@ -32,7 +32,7 @@
             <RichEdit bkcolor="#FFFFFFFF"  name="txtContentTwo" multiline="true" textpadding="6,3,6,3"  vscrollbar="true" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
           </HorizontalLayout>
           <HorizontalLayout sepimm="true" >
-            <RichEdit bkcolor="#FFFFFFFF"  multiline="true" textpadding="6,3,6,3"  vscrollbar="true"   autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
+            <RichEdit bkcolor="#FFFFFFFF"  name="txtContentTwoDown" multiline="true" textpadding="6,3,6,3"  vscrollbar="true"   autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
           </HorizontalLayout>
         </HorizontalLayout>
         <VerticalLayout>
@@ -40,11 +40,11 @@
             <RichEdit bkcolor="#FFD0E7F4" name="txtContentThree" multiline="true" textpadding="6,3,6,3"  vscrollbar="true" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
           </VerticalLayout>
           <VerticalLayout sepimm="true"  >
-            <RichEdit bkcolor="#FFD0E7F4" multiline="true" vscrollbar="true" textpadding="6,3,6,3" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
+            <RichEdit bkcolor="#FFD0E7F4" name="txtContentThreeDown" multiline="true" vscrollbar="true" textpadding="6,3,6,3" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
           </VerticalLayout>
         </VerticalLayout>
         <HorizontalLayout>
-          <RichEdit bkcolor="#FFC7EDCC" name="txtContentFour" multiline="true" textpadding="6,3,6,3"  vscrollbar="true" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
+          <RichEdit bkcolor="#FFC7EDCC"  name="txtContentFour" multiline="true" textpadding="6,3,6,3"  vscrollbar="true" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
         </HorizontalLayout>
       </TabLayout>
     </HorizontalLayout>

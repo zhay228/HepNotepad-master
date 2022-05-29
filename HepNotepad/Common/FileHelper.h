@@ -51,6 +51,8 @@ public:
 	static BOOL  SaveBitmap(const  BITMAP   &bm, HDC   hDC, HBITMAP   hBitmap, LPCTSTR   szFileName);
 
 	static HRESULT SaveIcon(HICON hIcon, const char* path);
+
+	static bool DeleteDirFile(CDuiString path);
  
 };
 

@@ -27,9 +27,11 @@ public:
 	virtual void InitWindow(); 
 	
 	virtual LRESULT     HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
+	virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled);
 	virtual LRESULT     OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	virtual void        OnFinalMessage(HWND hWnd);
 	virtual void        Notify(TNotifyUI & msg);
+	LRESULT OnDropFile(HDROP hDropInfo);
 	 
 private: 
 	LRESULT HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -38,7 +40,7 @@ private:
 	void LoadTipData(int tab=0);
 	void LoadInfoData(int tab = 0);
 	void LoadPersonInfoData(int tab = 0);
-	void LoadRecent();
+	void LoadShortcut();
 	void LoadTool();
 	void LoadCalendar(int tab = 0);
 	void LoadHistory(int tab = 0);
@@ -53,6 +55,8 @@ private:
 	void SetHotKey(CDuiString hotText, CDuiString configkey, __in int hotKey, bool inital = true);
 	void ConnectClipboard();    // connects as a clipboard viewer
 	void DisconnectClipboard(bool bSendPing = true); // disconnects as a clipboard viewer
+	void AddTool(string filePath);
+	void AddShortcut(string filePath);
 	 
 private:
 	CMenuWnd* m_pMenu;	 
@@ -105,7 +109,7 @@ private:
 	CEditUI* m_pTxtPwd;
 
 
-	CListUI* m_pRecentList;
+	CListUI* m_pShortcutList;
 	CListUI* m_pDevelopToolList;
 
 	CListUI* m_pCalendarList;
@@ -130,6 +134,14 @@ private:
 	CHotKeyUI * m_pHotCopySaveTip;
 	CHotKeyUI * m_pGetCopy;
 
+	CLabelUI * m_plabShowMainWindow;
+	CLabelUI * m_plabShowAddTipWindow;
+	CLabelUI * m_plabShowQueryInfoWindow;
+	CLabelUI * m_plabShowProgramQueryWindow;
+	CLabelUI * m_plabShowTipWindow;
+	CLabelUI * m_plabAddTipInfo;
+	CLabelUI * m_plabShowCopyInfo;
+
 
 	CDuiString configPath; 
 	CFrmTipInfo* m_pTempTip;
@@ -140,6 +152,8 @@ private:
 	CComboUI * m_pCbxMin;
 
 	CTextUI * m_pVersion;
+
+	CButtonUI * m_pBtnAllDataClear;
 
 	HWND m_hwndNextViewer; 
 	bool init = false;

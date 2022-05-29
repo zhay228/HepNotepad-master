@@ -109,25 +109,34 @@ void CFrmCreateDir::Notify(TNotifyUI &msg)
 
 LRESULT CFrmCreateDir::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	switch (uMsg)
-	{
-	case WM_CHAR: {//快捷键捕获
+	//switch (uMsg)
+	//{
+	//case WM_CHAR: {//快捷键捕获
 
-		switch (wParam)
-		{
-		case 0x1B: //Esc
-		{
-			Close(1); // 因为activex的原因，使用close可能会出现错误
-		}
-		break;
-		}
-	}
-				  break;
+	//	switch (wParam)
+	//	{
+	//	case 0x1B: //Esc
+	//	{
+	//		Close(1); // 因为activex的原因，使用close可能会出现错误
+	//	}
+	//	break;
+	//	}
+	//}
+	//			  break;
 
-	default:
-		return __super::HandleMessage(uMsg, wParam, lParam);
-	}
+	//default:
+	//	return __super::HandleMessage(uMsg, wParam, lParam);
+	//}
 	return __super::HandleMessage(uMsg, wParam, lParam);
+}
+
+LRESULT CFrmCreateDir::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
+{
+	if (wParam == VK_ESCAPE) //快捷键捕获 
+	{
+		Close(1);
+	}
+	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
 }
 
 void CFrmCreateDir::OnClick(TNotifyUI &msg)

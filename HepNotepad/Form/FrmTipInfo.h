@@ -13,8 +13,10 @@ public:
 	virtual LRESULT OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	virtual void InitWindow();
 	virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam); 
+	//virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled);
 	bool SetContent(string content);
-	bool AppendContent(string content);
+	void AppendContent(string content,int tabIndex = 1);
+	void InitData();
 	DUI_DECLARE_MESSAGE_MAP()
 	virtual void OnClick(TNotifyUI& msg);
 
@@ -31,7 +33,9 @@ private:
 	CTextUI * m_pTitle;
 	CRichEditUI* m_pContent;
 	CRichEditUI* m_pContentTwo;
+	CRichEditUI* m_pContentTwoDown;
 	CRichEditUI* m_pContentThree;
+	CRichEditUI* m_pContentThreeDown;
 	CRichEditUI* m_pContentFour;
 	CButtonUI* m_pBtnPageOne;
 	CButtonUI* m_pBtnPageTwo;

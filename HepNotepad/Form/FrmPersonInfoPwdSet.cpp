@@ -63,8 +63,17 @@ void CFrmPersonInfoPwdSet::Notify(TNotifyUI &msg)
 }
 
 LRESULT CFrmPersonInfoPwdSet::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
+{ 
 	return __super::HandleMessage(uMsg, wParam, lParam);
+}
+
+LRESULT CFrmPersonInfoPwdSet::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
+{
+	if (wParam == VK_ESCAPE) //¿ì½Ý¼ü²¶»ñ 
+	{
+		Close(1);
+	}
+	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
 }
 
 void CFrmPersonInfoPwdSet::OnClick(TNotifyUI &msg)

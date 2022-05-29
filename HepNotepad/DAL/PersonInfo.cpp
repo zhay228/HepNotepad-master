@@ -12,7 +12,6 @@ CPersonInfo::CPersonInfo()
 
 CPersonInfo::~CPersonInfo()
 { 
-	delete this;
 }
 
 

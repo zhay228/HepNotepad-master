@@ -107,7 +107,7 @@ void CFrmPersonInfoAdd::Notify(TNotifyUI &msg)
 }
 
 LRESULT CFrmPersonInfoAdd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
+{ 
 	switch (uMsg)
 	{
 
@@ -115,6 +115,15 @@ LRESULT CFrmPersonInfoAdd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam
 		return __super::HandleMessage(uMsg, wParam, lParam);
 	}
 	return __super::HandleMessage(uMsg, wParam, lParam);
+}
+
+LRESULT CFrmPersonInfoAdd::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
+{
+	if (wParam == VK_ESCAPE) //¿ì½Ý¼ü²¶»ñ 
+	{
+		Close(1);
+	}
+	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
 }
 
 void CFrmPersonInfoAdd::OnClick(TNotifyUI &msg)

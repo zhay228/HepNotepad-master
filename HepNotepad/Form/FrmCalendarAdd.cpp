@@ -148,6 +148,10 @@ void CFrmCalendarAdd::Notify(TNotifyUI &msg)
 
 LRESULT CFrmCalendarAdd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	if (wParam == VK_ESCAPE) //¿ì½Ý¼ü²¶»ñ 
+	{
+		Close(1);
+	}
 	switch (uMsg)
 	{
 

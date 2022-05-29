@@ -5,6 +5,7 @@
 #include <mshtml.h>
 #include <wininet.h>
 #include <sys/stat.h> 
+#include <ShellAPI.h>
 #include "Common\des.h"
 #include "Common\FileHelper.h"
 #include "Common\ShellUtils.h"
@@ -55,6 +56,8 @@ CMainFrame::~CMainFrame()
 	UnregisterHotKey(GetHWND(), WM_TEMPINFOHOTKEY);
 	UnregisterHotKey(GetHWND(), WM_COPYSAVETIPHOTKEY);
 	UnregisterHotKey(GetHWND(), WM_GETCOPY);
+	UnregisterHotKey(GetHWND(), WM_STOPGETCOPY);
+	 
 	delete wndCopy;
 	delete m_pTempTip;
 	delete m_pLogo;
@@ -142,7 +145,7 @@ void CMainFrame::InitWindow()
 	m_pPersonInfoList = static_cast<CListUI*>(m_pm.FindControl(_T("listPersonInfo")));
 	m_pTxtPwd = static_cast<CEditUI*>(m_pm.FindControl(_T("txtPwd")));
 
-	m_pRecentList = static_cast<CListUI*>(m_pm.FindControl("recentList"));
+	m_pShortcutList = static_cast<CListUI*>(m_pm.FindControl("shortcutList"));	 
 	m_pDevelopToolList = static_cast<CListUI*>(m_pm.FindControl("developList"));
 
 	m_pCalendarList = static_cast<CListUI*>(m_pm.FindControl("listCalendar"));
@@ -181,9 +184,22 @@ void CMainFrame::InitWindow()
 	m_pGetCopy = static_cast<CHotKeyUI*>(m_pm.FindControl(_T("txtGetCopy")));
 	m_pVersion = static_cast<CTextUI*>(m_pm.FindControl(_T("txtVersion")));
 
+	m_plabShowMainWindow = static_cast<CLabelUI*>(m_pm.FindControl(_T("labShowMainWindow")));
+	m_plabShowAddTipWindow = static_cast<CLabelUI*>(m_pm.FindControl(_T("labShowAddTipWindow")));
+	m_plabShowQueryInfoWindow = static_cast<CLabelUI*>(m_pm.FindControl(_T("labShowQueryInfoWindow")));
+	m_plabShowProgramQueryWindow = static_cast<CLabelUI*>(m_pm.FindControl(_T("labShowProgramQueryWindow")));
+	m_plabShowTipWindow = static_cast<CLabelUI*>(m_pm.FindControl(_T("labShowTipWindow")));
+	m_plabAddTipInfo = static_cast<CLabelUI*>(m_pm.FindControl(_T("labAddTipInfo")));
+	m_plabShowCopyInfo = static_cast<CLabelUI*>(m_pm.FindControl(_T("labShowCopyInfo")));
+
+	m_pBtnAllDataClear = static_cast<CButtonUI*>(m_pm.FindControl(_T("btnAllDataClear")));
+
 	/*RegisterHotKey(GetHWND(), WM_QUERYHOTKEY, MOD_CONTROL | MOD_SHIFT, 'Q');
 	RegisterHotKey(GetHWND(), WM_OFTENTOOLHOTKEY, MOD_CONTROL | MOD_SHIFT, 'W');
 	RegisterHotKey(GetHWND(), WM_TEMPINFOHOTKEY, MOD_CONTROL | MOD_SHIFT, 'E');*/
+
+	::DragAcceptFiles(this->m_hWnd, true);
+	
 	CustomInital();
 	DataLoad();
 }
@@ -310,7 +326,7 @@ void CMainFrame::CustomInital() {
 		m_pChkWeeklyEnable->SetCheck(userInfo->WeekEnable);
 		string exePath = CPaintManagerUI::GetInstancePath();
 		exePath += _T("HepNotepad.exe");
-		string version = "{c #386382}版本：" + GetProductVersion(exePath.c_str()) + " 2019 by hep{/c}";
+		string version = "{c #386382}版本：" + GetProductVersion(exePath.c_str()) + " 2022.5 by hep{/c}";
 		m_pVersion->SetText(version.c_str());
 
 		string text = "", hour = "", min = "";
@@ -355,41 +371,62 @@ void CMainFrame::CustomInital() {
 		GetPrivateProfileString(_T("SystemInfo"), _T("HotShowMain"), _T(""), paramVlaue, MAX_PATH, configPath);
 		SetHotKey(paramVlaue, _T("HotShowMain"), WM_SHOWMAINHOTKEY);
 		m_pHotShowMain->SetText(paramVlaue);
+		m_plabShowMainWindow->SetText(paramVlaue);
 		GetPrivateProfileString(_T("SystemInfo"), _T("HotHotAddTip"), _T(""), paramVlaue, MAX_PATH, configPath);
 		SetHotKey(paramVlaue, _T("HotHotAddTip"), WM_ADDTIPHOTKEY);
 		m_pHotAddTip->SetText(paramVlaue);
+		m_plabShowAddTipWindow->SetText(paramVlaue);
 		GetPrivateProfileString(_T("SystemInfo"), _T("HotInfoQuery"), _T(""), paramVlaue, MAX_PATH, configPath);
 		SetHotKey(paramVlaue, _T("HotInfoQuery"), WM_QUERYHOTKEY);
 		m_pHotInfoQuery->SetText(paramVlaue);
+		m_plabShowQueryInfoWindow->SetText(paramVlaue);
 		GetPrivateProfileString(_T("SystemInfo"), _T("HotProgramQuery"), _T(""), paramVlaue, MAX_PATH, configPath);
 		SetHotKey(paramVlaue, _T("HotProgramQuery"), WM_OFTENTOOLHOTKEY);
 		m_pHotProgramQuery->SetText(paramVlaue);
+		m_plabShowProgramQueryWindow->SetText(paramVlaue);
 		GetPrivateProfileString(_T("SystemInfo"), _T("HotTempTip"), _T(""), paramVlaue, MAX_PATH, configPath);
 		SetHotKey(paramVlaue, _T("HotTempTip"), WM_TEMPINFOHOTKEY);
 		m_pHotTempTip->SetText(paramVlaue);
+		m_plabShowTipWindow->SetText(paramVlaue);
 		GetPrivateProfileString(_T("SystemInfo"), _T("HotCopySaveTip"), _T(""), paramVlaue, MAX_PATH, configPath);
 		SetHotKey(paramVlaue, _T("HotCopySaveTip"), WM_COPYSAVETIPHOTKEY);
 		m_pHotCopySaveTip->SetText(paramVlaue);
+		m_plabAddTipInfo->SetText(paramVlaue);
 		GetPrivateProfileString(_T("SystemInfo"), _T("HotGetCopy"), _T(""), paramVlaue, MAX_PATH, configPath);
-		SetHotKey(paramVlaue, _T("HotGetCopy"), WM_GETCOPY);
+		SetHotKey(paramVlaue, _T("HotGetCopy"), WM_GETCOPY); 
 		m_pGetCopy->SetText(paramVlaue);
+		m_plabShowCopyInfo->SetText(paramVlaue);
 
+		GetPrivateProfileString(_T("SystemInfo"), _T("PersonInfoShow"), _T(""), paramVlaue, MAX_PATH, configPath);
+		string pValue = paramVlaue;
+		if (pValue == _T("true")) {
+			m_pOptNavPersonal->SetVisible(true);
+		}
+
+		GetPrivateProfileString(_T("SystemInfo"), _T("BtnDataClearShow"), _T(""), paramVlaue, MAX_PATH, configPath);
+		pValue = paramVlaue;
+		if (pValue == _T("true")) {
+			m_pBtnAllDataClear->SetVisible(true);
+		}		 
+
+		SetHotKey(_T("Ctrl + Shift + E"), _T("HotStopGetCopy"), WM_STOPGETCOPY); //停止复制
+		
 		m_pTempTip = new CFrmTipInfo(DataType::tempTip, "", "", "临时便签");
 		m_pTempTip->Create(NULL, _T("临时便签"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE, 0, 0);
+		//::SetWindowLong(m_pTempTip->GetHWND(), GWL_EXSTYLE, WS_EX_TOOLWINDOW); //不在任务栏显示
 		::ShowWindow(m_pTempTip->GetHWND(), SW_HIDE);
-		SetWindowLong(m_pTempTip->GetHWND(), GWL_EXSTYLE, WS_EX_TOOLWINDOW); //不在任务栏显示
 
 		m_pLogo = new CFrmLogo();
 		m_pLogo->Create(NULL, _T("随手记"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE, 0, 0);
+		//::SetWindowLong(m_pLogo->GetHWND(), GWL_EXSTYLE, WS_EX_TOOLWINDOW); //不在任务栏显示
 		::ShowWindow(m_pLogo->GetHWND(), SW_HIDE);
-		SetWindowLong(m_pLogo->GetHWND(), GWL_EXSTYLE, WS_EX_TOOLWINDOW); //不在任务栏显示
 
 		wndCopy = new CFrmTipInfo(DataType::copy, "获取复制内容");
 		wndCopy->Create(NULL, "复制内容", UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE, 0, 0);
+		//::SetWindowLong(wndCopy->GetHWND(), GWL_EXSTYLE, WS_EX_TOOLWINDOW); //不在任务栏显示
 		::ShowWindow(wndCopy->GetHWND(), SW_HIDE);
-		SetWindowLong(wndCopy->GetHWND(), GWL_EXSTYLE, WS_EX_TOOLWINDOW); //不在任务栏显示
 
-		SetTimer(0, 0, 300000, &TimerProc);
+		SetTimer(0, 0, 90000, &TimerProc);
 		init = true;
 
 		/*GetPrivateProfileString(_T("SystemInfo"), _T("AutoStart"), _T("false"), paramVlaue, MAX_PATH, configPath);
@@ -456,6 +493,7 @@ void CMainFrame::LoadTipData(int tab) {
 			delete pTipInfo;
 		}
 		SetPageInfo(pageInfo);
+		
 		delete pageInfo;
 	}
 	__except (exception_filter(GetExceptionInformation())) {
@@ -578,6 +616,8 @@ void CMainFrame::LoadPersonInfoData(int tab) {
 			}
 			string text = m_pPersonInfoType->GetText();
 			vector<string> dataTypeList = pPerson->GetTypeList();
+			delete pPerson;
+
 			m_pPersonInfoType->RemoveAll();
 			bool select = false;
 			for (int i = 0; i < dataTypeList.size(); i++) {
@@ -596,7 +636,7 @@ void CMainFrame::LoadPersonInfoData(int tab) {
 			m_pPersonInfoType->Add(pLabel);
 			if (!select)
 				pLabel->Select(true);
-			delete pPerson;
+			
 		}
 		SetPageInfo(pageInfo);
 		delete pageInfo;
@@ -608,17 +648,17 @@ void CMainFrame::LoadPersonInfoData(int tab) {
 	}
 }
 
-void CMainFrame::LoadRecent() {
+void CMainFrame::LoadShortcut() {
 	__try {
 		string path = CPaintManagerUI::GetInstancePath();
-		path += "recent\\";
+		path += "shortcut\\";
 		vector<string> typeList = { ".docx", ".doc", ".xlsx", ".xls", ".txt", ".pdf", ".lnk" };
 		vector<string> dList = CFileHelper::GetFiles(path, typeList, 2);
-		m_pRecentList->RemoveAll();
+		m_pShortcutList->RemoveAll();
 		for (int i = 0; i < dList.size(); i++) {
 			CListContainerElementUI* pElem = nullptr;
 			CDialogBuilder builder;
-			pElem = static_cast<CListContainerElementUI*>(builder.Create(_T("recentItem.xml")));
+			pElem = static_cast<CListContainerElementUI*>(builder.Create(_T("shortcutItem.xml")));
 
 			int nPos = dList[i].rfind(".");
 			string	fileName = dList[i].substr(0, nPos);
@@ -643,18 +683,18 @@ void CMainFrame::LoadRecent() {
 				CFileHelper::SaveHIcon2PngFile(hIcon, CDataTypeTool::GBKToUTF8(pngPath).c_str());
 			}
 			pHeaderImage->SetBkImage(pngPath.c_str());
-			CButtonUI* pBtnRemove = static_cast<CButtonUI*>(pElem->FindSubControl("btnRecentRemove"));
+			CButtonUI* pBtnRemove = static_cast<CButtonUI*>(pElem->FindSubControl("btnShortcutRemove"));
 			pBtnRemove->SetAttribute("filePath", (path + dList[i]).c_str());
-			pBtnRemove->SetAttribute("type", "recent");
-			m_pRecentList->Add(pElem);
+			pBtnRemove->SetAttribute("type", "shortcut");
+			m_pShortcutList->Add(pElem);
 		}
 		CListContainerElementUI* pElemAdd = nullptr;
 		CDialogBuilder builder;
-		pElemAdd = static_cast<CListContainerElementUI*>(builder.Create(_T("recentItem.xml")));
-		pElemAdd->SetName("btnAddRecent");
-		CButtonUI* pBtnRemove = static_cast<CButtonUI*>(pElemAdd->FindSubControl("btnRecentRemove"));
+		pElemAdd = static_cast<CListContainerElementUI*>(builder.Create(_T("shortcutItem.xml")));
+		pElemAdd->SetName("btnAddShortcut");
+		CButtonUI* pBtnRemove = static_cast<CButtonUI*>(pElemAdd->FindSubControl("btnShortcutRemove"));
 		pBtnRemove->SetVisible(false);
-		m_pRecentList->Add(pElemAdd);
+		m_pShortcutList->Add(pElemAdd);
 	}
 	__except (exception_filter(GetExceptionInformation())) {
 		CHAR buffer[1024];
@@ -667,7 +707,7 @@ void CMainFrame::LoadTool() {
 	__try {
 		string path = CPaintManagerUI::GetInstancePath();
 		path += "tool\\";
-		vector<string> typeList = { ".exe", ".udl" };
+		vector<string> typeList = { ".exe", ".udl", ".bat", ".GADGET", ".CMD", ".APPX", ".WSF", ".msi" };
 		vector<string> toolList = CFileHelper::GetFiles(path, typeList, 2);
 		for (int i = 0; i < m_pDevelopToolList->GetCount(); i++) {
 			CListContainerElementUI* pElem = (CListContainerElementUI*)m_pDevelopToolList->GetItemAt(i);
@@ -676,8 +716,7 @@ void CMainFrame::LoadTool() {
 				m_pDevelopToolList->RemoveAt(i);
 				i--;
 			}
-		}
-
+		} 
 		for (int i = 0; i < toolList.size(); i++) {
 			CListContainerElementUI* pElem = nullptr;
 			CDialogBuilder builder;
@@ -717,7 +756,7 @@ void CMainFrame::LoadTool() {
 		for (int i = 0; i < cusTometoolList.size(); i++) {
 			CListContainerElementUI* pElem = nullptr;
 			CDialogBuilder builder;
-			pElem = static_cast<CListContainerElementUI*>(builder.Create(_T("recentItem.xml")));
+			pElem = static_cast<CListContainerElementUI*>(builder.Create(_T("shortcutItem.xml")));
 
 			int nPos = cusTometoolList[i].rfind(".");
 			string	toolName = cusTometoolList[i].substr(0, nPos);
@@ -740,7 +779,7 @@ void CMainFrame::LoadTool() {
 				CFileHelper::SaveHIcon2PngFile(hIcon, CDataTypeTool::GBKToUTF8(pngPath).c_str());
 			}
 			pHeaderImage->SetBkImage(pngPath.c_str());
-			CButtonUI* pBtnRemove = static_cast<CButtonUI*>(pElem->FindSubControl("btnRecentRemove"));
+			CButtonUI* pBtnRemove = static_cast<CButtonUI*>(pElem->FindSubControl("btnShortcutRemove"));
 			pBtnRemove->SetAttribute("filePath", (customPath + cusTometoolList[i]).c_str());
 			pBtnRemove->SetAttribute("type", "tool");
 			m_pDevelopToolList->Add(pElem);
@@ -1025,6 +1064,29 @@ LRESULT CMainFrame::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
+	case WM_DROPFILES: { 
+		 
+		if (m_pOptMainNavTool->IsSelected()) {
+			TCHAR szFileName[MAX_PATH];
+			DragQueryFile((HDROP)wParam, 0, szFileName, MAX_PATH);
+			switch (m_pToolContainer->GetCurSel())
+			{
+			case 0:
+				
+				//DragFinish((HDROP)wParam);
+			 
+				AddShortcut(szFileName);
+				break;
+			case 1:
+				AddTool(szFileName);
+				break;
+			default:
+				break;
+			}			 
+		}		
+			
+	}		
+		break;
 	case WM_PAINT: /// not allow maximize, because after maximize, ui layout is wrong 
 	{
 		if (init) {
@@ -1080,10 +1142,9 @@ LRESULT CMainFrame::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		return 0;
 	}
 						   break;
-	case WM_DESTROY: {
-		ChangeClipboardChain(GetHWND(), m_hwndNextViewer);
-	}
-					 break;
+	case WM_DESTROY:  
+		ChangeClipboardChain(GetHWND(), m_hwndNextViewer);	 
+		break;	
 	case HN_MAINLOADTIP: //重新加载数据
 		LoadTipData();
 		break;
@@ -1213,7 +1274,7 @@ LRESULT CMainFrame::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 					m_pTempTip->Create(NULL, _T("临时便签"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE, cx - 375, cy - 232);
 					m_pTempTip->ResizeClient(360, 240);
 				}
-
+				m_pTempTip->InitData();
 				::SetWindowPos(m_pTempTip->GetHWND(), HWND_TOPMOST, cx - 361, cy - 218, 360, 240, SWP_SHOWWINDOW);
 				::ShowWindow(m_pTempTip->GetHWND(), SW_SHOW);
 			}
@@ -1228,8 +1289,8 @@ LRESULT CMainFrame::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 						hClip = GetClipboardData(CF_TEXT);
 						pBuf = (char*)GlobalLock(hClip);
 						GlobalUnlock(hClip);
-						string d = pBuf;
-						if (d.length() > 5) {
+						string info = pBuf;
+						if (info.length() > 5) {
 							DataInfo * dataInfo = new DataInfo;
 							CTipInfo* pOperation = new CTipInfo;
 							dataInfo->createTime = GetTimeInfo();
@@ -1273,6 +1334,9 @@ LRESULT CMainFrame::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 					::ShowWindow(wndCopy->GetHWND(), SW_HIDE);
 				}
 			}
+			else if (wParam == WM_STOPGETCOPY && IsWindowVisible(wndCopy->GetHWND())) {
+				copySaveTip = !copySaveTip;
+			}
 			//}
 		}
 		__except (exception_filter(GetExceptionInformation())) {
@@ -1281,26 +1345,36 @@ LRESULT CMainFrame::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			CLog::WriteToLog(buffer);
 		}
 	}
-	break;
+	break;	
 	case WM_CHAR: {//快捷键捕获
-
-		switch (wParam)
-		{
-		case 0x1B: //Esc
+		if (wParam == VK_ESCAPE) //快捷键捕获 
 		{
 			::ShowWindow(GetHWND(), SW_HIDE);
 		}
-		break;
-		}
 	}
 				  break;
-
 	default:
 		return __super::HandleMessage(uMsg, wParam, lParam);
 		break;
 	}
 
 	return __super::HandleMessage(uMsg, wParam, lParam);
+}
+
+LRESULT CMainFrame::OnDropFile(HDROP hDropInfo) {
+	TCHAR szFileName[MAX_PATH];
+	DragQueryFile(hDropInfo, 0, szFileName, MAX_PATH);
+	DragFinish(hDropInfo);
+	return 0;
+}
+
+LRESULT CMainFrame::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
+{
+	//if (wParam == VK_ESCAPE) //快捷键捕获 
+	//{
+	//	::ShowWindow(GetHWND(), SW_HIDE);
+	//}
+	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
 }
 
 void CMainFrame::OnFinalMessage(HWND hWnd)
@@ -1317,7 +1391,6 @@ void CMainFrame::OnSelectedChanged(TNotifyUI &msg) {
 			if (itemType.IsEmpty() == false && itemType == _T("navMainBtn")) {
 				int position = m_pNavMain->GetItemIndex(msg.pSender);
 				m_pMainContainer->SelectItem(position);
-
 			}
 			else if (itemType.IsEmpty() == false && itemType == _T("navDataBtn")) {
 				int position = m_pNavData->GetItemIndex(msg.pSender);
@@ -1325,9 +1398,7 @@ void CMainFrame::OnSelectedChanged(TNotifyUI &msg) {
 			}
 			else if (itemType.IsEmpty() == false && itemType == _T("navToolBtn")) {
 				int position = m_pNavTool->GetItemIndex(msg.pSender);
-
 				m_pToolContainer->SelectItem(position);
-
 			}
 			else if (itemType.IsEmpty() == false && itemType == _T("navCalendarBtn")) {
 				int position = m_pNavCalendar->GetItemIndex(msg.pSender);
@@ -1368,7 +1439,7 @@ void CMainFrame::ChangeTab() {
 		}
 	}
 	else if (m_pOptMainNavTool->IsSelected()) { //工具栏
-		LoadRecent();
+		LoadShortcut();
 		LoadTool();
 		m_pLayoutPage->SetVisible(false);
 	}
@@ -1432,6 +1503,7 @@ void CMainFrame::Notify(TNotifyUI & msg)
 				ShowMessage("热键冲突");
 			}
 			SetHotKey(text, _T("HotShowMain"), WM_SHOWMAINHOTKEY, false);
+			m_plabShowMainWindow->SetText(text);
 		}
 		else if (_tcsicmp(itemName, _T("txtHotAddTip")) == 0) {
 			CDuiString text = m_pHotAddTip->GetText();
@@ -1439,6 +1511,7 @@ void CMainFrame::Notify(TNotifyUI & msg)
 				ShowMessage("热键冲突");
 			}
 			SetHotKey(text, _T("HotHotAddTip"), WM_ADDTIPHOTKEY, false);
+			m_plabShowAddTipWindow->SetText(text);
 		}
 		else if (_tcsicmp(itemName, _T("txtHotInfoQuery")) == 0) {
 			CDuiString text = m_pHotInfoQuery->GetText();
@@ -1446,6 +1519,7 @@ void CMainFrame::Notify(TNotifyUI & msg)
 				ShowMessage("热键冲突");
 			}
 			SetHotKey(text, _T("HotInfoQuery"), WM_QUERYHOTKEY, false);
+			m_plabShowQueryInfoWindow->SetText(text);
 		}
 		else if (_tcsicmp(itemName, _T("txtHotProgramQuery")) == 0) {
 			CDuiString text = m_pHotProgramQuery->GetText();
@@ -1453,7 +1527,7 @@ void CMainFrame::Notify(TNotifyUI & msg)
 				ShowMessage("热键冲突");
 			}
 			SetHotKey(text, _T("HotProgramQuery"), WM_OFTENTOOLHOTKEY, false);
-
+			m_plabShowProgramQueryWindow->SetText(text);
 		}
 		else if (_tcsicmp(itemName, _T("txtHotTempTip")) == 0) {
 			CDuiString text = m_pHotTempTip->GetText();
@@ -1461,6 +1535,7 @@ void CMainFrame::Notify(TNotifyUI & msg)
 				ShowMessage("热键冲突");
 			}
 			SetHotKey(text, _T("HotTempTip"), WM_TEMPINFOHOTKEY, false);
+			m_plabShowTipWindow->SetText(text);
 		}
 		else if (_tcsicmp(itemName, _T("txtHotCopySaveTip")) == 0) {
 			CDuiString text = m_pHotCopySaveTip->GetText();
@@ -1468,16 +1543,18 @@ void CMainFrame::Notify(TNotifyUI & msg)
 				ShowMessage("热键冲突");
 			}
 			SetHotKey(text, _T("HotCopySaveTip"), WM_COPYSAVETIPHOTKEY, false);
+			m_plabAddTipInfo->SetText(text);
 		}
 		else if (_tcsicmp(itemName, _T("txtGetCopy")) == 0) {
 			CDuiString text = m_pGetCopy->GetText();
 			if (text.GetLength() == 0 || text == "无") {
-				ShowMessage("热键冲突");
+				ShowMessage("热键冲突");  
 			}
 			SetHotKey(text, _T("HotGetCopy"), WM_GETCOPY, false);
+			m_plabShowCopyInfo->SetText(text);
 		}
 	}
-	else if (msg.sType == _T("killfocus")) {
+	else if (msg.sType == _T("killfocus")) {  //失去焦点，如果未设置快捷键，则从配置文件读取
 		TCHAR paramVlaue[MAX_PATH];
 		if (_tcsicmp(itemName, _T("txtHotShowMain")) == 0) {
 			GetPrivateProfileString(_T("SystemInfo"), _T("HotShowMain"), _T(""), paramVlaue, MAX_PATH, configPath);
@@ -1519,31 +1596,14 @@ void CMainFrame::Notify(TNotifyUI & msg)
 	else if (_tcsicmp(msg.sType, _T("itemclick")) == 0)//单击
 	{
 		__try {
-			if (itemName.IsEmpty() == false && _tcsicmp(itemName, _T("btnAddRecent")) == 0) {
+			if (itemName.IsEmpty() == false && _tcsicmp(itemName, _T("btnAddShortcut")) == 0) {			
 				LPCTSTR lpszFilter = "All(*.*)\0*.*;\0\0";
 				CFileDialogEx fileDlg;
 				fileDlg.SetFilter(lpszFilter);
 				fileDlg.SetParentWnd(m_hWnd);
-
 				if (fileDlg.ShowOpenFileDlg())
 				{
-					string filePath = fileDlg.GetPathName().c_str();
-					string path = CPaintManagerUI::GetInstancePath();
-					path += "recent\\";
-					if (!CFileHelper::IsDirectoryExist(path.c_str())) {
-						CFileHelper::CreateDir(path);
-					}
-					int pos = filePath.rfind("\\");
-					string fileDir = filePath.substr(0, pos + 1);
-					string fileName = filePath.substr(pos + 1);
-					pos = fileName.rfind(".");
-					string name = fileName;
-					name.substr(0, pos - 1);
-					CreateShortcut(filePath.c_str(), fileName.c_str(), fileDir.c_str(), name.c_str(), CSIDL_PROGRAMS);
-					string programDir = GetSpecialFolderLocation(CSIDL_PROGRAMS);
-					programDir += "\\" + fileName + ".lnk";
-					MoveFile(programDir.c_str(), (path + fileName + ".lnk").c_str());
-					LoadRecent();
+					AddShortcut(fileDlg.GetPathName().c_str());					
 				}
 			}
 			else if (itemName.IsEmpty() == false && _tcsicmp(itemName, _T("btnAddTool")) == 0) {
@@ -1551,19 +1611,11 @@ void CMainFrame::Notify(TNotifyUI & msg)
 				CFileDialogEx fileDlg;
 				fileDlg.SetFilter(lpszFilter);
 				fileDlg.SetParentWnd(m_hWnd);
-
 				if (fileDlg.ShowOpenFileDlg())
 				{
-					string file = fileDlg.GetPathName().c_str();
-
-					string path = CPaintManagerUI::GetInstancePath();
-					path += "CustomTool\\";
-					int pos = file.rfind("\\");
-					string fileName = file.substr(pos + 1);
-					CopyFile(file.c_str(), (path + fileName).c_str(), true);
-
-					LoadTool();
+					AddTool(fileDlg.GetPathName().c_str());					
 				}
+							
 			}
 		}
 		__except (exception_filter(GetExceptionInformation())) {
@@ -1800,15 +1852,15 @@ void CMainFrame::OnClick(TNotifyUI& msg)
 	else if (msg.pSender->GetName().Compare(_T("btnPwdOK")) == 0) {
 		Unlock();
 	}
-	else if (msg.pSender->GetName().Compare(_T("btnRecentRemove")) == 0) {
+	else if (msg.pSender->GetName().Compare(_T("btnShortcutRemove")) == 0) {
 
 		if (ShowMessageConfirm(GetHWND(), _T("温馨提示"), _T("您确定要删除选中数据吗？"))) {
 			CButtonUI * btnRemove = (CButtonUI*)msg.pSender;
 			string type = btnRemove->GetCustomAttribute("type");
 			string fileName = btnRemove->GetCustomAttribute("filePath");
-			if (type == "recent") {
+			if (type == "shortcut") {
 				remove(fileName.c_str());
-				LoadRecent();
+				LoadShortcut();
 			}
 			else {
 				remove(fileName.c_str());
@@ -1890,7 +1942,7 @@ void CMainFrame::OnClick(TNotifyUI& msg)
 			delete pOperation;
 			if (result) {
 				LoadHistory();
-				ShowMessage("清理成功");
+				ShowMessage("清理完成");
 			}
 			else {
 				ShowMessage("清理失败");
@@ -2084,7 +2136,6 @@ void CMainFrame::OnClick(TNotifyUI& msg)
 		}
 	}
 	else if (msg.pSender->GetName().Compare(_T("btnDataInput")) == 0) {
-
 		LPCTSTR lpszFilter = "db(*.db)\0*.db;\0\0";
 		CFileDialogEx fileDlg;
 		fileDlg.SetFilter(lpszFilter);
@@ -2102,6 +2153,21 @@ void CMainFrame::OnClick(TNotifyUI& msg)
 				ShowMessage("不是有效备份数据或同不是一个用户备份文件数据");
 			}
 		}
+	}
+	else if (msg.pSender->GetName().Compare(_T("btnAllDataClear")) == 0) {
+		if (ShowMessageConfirm(GetHWND(), _T("温馨提示"), _T("您确定要清理所有数据吗？"))) {
+			CDataInfo* pDataInfo = new CDataInfo();
+			pDataInfo->DataClear();		 //>->2022.05.29清理数据库	 
+			m_pTipList->RemoveAll();
+			m_pDataList->RemoveAll();
+			m_pPersonInfoList->RemoveAll();
+			m_pCalendarList->RemoveAll();
+			m_pHistoryList->RemoveAll();
+			m_pWeeklyList->RemoveAll();			 
+			CFileHelper::DeleteDirFile(CPaintManagerUI::GetInstancePath() + "CustomTool\\");			
+			CFileHelper::DeleteDirFile(CPaintManagerUI::GetInstancePath() + "shortcut\\");
+			ShowMessage("清理完成");
+		}		
 	}
 }
 
@@ -2211,6 +2277,7 @@ void CMainFrame::GotoPageIndex(GotoPage page, int index) {
 //>->19.4.24自定义消息处理--托盘菜单事件消息
 LRESULT CMainFrame::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
+
 	if (uMsg == WM_MENUCLICK)
 	{
 		MenuCmd* pMenuCmd = (MenuCmd*)wParam;
@@ -2304,7 +2371,6 @@ void CMainFrame::EditCalendar(CListTextElementUI * item) {
 
 void CMainFrame::OnItemSelect(TNotifyUI &msg) {
 	if (msg.sType == _T("itemselect")) {
-
 		if (msg.pSender->GetName() == _T("cbxWeekMin") || msg.pSender->GetName() == _T("cbxWeekHour"))
 		{
 			string hour = m_pCbxHour->GetText();
@@ -2315,4 +2381,42 @@ void CMainFrame::OnItemSelect(TNotifyUI &msg) {
 			delete pOperation;
 		}
 	}
+}
+
+void CMainFrame::AddShortcut(string filePath) {
+	string path = CPaintManagerUI::GetInstancePath();
+	path += "shortcut\\";
+	if (!CFileHelper::IsDirectoryExist(path.c_str())) {
+		CFileHelper::CreateDir(path);
+	}
+	int pos = filePath.rfind("\\");
+	string fileDir = filePath.substr(0, pos + 1);
+	string fileName = filePath.substr(pos + 1);
+	pos = fileName.rfind(".");
+	string name = fileName;
+	name.substr(0, pos - 1);
+	CreateShortcut(filePath.c_str(), fileName.c_str(), fileDir.c_str(), name.c_str(), CSIDL_PROGRAMS);
+	string programDir = GetSpecialFolderLocation(CSIDL_PROGRAMS);
+	programDir += "\\" + fileName + ".lnk";
+	MoveFile(programDir.c_str(), (path + fileName + ".lnk").c_str());
+	LoadShortcut();
+}
+
+void CMainFrame::AddTool(string filePath) {
+	vector<string> typeList = { ".exe", ".udl", ".bat", ".GADGET", ".CMD", ".APPX", ".WSF", ".msi" };
+
+	int nPos = filePath.rfind(".");
+	string	fileType = filePath.substr(nPos, filePath.size());
+
+	if (!std::count(typeList.begin(), typeList.end(), fileType)) {
+		ShowMessage("不是可执行文件");
+		return;
+	}  
+	string path = CPaintManagerUI::GetInstancePath();
+	path += "CustomTool\\";
+	int pos = filePath.rfind("\\");
+	string fileName = filePath.substr(pos + 1);
+	CopyFile(filePath.c_str(), (path + fileName).c_str(), true);
+	LoadTool();
+	
 }

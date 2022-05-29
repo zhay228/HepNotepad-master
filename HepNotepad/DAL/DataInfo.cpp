@@ -100,6 +100,29 @@ bool CDataInfo::Delete(string id) {
 	return result;
 }
 
+bool CDataInfo::DataClear() {
+	string sql = "delete from Dat_Info"; 
+
+	CSqliteServer * sqliteServer = new CSqliteServer;
+	bool result = sqliteServer->ExecuteNoneQuery(sql);
+	sql = "delete from Dat_Calendar";
+	result = sqliteServer->ExecuteNoneQuery(sql);
+	sql = "delete from Dat_Tip";
+	result = sqliteServer->ExecuteNoneQuery(sql);
+	sql = "delete from Dat_Data";
+	result = sqliteServer->ExecuteNoneQuery(sql);
+	sql = "delete from Dat_PersonInfo";
+	result = sqliteServer->ExecuteNoneQuery(sql);
+	sql = "delete from Dat_Type";
+	result = sqliteServer->ExecuteNoneQuery(sql);
+	sql = "delete from Dat_WeekDetail";
+	result = sqliteServer->ExecuteNoneQuery(sql);
+	sql = "delete from Dat_Weekly";
+	result = sqliteServer->ExecuteNoneQuery(sql);
+	delete sqliteServer;
+	return result;
+}
+
 vector<DataInfo*> CDataInfo::GetList(PageInfo * pageInfo, string type, string key) {
 	string sql = "select id,key,title,content,typeName,UpdateTime from Dat_Info ";
 	string whereSql = " where 1 = 1 "; 

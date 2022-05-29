@@ -705,3 +705,31 @@ HRESULT CFileHelper::SaveIcon(HICON hIcon, const char* path) {
 	return hr;
 
 }
+
+
+bool CFileHelper::DeleteDirFile(CDuiString path)
+{
+	CDuiString strDir = path;
+	if (strDir.GetAt(strDir.GetLength() - 1) != '\\');
+	strDir += _T('\\');
+	
+	WIN32_FIND_DATA wfd;
+	HANDLE hFind = FindFirstFile(_T(strDir + "*.*"), &wfd);
+	if (hFind == INVALID_HANDLE_VALUE) {
+		return false;
+	}
+	do {
+		if (wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+			if (stricmp(_T(wfd.cFileName), ".") != 0 &&
+				stricmp(_T(wfd.cFileName), "..") != 0)
+				DeleteDirFile((strDir + _T(wfd.cFileName)));
+		}
+		else {
+			DeleteFile((_T(strDir) + wfd.cFileName));
+		}
+	} while (FindNextFile(hFind, &wfd));
+	FindClose(hFind);
+	RemoveDirectory(_T(path));
+
+	return true;
+}

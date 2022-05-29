@@ -8,7 +8,7 @@
       <HorizontalLayout bkcolor="#FFFFFFFF" bordercolor="#FF768D9B" bordersize="1">
         <TabLayout name="tabToolContainer">
           <VerticalLayout inset="0,0,0,0">
-            <List name="recentList" header="hidden"  itemtextcolor="#FF333333"  scrollselect="true"  colorhsl="true" vscrollbar="true" autovscroll="true" padding="6,6,6,0" ></List>
+            <List name="shortcutList" header="hidden"  itemtextcolor="#FF333333"  scrollselect="true"  colorhsl="true" vscrollbar="true" autovscroll="true" padding="6,6,6,0" ></List>
           </VerticalLayout>
           <VerticalLayout>
             <List name="developList" header="hidden"  itemtextcolor="#FF333333"  scrollselect="true"  colorhsl="true" vscrollbar="true" autovscroll="true" padding="6,9,6,0" >

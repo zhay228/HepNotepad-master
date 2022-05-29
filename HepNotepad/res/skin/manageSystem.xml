@@ -89,13 +89,60 @@
                 <Button textcolor="#FF494949" name="btnDataRevert"  text="数据库还原" font="0" padding="60,0,0,0" width="120" height="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>
               </HorizontalLayout>
                <HorizontalLayout height="30" padding="12,5,0,0"   bordersize="1" bottombordercolor="#FFDDDDDD">
-                <Button textcolor="#FF494949" name="btnDataInput"  text="数据库导入" font="0" padding="100,0,0,0" width="120" height="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/> 
-                
+                <Button textcolor="#FF494949" name="btnDataInput"  text="数据库导入" font="0" padding="100,0,0,0" width="120" height="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/>                
+                <Button textcolor="#FF494949" name="btnAllDataClear" visible="false"  text="数据库清理" font="0" padding="60,0,0,0" width="120" height="23" normalimage="file='button.png' source='0,0,63,23'" hotimage="file='button.png' source='0,23,63,46'" pushedimage="file='button.png' source='0,23,63,46'"/> 
               </HorizontalLayout>
             </VerticalLayout>
           </HorizontalLayout>
           <VerticalLayout>
-            <Text text="数据库" pos="335, 180, 600, 300" relativepos="50,50,0,0"  float="true" font="4" />
+            <HorizontalLayout height="30" padding="12,20,0,0" >
+              <Label name="labShowMainWindow" text="Alt + M" width="120" font="5" textcolor="#FF333333" align="right" />
+              <Label text="显示主窗体" font="5" textcolor="#FF333333" padding="12,0,0,0" />
+            </HorizontalLayout>
+            <HorizontalLayout height="30" padding="12,6,0,0" >
+              <Label name="labShowAddTipWindow" text="Alt + N" width="120" font="5" textcolor="#FF333333" align="right" />
+              <Label text="弹出便签窗口" font="5" textcolor="#FF333333" padding="12,0,0,0" />
+            </HorizontalLayout>
+            <HorizontalLayout height="30" padding="12,6,0,0" >
+              <Label name="labShowQueryInfoWindow" text="Ctrl + Q" width="120" font="5" textcolor="#FF333333" align="right" />
+              <Label text="弹出信息查询窗口"  font="5" textcolor="#FF333333" padding="12,0,0,0" />
+            </HorizontalLayout>
+            <HorizontalLayout height="30" padding="12,6,0,0" >
+              <Label name="labShowProgramQueryWindow" text="Ctrl + W" width="120" font="5" textcolor="#FF333333" align="right" />
+              <Label text="弹出常用项目查询窗口" font="5" textcolor="#FF333333" padding="12,0,0,0" />
+            </HorizontalLayout>
+            <HorizontalLayout height="30" padding="12,6,0,0" >
+              <Label name="labShowTipWindow" text="Ctrl + E" width="120" font="5" textcolor="#FF333333" align="right" />
+              <Label text="弹出临时便签窗口" font="5" textcolor="#FF333333" padding="12,0,0,0" />
+            </HorizontalLayout>
+            <HorizontalLayout height="30" padding="12,6,0,0" >
+              <Label name="labAddTipInfo" text="Ctrl + B" width="120" font="5" textcolor="#FF333333" align="right" />
+              <Label text="快捷保存便签信息到数据库" font="5" textcolor="#FF333333" padding="12,0,0,0" />
+            </HorizontalLayout>
+            <HorizontalLayout height="30" padding="12,6,0,0" >
+              <Label name="labShowCopyInfo" text="Alt + C" width="120" font="5" textcolor="#FF333333" align="right" />
+              <Label text="弹出连续复制信息显示的窗口" font="5" textcolor="#FF333333" padding="12,0,0,0" />
+            </HorizontalLayout>
+             <HorizontalLayout height="30" padding="12,6,0,0" >
+              <Label name="labInfoCopyTemp" text="Ctrl + T" width="120" font="5" textcolor="#FF333333" align="right" />
+              <Label text="将信息切换到临时窗口" font="5" textcolor="#FF333333" padding="12,0,0,0" />
+            </HorizontalLayout>
+            <HorizontalLayout height="30" padding="12,6,0,0" >
+              <Label name="lab" text="Ctrl + ←" width="120" font="5" textcolor="#FF333333" align="right" />
+              <Label text="在临时便签窗口上向左切换到下一个窗口" font="5" textcolor="#FF333333" padding="12,0,0,0" />
+            </HorizontalLayout>
+             <HorizontalLayout height="30" padding="12,6,0,0" >
+              <Label name="labRight" text="Ctrl + →" width="120" font="5" textcolor="#FF333333" align="right" />
+              <Label text="在临时便签窗口上向右切换到下一个窗口" font="5" textcolor="#FF333333" padding="12,0,0,0" />
+            </HorizontalLayout>
+            <HorizontalLayout height="30" padding="12,6,0,0" >
+              <Label name="labLeft" text="Ctrl + Shift + E" width="120" font="5" textcolor="#FF333333" align="right" />
+              <Label text="在使用连续复制窗口时，使用该快捷键停用/启用复制文本信息到窗口功能" font="5" textcolor="#FF333333" padding="12,0,0,0" />
+            </HorizontalLayout> 
+            <HorizontalLayout height="30" padding="12,6,0,0" >
+              <Label name="labEsc" text="Esc" width="120" font="5" textcolor="#FF333333" align="right"  />
+              <Label text="所有弹出窗口的关闭快捷键" font="5" textcolor="#FF333333" padding="12,0,0,0" />
+            </HorizontalLayout>
           </VerticalLayout>
           <VerticalLayout>
             <Text text="开发工具" pos="335, 180, 600, 300" relativepos="50,50,0,0"  float="true" font="4" />
@@ -110,7 +157,7 @@
     <HorizontalLayout   float="true" pos="1,0,799,26" name="navSystem">
       <Option navType="navSystemBtn" text="选项"  pos="6, 0, 84, 26" float="true" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navSystemBtn" selected="true"/>
       <Option navType="navSystemBtn" text="数据" pos="86, 0, 164, 26" float="true" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navSystemBtn"/>
-      <Option navType="navSystemBtn" visible="false" pos="166, 0, 244, 26" float="true" text="个人记事" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navSystemBtn"/>
+      <Option navType="navSystemBtn" text="说明" pos="166, 0, 244, 26" float="true" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navSystemBtn"/>
       <Option navType="navSystemBtn" visible="false" pos="246, 0, 324, 26" float="true" text="个人记事" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navSystemBtn"/>
       <Option navType="navSystemBtn" visible="false" pos="326, 0, 404, 26" float="true" text="备用1" textcolor="#FF386382" font="2" normalimage="tabbar_normal.png" hotimage="tabbar_hover.png" pushedimage="tabbar_pushed.png" selectedimage="tabbar_pushed.png" group="navSystemBtn"/>
     </HorizontalLayout>

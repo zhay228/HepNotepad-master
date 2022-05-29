@@ -87,7 +87,7 @@ void CFrmInfoAdd::Notify(TNotifyUI &msg)
 }
 
 LRESULT CFrmInfoAdd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
+{	 
 	switch (uMsg)
 	{
 	 
@@ -96,6 +96,15 @@ LRESULT CFrmInfoAdd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		return __super::HandleMessage(uMsg, wParam, lParam);
 	}
 	return __super::HandleMessage(uMsg, wParam, lParam);
+}
+
+LRESULT CFrmInfoAdd::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
+{
+	if (wParam == VK_ESCAPE) //¿ì½Ý¼ü²¶»ñ 
+	{
+		Close(0);
+	}
+	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
 }
 
 

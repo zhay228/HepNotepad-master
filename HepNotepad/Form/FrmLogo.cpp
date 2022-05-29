@@ -69,23 +69,20 @@ void CFrmLogo::Notify(TNotifyUI &msg)
 LRESULT CFrmLogo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
-	{
-	case WM_CHAR: {//快捷键捕获
-		switch (wParam)
-		{
-		case 0x1B: //Esc
-		{
-			Close(1);
-		}
-		break;
-
-		}
-	}
-				  break;  
+	{	 
 	default:
 		return __super::HandleMessage(uMsg, wParam, lParam);
 	}
 	return __super::HandleMessage(uMsg, wParam, lParam);
+}
+
+LRESULT CFrmLogo::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
+{
+	if (wParam == VK_ESCAPE) //快捷键捕获 
+	{
+		Close(0);
+	}
+	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
 }
 
 

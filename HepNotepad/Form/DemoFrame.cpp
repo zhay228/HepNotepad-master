@@ -69,7 +69,7 @@ void CDemoFrame::Notify(TNotifyUI &msg)
 }
 
 LRESULT CDemoFrame::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
+{	
 	switch (uMsg)
 	{ 
 	 
@@ -79,6 +79,14 @@ LRESULT CDemoFrame::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	return __super::HandleMessage(uMsg, wParam, lParam);
 }
 
+LRESULT CDemoFrame::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
+{
+	if (wParam == VK_ESCAPE) //¿ì½Ý¼ü²¶»ñ 
+	{
+		Close(0);
+	}
+	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
+}
 
 void CDemoFrame::OnClick(TNotifyUI &msg)
 {

@@ -302,9 +302,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\skin.zip">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="Library\Scintilla.iface">
       <Filter>Library</Filter>
     </None>
@@ -313,6 +310,9 @@
     </None>
     <None Include="plus.xpm">
       <Filter>Header Files</Filter>
+    </None>
+    <None Include="res\skin.zip">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>

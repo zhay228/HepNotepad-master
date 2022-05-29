@@ -124,8 +124,7 @@ void CFrmInfoQuery::LoadLink(string key) {
 		string path = CPaintManagerUI::GetInstancePath();
 		path += "recent\\";
 		vector<string> typeList1 = { ".docx", ".doc", ".xlsx", ".xls", ".txt", ".pdf",".lnk" };
-		vector<string> dList = CFileHelper::GetFiles(path, typeList1, 2);
-		int count = dList.size() > 10 ? 10 : dList.size();
+		vector<string> dList = CFileHelper::GetFiles(path, typeList1, 2); 
 		for (int i = 0; i < dList.size(); i++) {
 			if (dList[i].find(key) != string::npos) {
 				CDialogBuilder builder;
@@ -147,18 +146,36 @@ void CFrmInfoQuery::LoadLink(string key) {
 		vector<string> typeList = { ".exe", ".udl" };
 		path = CPaintManagerUI::GetInstancePath();
 		path += "tool\\";
-		vector<string> toolList = CFileHelper::GetFiles(path, typeList, 2);
-		count = toolList.size() > 10 ? 10 : toolList.size();
-		for (int i = 0; i < count; i++) {
+		vector<string> toolList = CFileHelper::GetFiles(path, typeList, 2); 
+		for (int i = 0; i < toolList.size(); i++) {
 			if (toolList[i].find(key) != string::npos) {
-				CDialogBuilder builder;
-				CListContainerElementUI* pElem = nullptr;
-				pElem = static_cast<CListContainerElementUI*>(builder.Create("queryItem.xml"));
-				pElem->SetName("queryItem");
-				CTextUI* pInfo = static_cast<CTextUI*>(pElem->FindSubControl("txtInfo"));
-				pInfo->SetText(toolList[i].c_str());
-				pElem->SetAttribute("filePath", (path + toolList[i]).c_str());
-				m_pInfoList->Add(pElem);
+				if (m_pInfoList->GetCount() < 15) {
+					CDialogBuilder builder;
+					CListContainerElementUI* pElem = nullptr;
+					pElem = static_cast<CListContainerElementUI*>(builder.Create("queryItem.xml"));
+					pElem->SetName("queryItem");
+					CTextUI* pInfo = static_cast<CTextUI*>(pElem->FindSubControl("txtInfo"));
+					pInfo->SetText(toolList[i].c_str());
+					pElem->SetAttribute("filePath", (path + toolList[i]).c_str());
+					m_pInfoList->Add(pElem);
+				} 
+			}
+		}
+		path = CPaintManagerUI::GetInstancePath();
+		path += "CustomTool\\";
+		vector<string> cusList = CFileHelper::GetFiles(path, typeList, 2);
+		for (int i = 0; i < cusList.size(); i++) {
+			if (cusList[i].find(key) != string::npos) {
+				if (m_pInfoList->GetCount() < 15) {
+					CDialogBuilder builder;
+					CListContainerElementUI* pElem = nullptr;
+					pElem = static_cast<CListContainerElementUI*>(builder.Create("queryItem.xml"));
+					pElem->SetName("queryItem");
+					CTextUI* pInfo = static_cast<CTextUI*>(pElem->FindSubControl("txtInfo"));
+					pInfo->SetText(cusList[i].c_str());
+					pElem->SetAttribute("filePath", (path + cusList[i]).c_str());
+					m_pInfoList->Add(pElem);
+				}
 			}
 		}
 		if (m_pInfoList->GetCount() > 0) {
@@ -193,16 +210,14 @@ void CFrmInfoQuery::Notify(TNotifyUI &msg)
 			}
 		}
 		else if (_tcsicmp(msg.sType, _T("textchanged")) == 0) {
-			if (_tcsicmp(itemName, _T("txtQuery")) == 0) {
-				if (m_pTxtQuery->GetText().GetLength() > 0) {
-					string key = m_pTxtQuery->GetText().GetData();
-					if (type == 1) {
-						LoadData(0, key);
-					}
-					else {
-						LoadLink(key);
-					}
+			if (_tcsicmp(itemName, _T("txtQuery")) == 0) {				
+				string key = m_pTxtQuery->GetText().GetData();
+				if (type == 1) {
+					LoadData(0, key);
 				}
+				else {
+					LoadLink(key);
+				}				
 			}
 		}
 		else if (_tcsicmp(msg.sType, _T("itemactivate")) == 0)//双击
@@ -266,20 +281,8 @@ void CFrmInfoQuery::OpendWnd(CListContainerElementUI* pElem) {
 
 LRESULT CFrmInfoQuery::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-
 	switch (uMsg)
 	{
-	case WM_CHAR: {//快捷键捕获 
-		switch (wParam)
-		{
-		case 0x1B: //Esc
-		{
-			Close(1); // 因为activex的原因，使用close可能会出现错误
-		}
-		break;
-		}
-	}
-				  break;
 	case WM_KEYUP: {
 		__try {
 			if (GetKeyState(VK_UP) < 0) {
@@ -321,6 +324,15 @@ LRESULT CFrmInfoQuery::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		return __super::HandleMessage(uMsg, wParam, lParam);
 	}
 	return __super::HandleMessage(uMsg, wParam, lParam);
+}
+ 
+LRESULT CFrmInfoQuery::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
+{
+	if (wParam == VK_ESCAPE) //快捷键捕获 
+	{
+		Close(1);
+	}
+	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
 }
 
 void CFrmInfoQuery::OnClick(TNotifyUI &msg)
