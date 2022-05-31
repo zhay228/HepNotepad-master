@@ -318,13 +318,13 @@ void CMainFrame::CustomInital() {
 		AddNotificationIcon(GetHWND());
 		m_MainHwnd = GetHWND();
 
-		configPath = CPaintManagerUI::GetInstancePath();
+		configPath = CPaintManagerUI::GetInstancePath().GetData();
 		configPath.Append(_T("Config.ini"));
 
 		m_pNavData->GetItemAt(2)->SetVisible(userInfo->personDataEnable);  //个人记事显示
 		m_pLayoutEncryt->SetVisible(userInfo->personDataEnable);
 		m_pChkWeeklyEnable->SetCheck(userInfo->WeekEnable);
-		string exePath = CPaintManagerUI::GetInstancePath();
+		string exePath = CPaintManagerUI::GetInstancePath().GetData();
 		exePath += _T("HepNotepad.exe");
 		string version = "{c #386382}版本：" + GetProductVersion(exePath.c_str()) + " 2022.5 by hep{/c}";
 		m_pVersion->SetText(version.c_str());
@@ -432,7 +432,7 @@ void CMainFrame::CustomInital() {
 		/*GetPrivateProfileString(_T("SystemInfo"), _T("AutoStart"), _T("false"), paramVlaue, MAX_PATH, configPath);
 		string pValue = paramVlaue;
 		if (pValue == _T("true")) {
-			string exePath = CPaintManagerUI::GetInstancePath();
+			string exePath = CPaintManagerUI::GetInstancePath().GetData();
 			exePath += _T("HepNotepad.exe");
 			TCHAR path[MAX_PATH];
 			strcpy(path, exePath.c_str());
@@ -512,8 +512,8 @@ void CMainFrame::LoadInfoData(int tab) {
 		pageInfo->currPageIndex = atoi(index.c_str());
 		pageInfo->totalPageCount = atoi(pageCount.c_str());
 		if (tab != 1 || m_pDataList->GetCount() < 1) {
-			string type = m_pInfoType->GetText();
-			string key = m_pInfoKey->GetText();
+			string type = m_pInfoType->GetText().GetData();;
+			string key = m_pInfoKey->GetText().GetData();;
 			CDataInfo* pDataInfo = new CDataInfo;
 			vector<DataInfo*> dataInfoList;
 			dataInfoList = pDataInfo->GetList(pageInfo, type, key);
@@ -542,7 +542,7 @@ void CMainFrame::LoadInfoData(int tab) {
 				m_pDataList->Add(pElem);
 			}
 
-			string text = m_pInfoType->GetText();
+			string text = m_pInfoType->GetText().GetData();;
 			vector<string> dataTypeList = pDataInfo->GetTypeList();
 			m_pInfoType->RemoveAll();
 
@@ -586,8 +586,8 @@ void CMainFrame::LoadPersonInfoData(int tab) {
 		pageInfo->totalPageCount = atoi(pageCount.c_str());
 		DeleteData(m_pPersonInfoList);
 		if ((tab != 1 || m_pPersonInfoList->GetCount() < 1) && !m_pLayoutEncryt->IsVisible()) {
-			string type = m_pPersonInfoType->GetText();
-			string key = m_pPersonInfoKey->GetText();
+			string type = m_pPersonInfoType->GetText().GetData();;
+			string key = m_pPersonInfoKey->GetText().GetData();;
 			CPersonInfo* pPerson = new CPersonInfo;
 			vector<DataInfo*> dataInfoList;
 			dataInfoList = pPerson->GetList(pageInfo, type, key);
@@ -614,7 +614,7 @@ void CMainFrame::LoadPersonInfoData(int tab) {
 				pElem->SetText(4, dataInfoList[i]->updateTime.c_str());
 				m_pPersonInfoList->Add(pElem);
 			}
-			string text = m_pPersonInfoType->GetText();
+			string text = m_pPersonInfoType->GetText().GetData();
 			vector<string> dataTypeList = pPerson->GetTypeList();
 			delete pPerson;
 
@@ -650,7 +650,7 @@ void CMainFrame::LoadPersonInfoData(int tab) {
 
 void CMainFrame::LoadShortcut() {
 	__try {
-		string path = CPaintManagerUI::GetInstancePath();
+		string path = CPaintManagerUI::GetInstancePath().GetData();
 		path += "shortcut\\";
 		vector<string> typeList = { ".docx", ".doc", ".xlsx", ".xls", ".txt", ".pdf", ".lnk" };
 		vector<string> dList = CFileHelper::GetFiles(path, typeList, 2);
@@ -705,13 +705,13 @@ void CMainFrame::LoadShortcut() {
 
 void CMainFrame::LoadTool() {
 	__try {
-		string path = CPaintManagerUI::GetInstancePath();
+		string path = CPaintManagerUI::GetInstancePath().GetData();
 		path += "tool\\";
 		vector<string> typeList = { ".exe", ".udl", ".bat", ".GADGET", ".CMD", ".APPX", ".WSF", ".msi" };
 		vector<string> toolList = CFileHelper::GetFiles(path, typeList, 2);
 		for (int i = 0; i < m_pDevelopToolList->GetCount(); i++) {
 			CListContainerElementUI* pElem = (CListContainerElementUI*)m_pDevelopToolList->GetItemAt(i);
-			string name = pElem->GetName();
+			string name = pElem->GetName().GetData();
 			if (name != "sysTooltem") {
 				m_pDevelopToolList->RemoveAt(i);
 				i--;
@@ -746,7 +746,7 @@ void CMainFrame::LoadTool() {
 			m_pDevelopToolList->Add(pElem);
 		}
 
-		string customPath = CPaintManagerUI::GetInstancePath();
+		string customPath = CPaintManagerUI::GetInstancePath().GetData();
 		customPath += "CustomTool\\";
 		if (!CFileHelper::IsDirectoryExist(customPath.c_str())) {
 			CFileHelper::CreateDir(customPath);
@@ -809,7 +809,7 @@ void CMainFrame::LoadCalendar(int tab) {
 		if (tab != 1 || m_pCalendarList->GetCount() < 1) {
 			int type = m_pCalendarType->GetCurSel();
 			if (type > 2)type = -1;
-			string key = m_pCalendarKey->GetText();
+			string key = m_pCalendarKey->GetText().GetData();
 			CCalendar* pOperation = new CCalendar;
 			vector<DataInfo*> dataInfoList;
 			dataInfoList = pOperation->GetList(pageInfo, key, type, 0);
@@ -860,7 +860,7 @@ void CMainFrame::LoadHistory(int tab) {
 		if (tab != 1 || m_pHistoryList->GetCount() < 1) {
 			int type = m_pHistoryType->GetCurSel();
 			if (type > 2)type = -1;
-			string key = m_pHistoryKey->GetText();
+			string key = m_pHistoryKey->GetText().GetData();
 			CCalendar* pOperation = new CCalendar;
 			vector<DataInfo*> dataInfoList;
 			dataInfoList = pOperation->GetList(pageInfo, key, type, 1);
@@ -979,7 +979,7 @@ void CMainFrame::LoadSystemInfo() {
 		m_pChkAutoStart->SetCheck(true);
 	}
 
-	string programDir = GetSpecialFolderLocation(CSIDL_DESKTOP);
+	string programDir = GetSpecialFolderLocation(CSIDL_DESKTOP).GetData();
 	programDir += "\\随手记.lnk";
 	if (CFileHelper::IsFileExist(programDir.c_str())) {
 		m_pChkCreateLink->SetCheck(true);
@@ -1489,7 +1489,7 @@ void CMainFrame::Notify(TNotifyUI & msg)
 			LoadPersonInfoData();
 		else if (itemName.IsEmpty() == false && itemName == _T("txtGotoPage"))
 		{
-			string index = m_pGotoPage->GetText();
+			string index = m_pGotoPage->GetText().GetData();
 			if (isDegital(index)) {
 				GotoPageIndex(GotoPage::Goto, atoi(index.c_str()));
 			}
@@ -1498,7 +1498,7 @@ void CMainFrame::Notify(TNotifyUI & msg)
 			}
 		}
 		else if (_tcsicmp(itemName, _T("txtHotShowMain")) == 0) {
-			CDuiString text = m_pHotShowMain->GetText();
+			CDuiString text = m_pHotShowMain->GetText().GetData();
 			if (text.GetLength() == 0 || text == "无") {
 				ShowMessage("热键冲突");
 			}
@@ -1506,7 +1506,7 @@ void CMainFrame::Notify(TNotifyUI & msg)
 			m_plabShowMainWindow->SetText(text);
 		}
 		else if (_tcsicmp(itemName, _T("txtHotAddTip")) == 0) {
-			CDuiString text = m_pHotAddTip->GetText();
+			CDuiString text = m_pHotAddTip->GetText().GetData();
 			if (text.GetLength() == 0 || text == "无") {
 				ShowMessage("热键冲突");
 			}
@@ -1514,7 +1514,7 @@ void CMainFrame::Notify(TNotifyUI & msg)
 			m_plabShowAddTipWindow->SetText(text);
 		}
 		else if (_tcsicmp(itemName, _T("txtHotInfoQuery")) == 0) {
-			CDuiString text = m_pHotInfoQuery->GetText();
+			CDuiString text = m_pHotInfoQuery->GetText().GetData();
 			if (text.GetLength() == 0 || text == "无") {
 				ShowMessage("热键冲突");
 			}
@@ -1522,7 +1522,7 @@ void CMainFrame::Notify(TNotifyUI & msg)
 			m_plabShowQueryInfoWindow->SetText(text);
 		}
 		else if (_tcsicmp(itemName, _T("txtHotProgramQuery")) == 0) {
-			CDuiString text = m_pHotProgramQuery->GetText();
+			CDuiString text = m_pHotProgramQuery->GetText().GetData();
 			if (text.GetLength() == 0 || text == "无") {
 				ShowMessage("热键冲突");
 			}
@@ -1530,7 +1530,7 @@ void CMainFrame::Notify(TNotifyUI & msg)
 			m_plabShowProgramQueryWindow->SetText(text);
 		}
 		else if (_tcsicmp(itemName, _T("txtHotTempTip")) == 0) {
-			CDuiString text = m_pHotTempTip->GetText();
+			CDuiString text = m_pHotTempTip->GetText().GetData();
 			if (text.GetLength() == 0 || text == "无") {
 				ShowMessage("热键冲突");
 			}
@@ -1538,7 +1538,7 @@ void CMainFrame::Notify(TNotifyUI & msg)
 			m_plabShowTipWindow->SetText(text);
 		}
 		else if (_tcsicmp(itemName, _T("txtHotCopySaveTip")) == 0) {
-			CDuiString text = m_pHotCopySaveTip->GetText();
+			CDuiString text = m_pHotCopySaveTip->GetText().GetData();
 			if (text.GetLength() == 0 || text == "无") {
 				ShowMessage("热键冲突");
 			}
@@ -1546,7 +1546,7 @@ void CMainFrame::Notify(TNotifyUI & msg)
 			m_plabAddTipInfo->SetText(text);
 		}
 		else if (_tcsicmp(itemName, _T("txtGetCopy")) == 0) {
-			CDuiString text = m_pGetCopy->GetText();
+			CDuiString text = m_pGetCopy->GetText().GetData();
 			if (text.GetLength() == 0 || text == "无") {
 				ShowMessage("热键冲突");  
 			}
@@ -1937,7 +1937,7 @@ void CMainFrame::OnClick(TNotifyUI& msg)
 			int type = m_pHistoryType->GetCurSel();
 			if (type > 2)type = -1;
 			CCalendar* pOperation = new CCalendar;
-			string key = m_pHistoryKey->GetText();
+			string key = m_pHistoryKey->GetText().GetData();
 			bool result = pOperation->ClearHistory(key, type);
 			delete pOperation;
 			if (result) {
@@ -1986,7 +1986,7 @@ void CMainFrame::OnClick(TNotifyUI& msg)
 	else if (msg.pSender->GetName().Compare(_T("chkAutoStart")) == 0) { //开机启动
 		CDuiString checked = m_pChkAutoStart->GetCheck() ? _T("false") : _T("true");
 		if (checked == _T("true")) {
-			string exePath = CPaintManagerUI::GetInstancePath();
+			string exePath = CPaintManagerUI::GetInstancePath().GetData();
 			exePath += _T("HepNotepad.exe");
 			TCHAR path[MAX_PATH];
 			strcpy(path, exePath.c_str());
@@ -2001,14 +2001,14 @@ void CMainFrame::OnClick(TNotifyUI& msg)
 	else if (msg.pSender->GetName().Compare(_T("chkCreateDeskLink")) == 0) { //创建桌面快捷方式
 		CDuiString checked = m_pChkCreateLink->GetCheck() ? _T("false") : _T("true");
 		if (checked == _T("true")) {
-			string exePath = CPaintManagerUI::GetInstancePath();
+			string exePath = CPaintManagerUI::GetInstancePath().GetData();
 			exePath += _T("HepNotepad.exe");
 			TCHAR path[MAX_PATH];
 			strcpy(path, exePath.c_str());
 			CreateShortcut(exePath.c_str(), "随手记", CPaintManagerUI::GetInstancePath(), "随手记", CSIDL_DESKTOP);
 		}
 		else {
-			string programDir = GetSpecialFolderLocation(CSIDL_DESKTOP);
+			string programDir = GetSpecialFolderLocation(CSIDL_DESKTOP).GetData();
 			programDir += "\\随手记.lnk";
 			remove(programDir.c_str());
 		}
@@ -2091,7 +2091,7 @@ void CMainFrame::OnClick(TNotifyUI& msg)
 		if (fileDlg.ShowSaveFileDlg())
 		{
 			string file = fileDlg.GetPathName().c_str();
-			string path = CPaintManagerUI::GetInstancePath();
+			string path = CPaintManagerUI::GetInstancePath().GetData();
 			path += "data.db";
 			CLog::WriteToLog(path.c_str());
 			CopyFile(path.c_str(), file.c_str(), false);
@@ -2110,9 +2110,9 @@ void CMainFrame::OnClick(TNotifyUI& msg)
 				string file = fileDlg.GetPathName().c_str();
 				CCommon * pOperation = new CCommon;
 				if (pOperation->DatabaseCheck(file)) {
-					string path = CPaintManagerUI::GetInstancePath();
+					string path = CPaintManagerUI::GetInstancePath().GetData();
 					path += "data.db";
-					string backpath = CPaintManagerUI::GetInstancePath();
+					string backpath = CPaintManagerUI::GetInstancePath().GetData();
 
 					backpath += "backup\\";
 					if (!CFileHelper::IsDirectoryExist(backpath.c_str())) {
@@ -2123,7 +2123,7 @@ void CMainFrame::OnClick(TNotifyUI& msg)
 					CLog::WriteToLog(path.c_str());
 					CopyFile(file.c_str(), path.c_str(), false);
 					ShowMessage("还原成功，将重新启动");
-					string exec = CPaintManagerUI::GetInstancePath();
+					string exec = CPaintManagerUI::GetInstancePath().GetData();
 					exec += "HepNotepad.exe";
 					ShellExecute(NULL, "open", exec.c_str(), NULL, NULL, SW_SHOWNORMAL);
 					Close();
@@ -2373,8 +2373,8 @@ void CMainFrame::OnItemSelect(TNotifyUI &msg) {
 	if (msg.sType == _T("itemselect")) {
 		if (msg.pSender->GetName() == _T("cbxWeekMin") || msg.pSender->GetName() == _T("cbxWeekHour"))
 		{
-			string hour = m_pCbxHour->GetText();
-			string min = m_pCbxMin->GetText();
+			string hour = m_pCbxHour->GetText().GetData();
+			string min = m_pCbxMin->GetText().GetData();
 			userInfo->WeekTime = hour + ":" + min;
 			CSystemInfo * pOperation = new CSystemInfo;
 			pOperation->UpdateValue(userInfo->WeekTimeCol, "", userInfo->WeekTime);
@@ -2384,7 +2384,7 @@ void CMainFrame::OnItemSelect(TNotifyUI &msg) {
 }
 
 void CMainFrame::AddShortcut(string filePath) {
-	string path = CPaintManagerUI::GetInstancePath();
+	string path = CPaintManagerUI::GetInstancePath().GetData();
 	path += "shortcut\\";
 	if (!CFileHelper::IsDirectoryExist(path.c_str())) {
 		CFileHelper::CreateDir(path);
@@ -2396,7 +2396,7 @@ void CMainFrame::AddShortcut(string filePath) {
 	string name = fileName;
 	name.substr(0, pos - 1);
 	CreateShortcut(filePath.c_str(), fileName.c_str(), fileDir.c_str(), name.c_str(), CSIDL_PROGRAMS);
-	string programDir = GetSpecialFolderLocation(CSIDL_PROGRAMS);
+	string programDir = GetSpecialFolderLocation(CSIDL_PROGRAMS).GetData();
 	programDir += "\\" + fileName + ".lnk";
 	MoveFile(programDir.c_str(), (path + fileName + ".lnk").c_str());
 	LoadShortcut();
@@ -2412,7 +2412,7 @@ void CMainFrame::AddTool(string filePath) {
 		ShowMessage("不是可执行文件");
 		return;
 	}  
-	string path = CPaintManagerUI::GetInstancePath();
+	string path = CPaintManagerUI::GetInstancePath().GetData();
 	path += "CustomTool\\";
 	int pos = filePath.rfind("\\");
 	string fileName = filePath.substr(pos + 1);

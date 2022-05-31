@@ -14,13 +14,13 @@ CFrmTipInfo::CFrmTipInfo()
 {
 }
 
-CFrmTipInfo::CFrmTipInfo(DataType _dataType, string _title){
+CFrmTipInfo::CFrmTipInfo(DataType _dataType, string _title) {
 
-dataType = _dataType;
+	dataType = _dataType;
 	title = _title;
 }
 
-CFrmTipInfo::CFrmTipInfo(DataType _dataType, string _id, string _dataInfo, string _title){
+CFrmTipInfo::CFrmTipInfo(DataType _dataType, string _id, string _dataInfo, string _title) {
 	dataType = _dataType;
 	id = _id;
 	title = _title;
@@ -72,7 +72,7 @@ void CFrmTipInfo::InitWindow()
 			m_pContent->SetReadOnly(true);
 		}
 		else if (dataType == DataType::tempTip) {
-			m_pLayoutPage->SetVisible(true);	
+			m_pLayoutPage->SetVisible(true);
 		}
 		else {
 			m_pContent->SetFocus();
@@ -108,22 +108,21 @@ void CFrmTipInfo::InitData() {
 					if (m_pContent->GetTextLength() < 2) {
 						tabIndex = 1;
 					}
-					else if (m_pContentTwo->GetTextLength() < 2) {
+					/*else if (m_pContentTwo->GetTextLength() < 2) {
 						tabIndex = 2;
 					}
 					else if (m_pContentThree->GetTextLength() < 2) {
 						tabIndex = 3;
-					}
+					}*/
 					else if (m_pContentFour->GetTextLength() < 2) {
 						tabIndex = 4;
 					}
 					AppendContent(info, tabIndex);
-
 				}
 			}
 			CloseClipboard();
 		}
-	}	
+	}
 }
 
 bool CFrmTipInfo::SetContent(string content) {
@@ -144,6 +143,7 @@ bool CFrmTipInfo::SetContent(string content) {
 }
 
 void CFrmTipInfo::AppendContent(string content, int tabIndex) {
+	content += "\r";
 	if (dataType == DataType::copy) {
 		m_pContent->AppendText(content.c_str());
 	}
@@ -160,12 +160,21 @@ void CFrmTipInfo::AppendContent(string content, int tabIndex) {
 		else if (tabIndex == 4) {
 			m_pContentFour->AppendText(content.c_str());
 		}
+		else if (tabIndex == 5) {
+			tabIndex = 2;
+			m_pContentTwoDown->AppendText(content.c_str());
+		}
+		else if (tabIndex == 6) {
+			tabIndex = 3;
+			m_pContentThreeDown->AppendText(content.c_str());
+		}
+
 		TabRichEdit(tabIndex);
-	} 
-} 
+	}
+}
 
 LRESULT CFrmTipInfo::OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
-{	
+{
 	return __super::OnSysCommand(uMsg, wParam, lParam, bHandled);
 }
 
@@ -179,11 +188,91 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg)
 	{
 	case WM_CHAR: {//快捷键捕获
-		if (wParam == VK_ESCAPE) //快捷键捕获 
+		switch (wParam)
 		{
-			CloseWnd();
+		case 0x06: //Ctrl+Enter
+		{
+			if (((m_pContentTwo != NULL) && m_pContentTwo->IsFocused()) || ((m_pContentTwo != NULL) && m_pContentTwoDown->IsFocused())) {
+				CDuiString contentLeft = m_pContentTwo->GetText();
+				CDuiString contentRigth = m_pContentTwoDown->GetText();
+				if (contentLeft.GetLength() > 36 && contentRigth.GetLength() > 36) {
+					vector<CDuiString>  listLeft = StrSplit(contentLeft, "\r");
+					vector<CDuiString>  listRight = StrSplit(contentRigth, "\r");
+					m_pContentTwo->SetText("");
+					m_pContentTwoDown->SetText("");
+					bool same = false;
+					int n = 0;
+					for (vector<CDuiString>::iterator it = listLeft.begin(); it != listLeft.end(); it++) {
+						for (vector<CDuiString>::iterator itr = listRight.begin(); itr != listRight.end(); itr++) {
+							if (*it == *itr) {
+								listLeft.erase(it);
+								listRight.erase(itr);
+								same = true;
+								it--;
+								itr--;
+								break;
+							}
+						}
+						if (!same) {
+							AppendContent(((CDuiString)*it).GetData(), 2);
+						}
+						same = false;
+					}
+					for (vector<CDuiString>::iterator itr = listRight.begin(); itr != listRight.end(); itr++) {
+						AppendContent(((CDuiString)*itr).GetData(), 5);
+					}
+				}
+			}
+			else if ((m_pContentThree != NULL) && m_pContentThree->IsFocused())
+			{
+				CDuiString content = m_pContentThree->GetText();
+				if (content.GetLength() > 300) {
+					vector<CDuiString>  listStr = StrSplit(content, "\r");
+					TCHAR paramVlaue[MAX_PATH];
+					CDuiString configPath = CPaintManagerUI::GetInstancePath();
+					configPath.Append(_T("Config.ini"));
+					GetPrivateProfileString(_T("SystemInfo"), _T("Filter1"), _T(""), paramVlaue, MAX_PATH, configPath);
+					CDuiString filter1 = paramVlaue;
+					GetPrivateProfileString(_T("SystemInfo"), _T("Filter2"), _T(""), paramVlaue, MAX_PATH, configPath);
+					CDuiString filter2 = paramVlaue;
+					GetPrivateProfileString(_T("SystemInfo"), _T("Filter3"), _T(""), paramVlaue, MAX_PATH, configPath);
+					CDuiString filter3 = paramVlaue;
+					GetPrivateProfileString(_T("SystemInfo"), _T("Filter4"), _T(""), paramVlaue, MAX_PATH, configPath);
+					CDuiString filter4 = paramVlaue;
+					bool filter = false;
+					for (int i = 0; i < listStr.size(); i++) {
+						if (listStr[i].Find(filter1) != -1) {
+							filter = true;
+						}
+						else if (listStr[i].Find(filter2) != -1) {
+							filter = true;
+						}
+						else if (listStr[i].Find(filter3) != -1) {
+							filter = true;
+						}
+						else if (listStr[i].Find(filter4) != -1) {
+							filter = true;
+						}
+						if (filter) {
+							AppendContent(listStr[i].GetData(), 6);
+						}
+						filter = false;
+					}
+				}
+			}
+		}
+		break;
+
+		case 0x0D://Enter
+		{
+
+		}
+		break;
+		default:
+			break;
 		}
 	}
+				  break;
 	case WM_PAINT: {
 		/*if (refeshCount < 3) {
 			SetForegroundWindow(GetHWND());
@@ -193,7 +282,7 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		}*/
 	}
-	break;
+				   break;
 	case WM_KEYDOWN: {
 		if ((m_pContent != NULL) && m_pContent->IsFocused() && (wParam == 'S') && GetKeyState(VK_CONTROL) < 0)	// 发送消息框的Ctrl+V消息,图片粘贴处理
 		{
@@ -222,6 +311,11 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			TabRichEdit(index);
 		}
 	}
+					 break;
+	case WM_KEYUP:
+	{
+
+	}
 	break;
 	default:
 		return __super::HandleMessage(uMsg, wParam, lParam);
@@ -229,10 +323,14 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	return __super::HandleMessage(uMsg, wParam, lParam);
 }
 
-//LRESULT CFrmTipInfo::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
-//{	
-//	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
-//}
+LRESULT CFrmTipInfo::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
+{
+	if (wParam == VK_ESCAPE) //快捷键捕获 
+	{
+		CloseWnd();
+	}
+	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
+}
 
 void CFrmTipInfo::OnClick(TNotifyUI &msg)
 {
@@ -247,7 +345,7 @@ void CFrmTipInfo::OnClick(TNotifyUI &msg)
 			if (dataType == DataType::tempTip || dataType == DataType::copy) {
 				CloseWnd();
 			}
-			else { 
+			else {
 				SendMessage(WM_SYSCOMMAND, SC_MINIMIZE, 0); return;
 			}
 
@@ -270,6 +368,9 @@ void CFrmTipInfo::OnClick(TNotifyUI &msg)
 		else if (_tcsicmp(itemName, _T("btnPageFour")) == 0) {
 			TabRichEdit(4);
 		}
+	}
+	else if (msg.sType == _T("return")) {
+
 	}
 }
 
@@ -313,7 +414,7 @@ void CFrmTipInfo::TabRichEdit(int _index) {
 
 void CFrmTipInfo::DataDeal() {
 	__try {
-		string content = m_pContent->GetText();
+		string content = m_pContent->GetText().GetData();
 		if (dataInfo == content)return;
 		DataInfo * dataInfo = new DataInfo;
 		if (dataType == DataType::tip || (dataType == DataType::tempTip && userInfo->saveTempTip)) {
@@ -354,7 +455,7 @@ void CFrmTipInfo::DataDeal() {
 				pOperation->Update(id, dataInfo->content);
 			}
 			delete pOperation;
-			::SendMessage(m_MainHwnd, HN_MAINLOADWEEKDATA, (WPARAM)0, (LPARAM)0); 
+			::SendMessage(m_MainHwnd, HN_MAINLOADWEEKDATA, (WPARAM)0, (LPARAM)0);
 		}
 		content = dataInfo->content;
 		delete dataInfo;
@@ -367,7 +468,7 @@ void CFrmTipInfo::DataDeal() {
 }
 
 void CFrmTipInfo::CloseWnd() {
-	if (dataType == DataType::tempTip|| dataType == DataType::copy) {
+	if (dataType == DataType::tempTip || dataType == DataType::copy) {
 		::ShowWindow(GetHWND(), SW_HIDE);
 	}
 	else {

@@ -36,6 +36,9 @@
           </HorizontalLayout>
         </HorizontalLayout>
         <VerticalLayout>
+         <VerticalLayout sepimm="true" sepheight="3" inset="0,0,0,3"  bottombordersize="2" bordercolor="FFEEEEEE" minheight="66">
+             <Edit name="txtFilter" font="1" width="200" height="25" bordersize="1" bordercolor="FFDDDDDD" padding="6,0,0,0" tipvalue="请输入过滤参数" textcolor="#FF515151" />
+          </VerticalLayout>
           <VerticalLayout sepimm="true" sepheight="3" inset="0,0,0,3"  bottombordersize="2" bordercolor="FFEEEEEE" minheight="66">
             <RichEdit bkcolor="#FFD0E7F4" name="txtContentThree" multiline="true" textpadding="6,3,6,3"  vscrollbar="true" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
           </VerticalLayout>

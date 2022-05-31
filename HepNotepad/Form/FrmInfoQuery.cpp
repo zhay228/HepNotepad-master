@@ -122,7 +122,7 @@ void CFrmInfoQuery::LoadLink(string key) {
 	__try {
 		m_pInfoList->RemoveAll();
 		string path = CPaintManagerUI::GetInstancePath();
-		path += "recent\\";
+		path += "shortcut\\";
 		vector<string> typeList1 = { ".docx", ".doc", ".xlsx", ".xls", ".txt", ".pdf",".lnk" };
 		vector<string> dList = CFileHelper::GetFiles(path, typeList1, 2); 
 		for (int i = 0; i < dList.size(); i++) {

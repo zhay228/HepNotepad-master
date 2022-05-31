@@ -13,7 +13,7 @@ public:
 	virtual LRESULT OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	virtual void InitWindow();
 	virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam); 
-	//virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled);
+	virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled);
 	bool SetContent(string content);
 	void AppendContent(string content,int tabIndex = 1);
 	void InitData();
