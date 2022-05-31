@@ -36,7 +36,7 @@
           </HorizontalLayout>
         </HorizontalLayout>
         <VerticalLayout>
-         <VerticalLayout sepimm="true" sepheight="3" inset="0,0,0,3"  bottombordersize="2" bordercolor="FFEEEEEE" minheight="66">
+         <VerticalLayout name="lyFilter" sepimm="true" visible="false" sepheight="3" inset="0,0,0,3"  bottombordersize="2" bordercolor="FFEEEEEE" minheight="66">
              <Edit name="txtFilter" font="1" width="200" height="25" bordersize="1" bordercolor="FFDDDDDD" padding="6,0,0,0" tipvalue="请输入过滤参数" textcolor="#FF515151" />
           </VerticalLayout>
           <VerticalLayout sepimm="true" sepheight="3" inset="0,0,0,3"  bottombordersize="2" bordercolor="FFEEEEEE" minheight="66">
@@ -52,8 +52,8 @@
       </TabLayout>
     </HorizontalLayout>
     <HorizontalLayout height="27">
-      <Text text="{c #386382}{/c}" pos="0, 5, 200, 24" float="true" showhtml="true"/>
-      <Text text="{c #386382}{/c}" pos="155, 5, 400, 24" float="true" showhtml="true"/>
+      <Text name="txtInfo" text="{c #386382}{/c}" pos="6, 5, 60, 24" float="true" showhtml="true"/>
+      <Text name="txtInfo2" text="{c #386382}{/c}" pos="72, 5, 108, 24" float="true" showhtml="true"/>
       <Button text="" textcolor="#FF337833" pos="305,5,360,18" float="true"/>
       <Control bkimage="" pos="550,4,566,20" float="true"/>
       <Text text="" pos="570, 5, 800, 24" float="true" showhtml="true"/>

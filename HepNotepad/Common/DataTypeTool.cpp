@@ -1,4 +1,5 @@
 ﻿#include <windows.h> 
+#include <algorithm> 
 #include "DataTypeTool.h"
   
 #pragma region  --- 编码转码  ---
@@ -278,4 +279,16 @@ char * CDataTypeTool::intTochar(int data){
 	char itc[10];
 	sprintf(itc, "%d", data);
 	return itc;
+}
+
+
+string CDataTypeTool::toLower(string data) {	
+	transform(data.begin(), data.end(), data.begin(), ::tolower);
+	return data;
+
+}
+string CDataTypeTool::toUpper(string data) {
+	transform(data.begin(), data.end(), data.begin(), ::toupper);	 
+	return data;
+
 }

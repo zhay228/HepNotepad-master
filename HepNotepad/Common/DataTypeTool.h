@@ -36,4 +36,7 @@ public:
 
 	static string intTostring(int data);
 	static char * intTochar(int data);
+
+	static string toLower(string data);
+	static string toUpper(string data);
 };

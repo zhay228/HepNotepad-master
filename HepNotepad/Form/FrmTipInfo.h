@@ -24,13 +24,14 @@ public:
 private:
 	void CloseWnd();
 	void DataDeal();
-	void TabRichEdit(int _index =1);
-	 
+	void TabRichEdit(int _index =1); 
 	
 private:
 	DataType dataType;
 	string  id,title,dataInfo;
 	CTextUI * m_pTitle;
+	CTextUI * m_pTxtInfo;
+	CTextUI * m_pTxtInfo2;
 	CRichEditUI* m_pContent;
 	CRichEditUI* m_pContentTwo;
 	CRichEditUI* m_pContentTwoDown;
@@ -45,6 +46,7 @@ private:
 	CTabLayoutUI* m_pTabContainer;
 	int index = 1;
 	int refeshCount = 0;
+	int isLower = false;
 
 };
 

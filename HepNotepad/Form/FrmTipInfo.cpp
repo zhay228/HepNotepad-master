@@ -10,6 +10,17 @@ DUI_END_MESSAGE_MAP()
 extern UserInfo* userInfo;
 extern HWND m_MainHwnd;
 
+string GetLengthInf(int length) {
+	char info[60];
+	if(length>0)
+		sprintf(info, _T("%d"), length);
+	else
+		sprintf(info, _T("%"), "");
+	return info;
+}
+
+
+
 CFrmTipInfo::CFrmTipInfo()
 {
 }
@@ -52,6 +63,8 @@ void CFrmTipInfo::InitWindow()
 {
 	__try {
 		m_pTitle = static_cast<CTextUI*>(m_pm.FindControl(_T("txtTitle")));
+		m_pTxtInfo = static_cast<CTextUI*>(m_pm.FindControl(_T("txtInfo")));
+		m_pTxtInfo2 = static_cast<CTextUI*>(m_pm.FindControl(_T("txtInfo2")));
 		m_pContent = static_cast<CRichEditUI*>(m_pm.FindControl(_T("txtContent")));
 		m_pContentTwo = static_cast<CRichEditUI*>(m_pm.FindControl(_T("txtContentTwo")));
 		m_pContentTwoDown = static_cast<CRichEditUI*>(m_pm.FindControl(_T("txtContentTwoDown")));
@@ -143,6 +156,7 @@ bool CFrmTipInfo::SetContent(string content) {
 }
 
 void CFrmTipInfo::AppendContent(string content, int tabIndex) {
+
 	content += "\r";
 	if (dataType == DataType::copy) {
 		m_pContent->AppendText(content.c_str());
@@ -189,9 +203,24 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CHAR: {//¿ì½Ý¼ü²¶»ñ
 		switch (wParam)
+		{		 
+		case 0x06: //Ctrl+F
 		{
-		case 0x06: //Ctrl+Enter
-		{
+			if (((m_pContent != NULL) && m_pContent->IsFocused())) {
+				string content = m_pContent->GetText();
+				m_pContent->SetText("");
+				if (isLower == 1) {
+					m_pContent->SetText(CDataTypeTool::toLower(content).data());
+					isLower = 2;
+				}
+				else {
+					m_pContent->SetText(CDataTypeTool::toUpper(content).data());
+					isLower = 1;
+				}
+				 
+				m_pContent->SetFocus();
+			}
+
 			if (((m_pContentTwo != NULL) && m_pContentTwo->IsFocused()) || ((m_pContentTwo != NULL) && m_pContentTwoDown->IsFocused())) {
 				CDuiString contentLeft = m_pContentTwo->GetText();
 				CDuiString contentRigth = m_pContentTwoDown->GetText();
@@ -227,6 +256,7 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			{
 				CDuiString content = m_pContentThree->GetText();
 				if (content.GetLength() > 300) {
+					m_pContentThree->SetText("");
 					vector<CDuiString>  listStr = StrSplit(content, "\r");
 					TCHAR paramVlaue[MAX_PATH];
 					CDuiString configPath = CPaintManagerUI::GetInstancePath();
@@ -254,7 +284,7 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 							filter = true;
 						}
 						if (filter) {
-							AppendContent(listStr[i].GetData(), 6);
+							AppendContent(listStr[i].GetData(), 3);
 						}
 						filter = false;
 					}
@@ -313,8 +343,33 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 					 break;
 	case WM_KEYUP:
-	{
-
+	{ 
+		if (m_pTabContainer != NULL) {			 
+			switch (index)
+			{
+			case 1: { 
+				m_pTxtInfo->SetText(GetLengthInf(m_pContent->GetText().GetLength()).data());
+			}
+					break;
+			case 2: {
+				m_pTxtInfo->SetText(GetLengthInf(m_pContentTwo->GetText().GetLength()).data());
+				m_pTxtInfo2->SetText(GetLengthInf(m_pContentTwoDown->GetText().GetLength()).data());
+			}
+					break;
+			case 3: {
+				m_pTxtInfo->SetText(GetLengthInf(m_pContentThree->GetText().GetLength()).data());
+				m_pTxtInfo2->SetText(GetLengthInf(m_pContentThreeDown->GetText().GetLength()).data());
+				 
+			}
+					break;
+			case 4: {
+				m_pTxtInfo->SetText(GetLengthInf(m_pContentFour->GetText().GetLength()).data());
+			}
+					break;
+			default:
+				break;
+			}
+		}
 	}
 	break;
 	default:
@@ -374,6 +429,8 @@ void CFrmTipInfo::OnClick(TNotifyUI &msg)
 	}
 }
 
+
+
 void CFrmTipInfo::TabRichEdit(int _index) {
 	index = _index;
 	if (index > 4)index = 1;
@@ -384,25 +441,32 @@ void CFrmTipInfo::TabRichEdit(int _index) {
 	m_pBtnPageThree->SetNormalImage("ico/page3_1.png");
 	m_pBtnPageFour->SetNormalImage("ico/page4_1.png");
 	m_pTabContainer->SelectItem(index - 1);
-
+	m_pTxtInfo->SetText("");
+	m_pTxtInfo2->SetText("");
 	switch (index)
 	{
-	case 1: {
+	case 1: { 
+		m_pTxtInfo->SetText(GetLengthInf(m_pContent->GetText().GetLength()).data());
 		m_pBtnPageOne->SetNormalImage("ico/page1.png");
 		m_pContent->SetFocus();
 	}
 			break;
 	case 2: {
+		m_pTxtInfo->SetText(GetLengthInf(m_pContentTwo->GetText().GetLength()).data());
+		m_pTxtInfo2->SetText(GetLengthInf(m_pContentTwoDown->GetText().GetLength()).data());
 		m_pBtnPageTwo->SetNormalImage("ico/page2.png");
 		m_pContentFour->SetFocus();
 	}
 			break;
 	case 3: {
+		m_pTxtInfo->SetText(GetLengthInf(m_pContentThree->GetText().GetLength()).data());
+		m_pTxtInfo2->SetText(GetLengthInf(m_pContentThreeDown->GetText().GetLength()).data());
 		m_pBtnPageThree->SetNormalImage("ico/page3.png");
 		m_pContentFour->SetFocus();
 	}
 			break;
 	case 4: {
+		m_pTxtInfo->SetText(GetLengthInf(m_pContentFour->GetText().GetLength()).data());
 		m_pBtnPageFour->SetNormalImage("ico/page4.png");
 		m_pContentFour->SetFocus();
 	}
