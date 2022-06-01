@@ -204,10 +204,10 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_CHAR: {//¿ì½Ý¼ü²¶»ñ
 		switch (wParam)
 		{		 
-		case 0x06: //Ctrl+F
+		case 0x15: //Ctrl+U
 		{
 			if (((m_pContent != NULL) && m_pContent->IsFocused())) {
-				string content = m_pContent->GetText();
+				string content = m_pContent->GetText().GetData();
 				m_pContent->SetText("");
 				if (isLower == 1) {
 					m_pContent->SetText(CDataTypeTool::toLower(content).data());
@@ -217,10 +217,51 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 					m_pContent->SetText(CDataTypeTool::toUpper(content).data());
 					isLower = 1;
 				}
-				 
 				m_pContent->SetFocus();
 			}
-
+			else if (((m_pContentTwo != NULL) && m_pContentTwo->IsFocused())) {
+				string content = m_pContentTwo->GetText().GetData();
+				m_pContentTwo->SetText("");
+				if (isLower == 1) {
+					m_pContentTwo->SetText(CDataTypeTool::toLower(content).data());
+					isLower = 2;
+				}
+				else {
+					m_pContentTwo->SetText(CDataTypeTool::toUpper(content).data());
+					isLower = 1;
+				}
+				m_pContentTwo->SetFocus();
+			}
+			else if (((m_pContentThree != NULL) && m_pContentThree->IsFocused())) {
+				string content = m_pContentThree->GetText().GetData();
+				m_pContentThree->SetText("");
+				if (isLower == 1) {
+					m_pContentThree->SetText(CDataTypeTool::toLower(content).data());
+					isLower = 2;
+				}
+				else {
+					m_pContentThree->SetText(CDataTypeTool::toUpper(content).data());
+					isLower = 1;
+				}
+				m_pContentThree->SetFocus();
+			}
+			else if (((m_pContentFour != NULL) && m_pContentFour->IsFocused())) {
+				string content = m_pContentFour->GetText().GetData();
+				m_pContentFour->SetText("");
+				if (isLower == 1) {
+					m_pContentFour->SetText(CDataTypeTool::toLower(content).data());
+					isLower = 2;
+				}
+				else {
+					m_pContentFour->SetText(CDataTypeTool::toUpper(content).data());
+					isLower = 1;
+				}
+				m_pContentFour->SetFocus();
+			}
+		}
+		break;
+		case 0x06: //Ctrl+F
+		{
 			if (((m_pContentTwo != NULL) && m_pContentTwo->IsFocused()) || ((m_pContentTwo != NULL) && m_pContentTwoDown->IsFocused())) {
 				CDuiString contentLeft = m_pContentTwo->GetText();
 				CDuiString contentRigth = m_pContentTwoDown->GetText();
@@ -429,8 +470,6 @@ void CFrmTipInfo::OnClick(TNotifyUI &msg)
 	}
 }
 
-
-
 void CFrmTipInfo::TabRichEdit(int _index) {
 	index = _index;
 	if (index > 4)index = 1;
@@ -482,44 +521,49 @@ void CFrmTipInfo::DataDeal() {
 		if (dataInfo == content)return;
 		DataInfo * dataInfo = new DataInfo;
 		if (dataType == DataType::tip || (dataType == DataType::tempTip && userInfo->saveTempTip)) {
-			CTipInfo* pOperation = new CTipInfo;
-			dataInfo->content = m_pContent->GetText();
-			if (id == "") {
-				dataInfo->createTime = GetTimeInfo();
-				pOperation->Add(dataInfo);
-				id = dataInfo->id;
-			}
-			else {
+			if (m_pContent->GetText().GetLength() > 36)	{
+				CTipInfo* pOperation = new CTipInfo;
+				dataInfo->content = m_pContent->GetText();
+				if (id == "") {
+					dataInfo->createTime = GetTimeInfo();
+					pOperation->Add(dataInfo);
+					id = dataInfo->id;
+				}
+				else {
+					dataInfo->id = id;
+					dataInfo->updateTime = GetTimeInfo();
+					pOperation->Update(dataInfo);
+				}
+				delete pOperation;
+				::SendMessage(m_MainHwnd, HN_MAINLOADTIP, (WPARAM)0, (LPARAM)0);
+			}		
+		}
+		else if (dataType == DataType::info) {
+			if (m_pContent->GetText().GetLength() > 36) {
+				CDataInfo* pOperation = new CDataInfo;
+				dataInfo->content = m_pContent->GetText();
 				dataInfo->id = id;
 				dataInfo->updateTime = GetTimeInfo();
 				pOperation->Update(dataInfo);
+				delete pOperation;
+				::SendMessage(m_MainHwnd, HN_MAINLOADINFO, (WPARAM)0, (LPARAM)0);
 			}
-			delete pOperation;
-			::SendMessage(m_MainHwnd, HN_MAINLOADTIP, (WPARAM)0, (LPARAM)0);
-		}
-		else if (dataType == DataType::info) {
-			CDataInfo* pOperation = new CDataInfo;
-
-			dataInfo->content = m_pContent->GetText();
-			dataInfo->id = id;
-			dataInfo->updateTime = GetTimeInfo();
-			pOperation->Update(dataInfo);
-			delete pOperation;
-			::SendMessage(m_MainHwnd, HN_MAINLOADINFO, (WPARAM)0, (LPARAM)0);
 		}
 		else if (dataType == DataType::weekly) {
-			CWeekly * pOperation = new CWeekly;
-			dataInfo->content = m_pContent->GetText();
-			if (id == "") {
-				dataInfo->createTime = GetTimeInfo();
-				pOperation->AddWeekDetail(dataInfo);
-				id = dataInfo->id;
+			if (m_pContent->GetText().GetLength() > 12) {
+				CWeekly * pOperation = new CWeekly;
+				dataInfo->content = m_pContent->GetText();
+				if (id == "") {
+					dataInfo->createTime = GetTimeInfo();
+					pOperation->AddWeekDetail(dataInfo);
+					id = dataInfo->id;
+				}
+				else {
+					pOperation->Update(id, dataInfo->content);
+				}
+				delete pOperation;
+				::SendMessage(m_MainHwnd, HN_MAINLOADWEEKDATA, (WPARAM)0, (LPARAM)0);
 			}
-			else {
-				pOperation->Update(id, dataInfo->content);
-			}
-			delete pOperation;
-			::SendMessage(m_MainHwnd, HN_MAINLOADWEEKDATA, (WPARAM)0, (LPARAM)0);
 		}
 		content = dataInfo->content;
 		delete dataInfo;
