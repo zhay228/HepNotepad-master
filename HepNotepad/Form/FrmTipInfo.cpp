@@ -297,8 +297,8 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			{
 				CDuiString content = m_pContentThree->GetText();
 				if (content.GetLength() > 300) {
-					m_pContentThree->SetText("");
 					vector<CDuiString>  listStr = StrSplit(content, "\r");
+					m_pContentThree->SetText("");
 					TCHAR paramVlaue[MAX_PATH];
 					CDuiString configPath = CPaintManagerUI::GetInstancePath();
 					configPath.Append(_T("Config.ini"));
