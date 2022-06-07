@@ -312,16 +312,16 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 					CDuiString filter4 = paramVlaue;
 					bool filter = false;
 					for (int i = 0; i < listStr.size(); i++) {
-						if (listStr[i].Find(filter1) != -1) {
+						if (listStr[i].Find(filter1) != -1 && filter1.GetLength() > 1) {
 							filter = true;
 						}
-						else if (listStr[i].Find(filter2) != -1) {
+						else if (listStr[i].Find(filter2) != -1 && filter2.GetLength() > 1) {
 							filter = true;
 						}
-						else if (listStr[i].Find(filter3) != -1) {
+						else if (listStr[i].Find(filter3) != -1 && filter3.GetLength() > 1) {
 							filter = true;
 						}
-						else if (listStr[i].Find(filter4) != -1) {
+						else if (listStr[i].Find(filter4) != -1 && filter4.GetLength() > 1) {
 							filter = true;
 						}
 						if (filter) {
