@@ -19,8 +19,6 @@ string GetLengthInf(int length) {
 	return info;
 }
 
-
-
 CFrmTipInfo::CFrmTipInfo()
 {
 }
@@ -76,7 +74,6 @@ void CFrmTipInfo::InitWindow()
 		m_pBtnPageThree = static_cast<CButtonUI*>(m_pm.FindControl(_T("btnPageThree")));
 		m_pBtnPageFour = static_cast<CButtonUI*>(m_pm.FindControl(_T("btnPageFour")));
 		m_pLayoutPage = static_cast<CHorizontalLayoutUI*>(m_pm.FindControl(_T("pageLayout")));
-
 		m_pTitle->SetText(title.c_str());
 		m_pContent->SetText(dataInfo.c_str());
 		m_pTabContainer = static_cast<CTabLayoutUI*>(m_pm.FindControl(_T("tabContainer")));
@@ -117,8 +114,9 @@ void CFrmTipInfo::InitData() {
 				GlobalUnlock(hClip);
 				string info = pBuf;
 				if (info.length() > 2) {
-					int tabIndex = 1;
-					if (m_pContent->GetTextLength() < 2) {
+					int tabIndex = 0;
+					
+					if (m_pContent->GetText().GetLength() < 2) {
 						tabIndex = 1;
 					}
 					/*else if (m_pContentTwo->GetTextLength() < 2) {
@@ -127,10 +125,11 @@ void CFrmTipInfo::InitData() {
 					else if (m_pContentThree->GetTextLength() < 2) {
 						tabIndex = 3;
 					}*/
-					else if (m_pContentFour->GetTextLength() < 2) {
+					else if (m_pContentFour->GetText().GetLength() < 2) {
 						tabIndex = 4;
 					}
-					AppendContent(info, tabIndex);
+					if (tabIndex > 0)
+						AppendContent(info, tabIndex);
 				}
 			}
 			CloseClipboard();
@@ -333,7 +332,6 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 		}
 		break;
-
 		case 0x0D://Enter
 		{
 
@@ -437,14 +435,12 @@ void CFrmTipInfo::OnClick(TNotifyUI &msg)
 			CloseWnd();
 		}
 		else if (_tcsicmp(itemName, _T("minbtn")) == 0) {
-
 			if (dataType == DataType::tempTip || dataType == DataType::copy) {
 				CloseWnd();
 			}
 			else {
 				SendMessage(WM_SYSCOMMAND, SC_MINIMIZE, 0); return;
 			}
-
 		}
 		else if (_tcsicmp(itemName, _T("maxbtn")) == 0) {
 			SendMessage(WM_SYSCOMMAND, SC_MAXIMIZE, 0); return;
@@ -521,7 +517,7 @@ void CFrmTipInfo::DataDeal() {
 		if (dataInfo == content)return;
 		DataInfo * dataInfo = new DataInfo;
 		if (dataType == DataType::tip || (dataType == DataType::tempTip && userInfo->saveTempTip)) {
-			if (m_pContent->GetText().GetLength() > 36)	{
+			if (m_pContent->GetText().GetLength() > 12)	{
 				CTipInfo* pOperation = new CTipInfo;
 				dataInfo->content = m_pContent->GetText();
 				if (id == "") {
