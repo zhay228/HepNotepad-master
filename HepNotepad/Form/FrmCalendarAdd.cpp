@@ -148,17 +148,26 @@ void CFrmCalendarAdd::Notify(TNotifyUI &msg)
 
 LRESULT CFrmCalendarAdd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	if (wParam == VK_ESCAPE) //快捷键捕获 
-	{
-		Close(1);
-	}
+	 
+	return __super::HandleMessage(uMsg, wParam, lParam);
+}
+
+LRESULT CFrmCalendarAdd::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
+{
 	switch (uMsg)
 	{
-
-	default:
-		return __super::HandleMessage(uMsg, wParam, lParam);
+	case WM_KEYDOWN: {
+		if (wParam == VK_ESCAPE) //快捷键捕获 
+		{
+			Close(0);
+		}
 	}
-	return __super::HandleMessage(uMsg, wParam, lParam);
+	break;
+	default:
+		return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
+
+	}
+	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
 }
 
 void CFrmCalendarAdd::OnClick(TNotifyUI &msg)
@@ -201,8 +210,8 @@ void CFrmCalendarAdd::OnClick(TNotifyUI &msg)
 			m_pDataInfo->remindDate = "everyDay";
 		}
 		
-		string hour = m_pCbxHour->GetText();
-		string min = m_pCbxMin->GetText();
+		string hour = m_pCbxHour->GetText().GetData();
+		string min = m_pCbxMin->GetText().GetData();
 		m_pDataInfo->remindTime = hour + ":" + min; 
 		m_pDataInfo->createTime = GetTimeInfo(); 
 		CCalendar* pOperation = new CCalendar;

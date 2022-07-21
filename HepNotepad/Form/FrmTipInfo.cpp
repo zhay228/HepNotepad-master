@@ -419,9 +419,18 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 LRESULT CFrmTipInfo::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
 {
-	if (wParam == VK_ESCAPE) //快捷键捕获 
+	switch (uMsg)
 	{
-		CloseWnd();
+	case WM_KEYDOWN: {
+		if (wParam == VK_ESCAPE) //快捷键捕获 
+		{
+			Close(0);
+		}
+	}
+					 break;
+	default:
+		return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
+
 	}
 	return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
 }
