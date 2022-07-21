@@ -424,7 +424,7 @@ LRESULT CFrmTipInfo::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, boo
 	case WM_KEYDOWN: {
 		if (wParam == VK_ESCAPE) //¿ì½Ý¼ü²¶»ñ 
 		{
-			Close(0);
+			CloseWnd();
 		}
 	}
 					 break;
