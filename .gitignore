@@ -984,3 +984,6 @@ DuiLib/Build/Release/vc120.pdb
 DuiLib/Build/Release/WinImplBase.obj
 DuiLib/Build/Release/WndShadow.obj
 DuiLib/Build/Release/XUnzip.obj
+/bin/HepNotepad.pdb
+/bin/HepNotepad.iobj
+/bin/HepNotepad.ipdb

@@ -90,8 +90,7 @@ void CFrmTipInfo::InitWindow()
 		if (size.cy > m_pContent->GetHeight())
 			m_pContent->HomeUp();
 
-		index = 1;		
-		
+		index = 1;				
 		
 	}
 	__except (exception_filter(GetExceptionInformation())) {
