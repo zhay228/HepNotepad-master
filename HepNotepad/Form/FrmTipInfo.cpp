@@ -84,13 +84,14 @@ void CFrmTipInfo::InitWindow()
 		else if (dataType == DataType::tempTip) {
 			m_pLayoutPage->SetVisible(true);
 		}		
-		m_pContent->Activate();
-		m_pContent->SetFocus();
+		
 		SIZE size = m_pContent->GetScrollRange();
 		if (size.cy > m_pContent->GetHeight())
 			m_pContent->HomeUp();
 
-		index = 1;				
+		index = 1;			
+		m_pContent->Activate();
+		m_pContent->SetFocus();
 		
 	}
 	__except (exception_filter(GetExceptionInformation())) {
@@ -140,16 +141,20 @@ void CFrmTipInfo::InitData() {
 
 bool CFrmTipInfo::SetContent(string content) {
 	bool show = false;
-	if (m_pContentFour->GetText().GetLength() > 1) {
+	if (m_pContent->GetText().GetLength() < 1) {		
+		TabRichEdit(1);
+		m_pContent->SetText(content.c_str());
+		AppendContent(content.c_str(),1);
+		show = true;		
+	}
+	else if (m_pContentFour->GetText().GetLength() > 1) {
 		if (ShowMessageConfirm(GetHWND(), _T("温馨提示"), _T("您确定要覆盖第4面板的数据吗？"))) {
-			TabRichEdit(4);
-			m_pContentFour->SetText(content.c_str());
+			AppendContent(content.c_str(), 4);
 			show = true;
 		}
 	}
 	else {
-		TabRichEdit(4);
-		m_pContentFour->SetText(content.c_str());
+		AppendContent(content.c_str(), 4);
 		show = true;
 	}
 	return show;
@@ -344,13 +349,13 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 				  break;
 	case WM_PAINT: {
-		/*if (refeshCount < 3) {
+		if (refeshCount < 3 && dataType != DataType::tempTip) {
 			SetForegroundWindow(GetHWND());
 			if (m_pContent != NULL)
 				m_pContent->SetFocus();
 			refeshCount++;
 
-		}*/
+		}
 	}
 				   break;
 	case WM_KEYDOWN: {
@@ -534,7 +539,7 @@ void CFrmTipInfo::TabRichEdit(int _index) {
 
 void CFrmTipInfo::DataDeal() {
 	__try {
-		/*string content = m_pContent->GetText().GetData();
+		string content = m_pContent->GetText().GetData();
 		if (dataInfo == content)return;
 		DataInfo * dataInfo = new DataInfo;
 		if (dataType == DataType::tip || (dataType == DataType::tempTip && userInfo->saveTempTip)) {
@@ -583,7 +588,7 @@ void CFrmTipInfo::DataDeal() {
 			}
 		}
 		content = dataInfo->content;
-		delete dataInfo;*/
+		delete dataInfo;
 	}
 	__except (exception_filter(GetExceptionInformation())) {
 		CHAR buffer[1024];

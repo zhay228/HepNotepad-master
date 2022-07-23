@@ -501,7 +501,7 @@ string GetProductVersion(const char* lpszFileName)
 				nVer[2] = HIWORD(pFileInfo->dwProductVersionLS);
 				nVer[3] = LOWORD(pFileInfo->dwProductVersionLS);
 				char szVerInfo[256] = { 0 };
-				sprintf_s(szVerInfo, _T("%d.%d.%d.%d"), nVer[0], nVer[1], nVer[2], nVer[3]);
+				sprintf_s(szVerInfo, _T("%d.%d.%d"), nVer[0], nVer[1], nVer[2]);
 				sVerInfo = szVerInfo;
 			}
 		}

@@ -312,6 +312,28 @@ void CMainFrame::SetHotKey(CDuiString hotText, CDuiString configkey, __in int ho
 	}
 }
 
+SYSTEMTIME OnTime64toSystemTime(__time64_t& itime)
+{
+	struct tm *temptm = _localtime64(&itime);
+	SYSTEMTIME st = { 1900 + temptm->tm_year,
+		1 + temptm->tm_mon,
+		temptm->tm_wday,
+		temptm->tm_mday,
+		temptm->tm_hour,
+		temptm->tm_min,
+		temptm->tm_sec,
+		0 };
+	return st;
+}
+void GetModifyDateTime(const wstring& strFilename, SYSTEMTIME& stLocal)
+{
+	struct _stat64i32 statbuf;
+	_wstat64i32(strFilename.c_str(), &statbuf);
+	stLocal = OnTime64toSystemTime(statbuf.st_mtime);
+}
+
+
+
 void CMainFrame::CustomInital() {
 	__try {
 		m_pMenu = new CMenuWnd();
@@ -326,7 +348,12 @@ void CMainFrame::CustomInital() {
 		m_pChkWeeklyEnable->SetCheck(userInfo->WeekEnable);
 		string exePath = CPaintManagerUI::GetInstancePath().GetData();
 		exePath += _T("HepNotepad.exe");
-		string version = "{c #386382}°æ±¾£º" + GetProductVersion(exePath.c_str()) + " 2022.5 by hep{/c}";
+		SYSTEMTIME stLocal;
+		GetModifyDateTime(CDataTypeTool::Utf8ToUnicode(exePath), stLocal);
+		char info[1000];
+		sprintf(info, "%02d.%02d", stLocal.wYear, stLocal.wMonth, stLocal.wDay);
+		string version = "{c #386382}°æ±¾£º" + GetProductVersion(exePath.c_str()) + " "+ info +" hep{/c}";
+		
 		m_pVersion->SetText(version.c_str());
 
 		string text = "", hour = "", min = "";
@@ -1165,19 +1192,21 @@ LRESULT CMainFrame::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		__try {
 			SendMsg * msg = (SendMsg *)wParam;
 			if (m_pTempTip != NULL) {
-				bool show = m_pTempTip->SetContent(msg->data);
+				
 				int  cx = GetSystemMetrics(SM_CXFULLSCREEN);
 				int  cy = GetSystemMetrics(SM_CYFULLSCREEN);
-				if (show) {
-					if (m_pTempTip == NULL || m_pTempTip == nullptr) {
-						m_pTempTip = new CFrmTipInfo(DataType::tempTip, "", "", "ÁÙÊ±±ãÇ©");
 
-						m_pTempTip->Create(NULL, _T("ÁÙÊ±±ãÇ©"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE, cx - 375, cy - 232);
-						m_pTempTip->ResizeClient(360, 240);
-					}
-					::SetWindowPos(m_pTempTip->GetHWND(), HWND_TOPMOST, cx - 361, cy - 218, 360, 240, SWP_SHOWWINDOW);
-					::ShowWindow(m_pTempTip->GetHWND(), SW_SHOW);
+				if (m_pTempTip == NULL || m_pTempTip == nullptr) {
+					m_pTempTip = new CFrmTipInfo(DataType::tempTip, "", "", "ÁÙÊ±±ãÇ©");
+
+					m_pTempTip->Create(NULL, _T("ÁÙÊ±±ãÇ©"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE, cx - 375, cy - 232);
+					m_pTempTip->ResizeClient(360, 240);
 				}
+				bool show = m_pTempTip->SetContent(msg->data);
+				::SetWindowPos(m_pTempTip->GetHWND(), HWND_TOPMOST, cx - 361, cy - 218, 360, 240, SWP_SHOWWINDOW); 
+				::SetActiveWindow(m_pTempTip->GetHWND());
+				::ShowWindow(m_pTempTip->GetHWND(), SW_SHOW);
+				
 			}
 			delete msg;
 		}

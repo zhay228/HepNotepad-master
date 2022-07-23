@@ -265,12 +265,15 @@ void CFrmInfoQuery::OpendWnd(CListContainerElementUI* pElem) {
 		CDataInfo *pOperation = new CDataInfo;
 		pOperation->UpdateCount(id, dType);
 		delete pOperation;
-
-		CFrmTipInfo* wnd = new CFrmTipInfo(dType, id, content, title);
-		wnd->Create(NULL, _T("信息内容"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE, 0, 0);
-		wnd->CenterWindow();
-		::SetWindowPos(wnd->GetHWND(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE);
-		::ShowWindow(wnd->GetHWND(), SW_SHOW);
+		int  cx = GetSystemMetrics(SM_CXFULLSCREEN);
+		int  cy = GetSystemMetrics(SM_CYFULLSCREEN);
+		CFrmTipInfo* m_pTempTip = new CFrmTipInfo(dType, id, content, title); 
+		m_pTempTip->Create(NULL, _T("信息内容"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE, cx - 375, cy - 232);
+		m_pTempTip->ResizeClient(360, 240);
+	    m_pTempTip->InitData();
+		::SetWindowPos(m_pTempTip->GetHWND(), HWND_TOPMOST, cx - 361, cy - 218, 360, 240, SWP_SHOWWINDOW);
+		::SetActiveWindow(m_pTempTip->GetHWND());
+		::ShowWindow(m_pTempTip->GetHWND(), SW_SHOW);
 	}
 	__except (exception_filter(GetExceptionInformation())) {
 		CHAR buffer[1024];
