@@ -83,16 +83,16 @@ void CFrmTipInfo::InitWindow()
 		}
 		else if (dataType == DataType::tempTip) {
 			m_pLayoutPage->SetVisible(true);
-		}
-		else {
-			m_pContent->SetFocus();
-		}
-
+		}		
+		m_pContent->Activate();
+		m_pContent->SetFocus();
 		SIZE size = m_pContent->GetScrollRange();
 		if (size.cy > m_pContent->GetHeight())
 			m_pContent->HomeUp();
 
-		index = 1;
+		index = 1;		
+		
+		
 	}
 	__except (exception_filter(GetExceptionInformation())) {
 		CHAR buffer[1024];
@@ -135,6 +135,8 @@ void CFrmTipInfo::InitData() {
 			CloseClipboard();
 		}
 	}
+	TabRichEdit(index);
+	
 }
 
 bool CFrmTipInfo::SetContent(string content) {
@@ -353,12 +355,12 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 				   break;
 	case WM_KEYDOWN: {
-		if ((m_pContent != NULL) && m_pContent->IsFocused() && (wParam == 'S') && GetKeyState(VK_CONTROL) < 0)	// 发送消息框的Ctrl+V消息,图片粘贴处理
+		if ((m_pContent != NULL) && m_pContent->IsFocused() && (wParam == 'S') && GetKeyState(VK_CONTROL) < 0)	// Ctrl + S 保存到数据库
 		{
 			DataDeal();
 			m_pContent->SetFocus();
 		}
-		else if ((m_pContent != NULL) && m_pContent->IsFocused() && (wParam == 'T') && GetKeyState(VK_CONTROL) < 0)	// 发送消息框的Ctrl+V消息,图片粘贴处理
+		else if ((m_pContent != NULL) && m_pContent->IsFocused() && (wParam == 'T') && GetKeyState(VK_CONTROL) < 0)	// Ctrl + S 便签信息转到临时便签信息
 		{
 			if (dataType != DataType::tempTip) {
 				SendMsg * msg = new SendMsg;
@@ -388,21 +390,28 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			{
 			case 1: { 
 				m_pTxtInfo->SetText(GetLengthInf(m_pContent->GetText().GetLength()).data());
+				//m_pContent->Activate();
+				m_pContent->SetFocus();
 			}
 					break;
 			case 2: {
 				m_pTxtInfo->SetText(GetLengthInf(m_pContentTwo->GetText().GetLength()).data());
 				m_pTxtInfo2->SetText(GetLengthInf(m_pContentTwoDown->GetText().GetLength()).data());
+				m_pContentTwo->Activate();
+				m_pContentTwo->SetFocus();
 			}
 					break;
 			case 3: {
 				m_pTxtInfo->SetText(GetLengthInf(m_pContentThree->GetText().GetLength()).data());
 				m_pTxtInfo2->SetText(GetLengthInf(m_pContentThreeDown->GetText().GetLength()).data());
-				 
+				m_pContentThree->Activate();
+				m_pContentThree->SetFocus();
 			}
 					break;
 			case 4: {
 				m_pTxtInfo->SetText(GetLengthInf(m_pContentFour->GetText().GetLength()).data());
+				m_pContentFour->Activate();
+				m_pContentFour->SetFocus();
 			}
 					break;
 			default:
@@ -492,6 +501,7 @@ void CFrmTipInfo::TabRichEdit(int _index) {
 	case 1: { 
 		m_pTxtInfo->SetText(GetLengthInf(m_pContent->GetText().GetLength()).data());
 		m_pBtnPageOne->SetNormalImage("ico/page1.png");
+		m_pContent->Activate();
 		m_pContent->SetFocus();
 	}
 			break;
@@ -499,19 +509,22 @@ void CFrmTipInfo::TabRichEdit(int _index) {
 		m_pTxtInfo->SetText(GetLengthInf(m_pContentTwo->GetText().GetLength()).data());
 		m_pTxtInfo2->SetText(GetLengthInf(m_pContentTwoDown->GetText().GetLength()).data());
 		m_pBtnPageTwo->SetNormalImage("ico/page2.png");
-		m_pContentFour->SetFocus();
+		m_pContentTwo->Activate();
+		m_pContentTwo->SetFocus();
 	}
 			break;
 	case 3: {
 		m_pTxtInfo->SetText(GetLengthInf(m_pContentThree->GetText().GetLength()).data());
 		m_pTxtInfo2->SetText(GetLengthInf(m_pContentThreeDown->GetText().GetLength()).data());
 		m_pBtnPageThree->SetNormalImage("ico/page3.png");
-		m_pContentFour->SetFocus();
+		m_pContentThree->Activate();
+		m_pContentThree->SetFocus();
 	}
 			break;
 	case 4: {
 		m_pTxtInfo->SetText(GetLengthInf(m_pContentFour->GetText().GetLength()).data());
 		m_pBtnPageFour->SetNormalImage("ico/page4.png");
+		m_pContentFour->Activate();
 		m_pContentFour->SetFocus();
 	}
 			break;
@@ -522,7 +535,7 @@ void CFrmTipInfo::TabRichEdit(int _index) {
 
 void CFrmTipInfo::DataDeal() {
 	__try {
-		string content = m_pContent->GetText().GetData();
+		/*string content = m_pContent->GetText().GetData();
 		if (dataInfo == content)return;
 		DataInfo * dataInfo = new DataInfo;
 		if (dataType == DataType::tip || (dataType == DataType::tempTip && userInfo->saveTempTip)) {
@@ -571,7 +584,7 @@ void CFrmTipInfo::DataDeal() {
 			}
 		}
 		content = dataInfo->content;
-		delete dataInfo;
+		delete dataInfo;*/
 	}
 	__except (exception_filter(GetExceptionInformation())) {
 		CHAR buffer[1024];

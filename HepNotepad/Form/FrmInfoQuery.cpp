@@ -121,7 +121,7 @@ void CFrmInfoQuery::LoadData(int type, string key) {
 void CFrmInfoQuery::LoadLink(string key) {
 	__try {
 		m_pInfoList->RemoveAll();
-		string path = CPaintManagerUI::GetInstancePath();
+		string path = CPaintManagerUI::GetInstancePath().GetData();
 		path += "shortcut\\";
 		vector<string> typeList1 = { ".docx", ".doc", ".xlsx", ".xls", ".txt", ".pdf",".lnk" };
 		vector<string> dList = CFileHelper::GetFiles(path, typeList1, 2); 
@@ -311,6 +311,8 @@ LRESULT CFrmInfoQuery::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 	}
 				   break;
+
+	
 	case WM_PAINT: {
 		if (refeshCount < 3) {
 
@@ -335,8 +337,30 @@ LRESULT CFrmInfoQuery::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, b
 		{
 			Close(0);
 		}
+		if (GetKeyState(VK_DOWN) < 0) {
+			int index = m_pInfoList->GetCurSel();
+			if (index < (m_pInfoList->GetCount() - 1)) {
+				CListContainerElementUI* pElem = (CListContainerElementUI*)m_pInfoList->GetItemAt(index+1);
+				pElem->Select(true);
+			}
+			else {
+				CListContainerElementUI* pElem = (CListContainerElementUI*)m_pInfoList->GetItemAt(0);
+				pElem->Select(true);
+			}
+		}
+		else if (GetKeyState(VK_UP) < 0) {
+			int index = m_pInfoList->GetCurSel();
+			if (index > 0) {				
+				CListContainerElementUI* pElem = (CListContainerElementUI*)m_pInfoList->GetItemAt(index - 1);
+				pElem->Select(true);
+			}
+			else {
+				CListContainerElementUI* pElem = (CListContainerElementUI*)m_pInfoList->GetItemAt(m_pInfoList->GetCount() - 1);
+				pElem->Select(true);
+			}
+		}
 	}
-					 break;
+					 break;	 
 	default:
 		return __super::MessageHandler(uMsg, wParam, lParam, bHandled);
 

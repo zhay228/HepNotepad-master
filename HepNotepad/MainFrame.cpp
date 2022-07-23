@@ -1276,6 +1276,7 @@ LRESULT CMainFrame::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 				}
 				m_pTempTip->InitData();
 				::SetWindowPos(m_pTempTip->GetHWND(), HWND_TOPMOST, cx - 361, cy - 218, 360, 240, SWP_SHOWWINDOW);
+				::SetActiveWindow(m_pTempTip->GetHWND());
 				::ShowWindow(m_pTempTip->GetHWND(), SW_SHOW);
 			}
 			else if (wParam == WM_COPYSAVETIPHOTKEY) {
