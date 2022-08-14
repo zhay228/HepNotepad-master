@@ -43,6 +43,8 @@ private:
 	CButtonUI* m_pBtnPageThree;
 	CButtonUI* m_pBtnPageFour;
 	CHorizontalLayoutUI * m_pLayoutPage;
+	CHorizontalLayoutUI * m_pLayoutTwoRight;
+	CVerticalLayoutUI * m_plyThreeDown;
 	CTabLayoutUI* m_pTabContainer;
 	int index = 1;
 	int refeshCount = 0;

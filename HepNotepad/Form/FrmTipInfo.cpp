@@ -74,6 +74,8 @@ void CFrmTipInfo::InitWindow()
 		m_pBtnPageThree = static_cast<CButtonUI*>(m_pm.FindControl(_T("btnPageThree")));
 		m_pBtnPageFour = static_cast<CButtonUI*>(m_pm.FindControl(_T("btnPageFour")));
 		m_pLayoutPage = static_cast<CHorizontalLayoutUI*>(m_pm.FindControl(_T("pageLayout")));
+		m_pLayoutTwoRight = static_cast<CHorizontalLayoutUI*>(m_pm.FindControl(_T("lyTwoRight")));
+		m_plyThreeDown = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("lyThreeDown")));
 		m_pTitle->SetText(title.c_str());
 		m_pContent->SetText(dataInfo.c_str());
 		m_pTabContainer = static_cast<CTabLayoutUI*>(m_pm.FindControl(_T("tabContainer")));
@@ -208,7 +210,7 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CHAR: {//¿ì½Ý¼ü²¶»ñ
 		switch (wParam)
-		{		 
+		{	
 		case 0x15: //Ctrl+U
 		{
 			if (((m_pContent != NULL) && m_pContent->IsFocused())) {
@@ -267,7 +269,7 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 		case 0x06: //Ctrl+F
 		{
-			if (((m_pContentTwo != NULL) && m_pContentTwo->IsFocused()) || ((m_pContentTwo != NULL) && m_pContentTwoDown->IsFocused())) {
+			if ((m_pContentTwo != NULL && m_pContentTwo->IsFocused()) || (m_pContentTwo != NULL && m_pContentTwoDown->IsFocused())) {
 				CDuiString contentLeft = m_pContentTwo->GetText();
 				CDuiString contentRigth = m_pContentTwoDown->GetText();
 				if (contentLeft.GetLength() > 36 && contentRigth.GetLength() > 36) {
@@ -298,7 +300,7 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 					}
 				}
 			}
-			else if ((m_pContentThree != NULL) && m_pContentThree->IsFocused())
+			else if (m_pContentThree != NULL && m_pContentThree->IsFocused())
 			{
 				CDuiString content = m_pContentThree->GetText();
 				if (content.GetLength() > 300) {
@@ -341,6 +343,15 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case 0x0D://Enter
 		{
 
+		}
+		break;
+		case 0x07: {//Ctrl+G
+			if (m_pContentTwo != NULL && m_pContentTwo->IsFocused()) {
+				m_pLayoutTwoRight->SetVisible(!m_pLayoutTwoRight->IsVisible());
+			}
+			else if (m_pContentThree != NULL && m_pContentThree->IsFocused()) {
+				m_plyThreeDown->SetVisible(!m_plyThreeDown->IsVisible());				
+			}
 		}
 		break;
 		default:
@@ -399,17 +410,21 @@ LRESULT CFrmTipInfo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 					break;
 			case 2: {
-				m_pTxtInfo->SetText(GetLengthInf(m_pContentTwo->GetText().GetLength()).data());
-				m_pTxtInfo2->SetText(GetLengthInf(m_pContentTwoDown->GetText().GetLength()).data());
-				m_pContentTwo->Activate();
-				m_pContentTwo->SetFocus();
+				if (m_pContentTwo != NULL && m_pContentTwo->IsFocused()) {
+					m_pTxtInfo->SetText(GetLengthInf(m_pContentTwo->GetText().GetLength()).data());
+					m_pTxtInfo2->SetText(GetLengthInf(m_pContentTwoDown->GetText().GetLength()).data());
+					m_pContentTwo->Activate();
+					m_pContentTwo->SetFocus();
+				}
 			}
 					break;
 			case 3: {
-				m_pTxtInfo->SetText(GetLengthInf(m_pContentThree->GetText().GetLength()).data());
-				m_pTxtInfo2->SetText(GetLengthInf(m_pContentThreeDown->GetText().GetLength()).data());
-				m_pContentThree->Activate();
-				m_pContentThree->SetFocus();
+				if (m_pContentThree != NULL && m_pContentThree->IsFocused()) {
+					m_pTxtInfo->SetText(GetLengthInf(m_pContentThree->GetText().GetLength()).data());
+					m_pTxtInfo2->SetText(GetLengthInf(m_pContentThreeDown->GetText().GetLength()).data());
+					m_pContentThree->Activate();
+					m_pContentThree->SetFocus();
+				}
 			}
 					break;
 			case 4: {

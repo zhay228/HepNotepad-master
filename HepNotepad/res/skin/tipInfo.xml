@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Window size="420,330" sizebox="4,4,6,6" roundcorner="5,5" caption="0,0,0,90" mininfo="360,240">
   <Font id="0" name="微软雅黑" size="13" bold="true" />
   <Font id="1" name="微软雅黑" size="15" bold="false" />
@@ -31,24 +31,21 @@
           <HorizontalLayout sepwidth="2" inset="0,0,2,0"  >
             <RichEdit bkcolor="#FFFFFFFF"  name="txtContentTwo" multiline="true" textpadding="6,3,6,3"  vscrollbar="true" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
           </HorizontalLayout>
-          <HorizontalLayout sepimm="true" >
-            <RichEdit bkcolor="#FFFFFFFF"  name="txtContentTwoDown" multiline="true" textpadding="6,3,6,3"  vscrollbar="true"   autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
+          <HorizontalLayout sepimm="true" name="lyTwoRight" sepimm="true" visible="false" >
+            <RichEdit bkcolor="#FFFFFFFF" name="txtContentTwoDown" multiline="true" textpadding="6,3,6,3"  vscrollbar="true"   autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
           </HorizontalLayout>
         </HorizontalLayout>
         <VerticalLayout>
-         <VerticalLayout name="lyFilter" sepimm="true" visible="false" sepheight="3" inset="0,0,0,3"  bottombordersize="2" bordercolor="FFEEEEEE" minheight="66">
-             <Edit name="txtFilter" font="1" width="200" height="25" bordersize="1" bordercolor="FFDDDDDD" padding="6,0,0,0" tipvalue="请输入过滤参数" textcolor="#FF515151" />
-          </VerticalLayout>
           <VerticalLayout sepimm="true" sepheight="3" inset="0,0,0,3"  bottombordersize="2" bordercolor="FFEEEEEE" minheight="66">
             <RichEdit bkcolor="#FFD0E7F4" name="txtContentThree" multiline="true" textpadding="6,3,6,3"  vscrollbar="true" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
           </VerticalLayout>
-          <VerticalLayout sepimm="true"  >
-            <RichEdit bkcolor="#FFD0E7F4" name="txtContentThreeDown" multiline="true" vscrollbar="true" textpadding="6,3,6,3" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
+          <VerticalLayout name="lyThreeDown" sepimm="true" visible="false" >
+            <RichEdit bkcolor="#FFD0E7F4" name="txtContentThreeDown"  multiline="true" vscrollbar="true" textpadding="6,3,6,3" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
           </VerticalLayout>
         </VerticalLayout>
         <HorizontalLayout>
           <RichEdit bkcolor="#FFC7EDCC"  name="txtContentFour" multiline="true" textpadding="6,3,6,3"  vscrollbar="true" autovscroll="true" enabled="true" rich="true" readonly="false" wantreturn="true" wantctrlreturn="false" menu="true" font="1" textcolor="#FF515151"/>
-        </HorizontalLayout>
+        </HorizontalLayout>       
       </TabLayout>
     </HorizontalLayout>
     <HorizontalLayout height="27">
