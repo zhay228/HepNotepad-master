@@ -197,7 +197,7 @@ void CFrmInfoQuery::Notify(TNotifyUI &msg)
 		if (itemName.IsEmpty() == false && itemName == _T("txtQuery") && msg.sType == _T("return"))
 		{
 			if (m_pInfoList->GetCount() > 0) {
-				CListContainerElementUI* pElem = (CListContainerElementUI*)m_pInfoList->GetItemAt(0);
+				CListContainerElementUI* pElem = (CListContainerElementUI*)m_pInfoList->GetItemAt(m_pInfoList->GetCurSel());
 				if (type == 1) {
 					OpendWnd(pElem);
 				}

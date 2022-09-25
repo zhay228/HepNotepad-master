@@ -88,9 +88,9 @@ void CFrmTipInfo::InitWindow()
 		}		
 		
 		SIZE size = m_pContent->GetScrollRange();
-		if (size.cy > m_pContent->GetHeight())
+		//if (size.cy > m_pContent->GetHeight())
 			m_pContent->HomeUp();
-
+		
 		index = 1;			
 		m_pContent->Activate();
 		m_pContent->SetFocus();
